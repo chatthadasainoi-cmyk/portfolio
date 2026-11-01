@@ -4,78 +4,74 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chatthada Sainoi · Links</title>
-<meta name="description" content="Chatthada Sainoi, Software Developer. Portfolio, GitHub and LinkedIn.">
+<meta name="description" content="Chatthada Sainoi, Software Developer. Portfolio, GitHub, LinkedIn and socials.">
 <link rel="icon" href="me.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,800&family=Barlow:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500&display=swap">
 <style>
-:root{--stage:#0E0C0D;--panel:#171415;--panel2:#1F1B1C;--line:rgba(255,255,255,.10);--text:#F4F1F1;--dim:#A39A9C;--red:#E3173E}
+:root{--bg:#2B3038;--bg2:#1E2228;--text:#F5F6F8;--dim:#B7BCC6;--card:#FFFFFF;--ink:#1D2026;--red:#E3173E}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%}
-body{background:var(--stage);color:var(--text);font-family:Barlow,system-ui,sans-serif;display:flex;justify-content:center;padding:max(28px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom));
-  background-image:radial-gradient(60% 45% at 50% 0%,rgba(227,23,62,.22),transparent 70%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:auto,36px 36px,36px 36px}
-main{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center}
-.ph{width:112px;height:112px;border-radius:50%;overflow:hidden;border:2px solid var(--red);box-shadow:0 0 0 6px rgba(227,23,62,.12),0 18px 40px -12px rgba(0,0,0,.9);animation:in .6s cubic-bezier(.2,.8,.2,1) both}
+body{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%) fixed;color:var(--text);font-family:Inter,system-ui,sans-serif;display:flex;justify-content:center;padding:max(40px,env(safe-area-inset-top)) 16px max(32px,env(safe-area-inset-bottom))}
+main{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center}
+.ph{width:112px;height:112px;border-radius:50%;overflow:hidden;box-shadow:0 12px 30px -10px rgba(0,0,0,.6);animation:in .6s cubic-bezier(.2,.8,.2,1) both}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
-h1{margin-top:18px;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-style:italic;text-transform:uppercase;font-size:36px;line-height:.95;letter-spacing:.01em;text-align:center;animation:in .6s .08s cubic-bezier(.2,.8,.2,1) both}
-h1 span{color:var(--red)}
-.th{font-family:"IBM Plex Sans Thai",sans-serif;color:var(--dim);font-size:14px;margin-top:6px;animation:in .6s .14s both}
-.role{margin-top:12px;font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;padding:5px 11px;border:1px solid rgba(255,255,255,.22);border-radius:2px;animation:in .6s .2s both}
-.role b{color:var(--red)}
-.sub{margin-top:10px;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);text-align:center;line-height:1.6;animation:in .6s .24s both}
-.links{width:100%;margin-top:26px;display:flex;flex-direction:column;gap:12px}
-a.l{position:relative;display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:4px;color:var(--text);text-decoration:none;overflow:hidden;transition:transform .2s cubic-bezier(.2,.8,.2,1),border-color .2s,background .2s;animation:in .55s cubic-bezier(.2,.8,.2,1) both}
-a.l:nth-child(1){animation-delay:.3s}a.l:nth-child(2){animation-delay:.37s}a.l:nth-child(3){animation-delay:.44s}
-a.l::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transition:transform .25s}
-a.l:hover,a.l:focus-visible{transform:translateY(-2px);border-color:rgba(255,255,255,.28);background:var(--panel2);outline:none}
-a.l:hover::before,a.l:focus-visible::before{transform:scaleY(1)}
-a.l:active{transform:scale(.985)}
-a.l.main{background:var(--red);border-color:var(--red)}
-a.l.main::before{display:none}
-a.l.main:hover,a.l.main:focus-visible{background:#F02A50;border-color:#F02A50}
-.ic{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:3px;background:rgba(255,255,255,.06)}
-a.l.main .ic{background:rgba(0,0,0,.18)}
-.ic svg{width:22px;height:22px;fill:currentColor}
-.tx{flex:1;min-width:0}
-.t{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:21px;letter-spacing:.06em;text-transform:uppercase;line-height:1}
-.u{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-a.l.main .u{color:rgba(255,255,255,.82)}
-.ar{font-size:20px;opacity:.6;transition:transform .2s}
-a.l:hover .ar{transform:translateX(3px);opacity:1}
-footer{margin-top:26px;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);text-align:center;line-height:1.7;animation:in .6s .5s both}
-footer a{color:var(--text);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}
-@keyframes in{from{opacity:0;transform:translateY(14px)}}
+h1{margin-top:20px;font-weight:800;font-size:30px;letter-spacing:-.01em;animation:in .6s .06s both}
+.wave{display:inline-block;transform-origin:70% 70%;animation:wave 2.2s 1s ease-in-out 2}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(14deg)}20%{transform:rotate(-8deg)}40%{transform:rotate(-4deg)}50%{transform:rotate(10deg)}}
+.intro{margin-top:8px;font-weight:600;font-size:18px;line-height:1.4;text-align:center;animation:in .6s .12s both}
+.intro b{color:#FF5577;font-weight:700}
+.th{margin-top:4px;font-family:"IBM Plex Sans Thai",sans-serif;font-size:13.5px;color:var(--dim);animation:in .6s .16s both}
+.soc{display:flex;gap:22px;margin-top:20px;animation:in .6s .2s both}
+.soc a{color:var(--text);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;transition:transform .2s,opacity .2s}
+.soc a:hover,.soc a:focus-visible{transform:translateY(-2px) scale(1.08);outline:none}
+.soc svg{width:30px;height:30px;fill:currentColor}
+.links{width:100%;margin-top:30px;display:flex;flex-direction:column;gap:16px}
+a.btn{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 18px;background:var(--card);color:var(--ink);border-radius:14px;text-decoration:none;font-weight:600;font-size:16.5px;box-shadow:0 6px 18px -10px rgba(0,0,0,.5);transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s;animation:in .5s cubic-bezier(.2,.8,.2,1) both}
+a.btn:nth-child(1){animation-delay:.26s}a.btn:nth-child(2){animation-delay:.32s}a.btn:nth-child(3){animation-delay:.38s}
+a.btn:hover,a.btn:focus-visible{transform:translateY(-2px) scale(1.01);box-shadow:0 12px 24px -12px rgba(0,0,0,.6);outline:none}
+a.btn:active{transform:scale(.98)}
+a.btn .i{width:36px;height:36px;flex:none;display:grid;place-items:center}
+a.btn .i svg{width:24px;height:24px;fill:currentColor}
+a.btn .t{flex:1;text-align:center}
+a.btn .sp{width:36px;flex:none}
+a.btn.main{background:var(--red);color:#fff}
+footer{margin-top:28px;font-size:12px;color:var(--dim);animation:in .6s .45s both}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <main>
   <div class="ph"><img src="me.jpg" alt="Chatthada Sainoi"></div>
-  <h1>Chatthada <span>Sainoi</span></h1>
-  <div class="th">ชาติธาดา สายน้อย</div>
-  <div class="role">Software <b>Developer</b></div>
-  <div class="sub">Digital Technology (Enterprise Software / Mobile Application)<br>Suranaree University of Technology</div>
+  <h1>Hey! <span class="wave">👋</span></h1>
+  <p class="intro">I'm Chatthada (Smart),<br>a <b>Software Developer</b>.</p>
+  <p class="th">ชาติธาดา สายน้อย · SUT Digital Technology</p>
+
+  <div class="soc">
+    <a href="https://www.instagram.com/chatthadaaa/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.58 0 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85C2.42 3.92 3.94 2.37 7.15 2.27 8.42 2.2 8.8 2.2 12 2.2zM12 0C8.74 0 8.33 0 7.05.07 2.7.27.27 2.69.07 7.05 0 8.33 0 8.74 0 12s0 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98C24 15.67 24 15.26 24 12s0-3.67-.07-4.95C23.73 2.7 21.31.27 16.95.07 15.67 0 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+    <a href="https://www.facebook.com/share/18cLqNHepe/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg></a>
+    <a href="mailto:chatthadasainoi@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm10 8.4L2.6 6H21.4L12 12.4zm0 2.3L2 8v10h20V8l-10 6.7z"/></svg></a>
+    <!-- LINE: add the link here when ready, e.g. https://line.me/ti/p/~YOUR_ID -->
+  </div>
 
   <nav class="links">
-    <a class="l main" href="https://chatthadasainoi-cmyk.github.io/portfolio/">
-      <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm8-2h8v8h-8v-8zm2 2v4h4v-4h-4z"/></svg></span>
-      <span class="tx"><span class="t">Portfolio</span><div class="u">Projects, demos and contact</div></span>
-      <span class="ar">→</span>
+    <a class="btn main" href="https://chatthadasainoi-cmyk.github.io/portfolio/">
+      <span class="i"><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm8-2h8v8h-8v-8zm2 2v4h4v-4h-4z"/></svg></span>
+      <span class="t">Portfolio</span><span class="sp"></span>
     </a>
-    <a class="l" href="https://github.com/chatthadasainoi-cmyk" target="_blank" rel="noopener">
-      <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></span>
-      <span class="tx"><span class="t">GitHub</span><div class="u">github.com/chatthadasainoi-cmyk</div></span>
-      <span class="ar">↗</span>
+    <a class="btn" href="https://github.com/chatthadasainoi-cmyk" target="_blank" rel="noopener">
+      <span class="i"><svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></span>
+      <span class="t">GitHub</span><span class="sp"></span>
     </a>
-    <a class="l" href="https://www.linkedin.com/in/chatthada-sainoi-636933351" target="_blank" rel="noopener">
-      <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
-      <span class="tx"><span class="t">LinkedIn</span><div class="u">linkedin.com/in/chatthada-sainoi</div></span>
-      <span class="ar">↗</span>
+    <a class="btn" href="https://www.linkedin.com/in/chatthada-sainoi-636933351" target="_blank" rel="noopener">
+      <span class="i" style="color:#0A66C2"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+      <span class="t">LinkedIn</span><span class="sp"></span>
     </a>
   </nav>
 
-  <footer><a href="mailto:chatthadasainoi@gmail.com">chatthadasainoi@gmail.com</a> · 095-319-4360</footer>
+  <footer>095-319-4360 · chatthadasainoi@gmail.com</footer>
 </main>
 </body>
 </html>
