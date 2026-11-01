@@ -346,8 +346,14 @@ const D={
  lead:{hero:"council-team",k:"Leadership · 2024 – 2025",t:"Student Council President",m:"Institute of Digital Arts and Science, SUT",
   body:`<p>Led the student council of the Institute of Digital Arts and Science in my first year at SUT, working with the council team and representing students to the institute.</p>
   <h3>Photos</h3>${shots([["council-team","Won the student council presidential election",1],["council-portrait","Council president, DGT #5"],["council","DIGITECH member introduction"],["council-art","Illustration made for the council introduction",1]])}`},
- ml:{hero:"ml-admin",k:"Team project",t:"Mission Life",m:"Backend & admin developer",
-  body:`<p>A mobile app that turns life goals into a game: players create a character, take on missions, battle monsters and earn trophies.</p><h3>What I did</h3><ul><li>Built the REST API with Node.js/Express and MongoDB.</li><li>Password reset by email OTP (Nodemailer) and hashed passwords (bcrypt).</li><li>Admin dashboard for managing quests and reading player feedback.</li></ul><h3>Demo</h3><div class="vids"><figure><video src="vid/ml-battle.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Mission battle: each task done hits the monster's HP</figcaption></figure><figure><video src="vid/ml-admin.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Admin dashboard I built: user stats, activity and quest management (4× speed, test data)</figcaption></figure></div><h3>Stack</h3>${chips(["React Native","Node.js","Express","MongoDB","Firebase Admin"])}<a class="link" href="https://github.com/chatthadasainoi-cmyk/Mission-Life" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+ ml:{hero:"ml-hero",k:"Team project · Scripting Languages Project course · Group 09",t:"Mission Life",m:"UI design & frontend developer",
+  body:`<p>A mobile app that turns daily goals into an RPG: players create a character, set missions, and every real-life task done takes HP off a monster. XP unlocks levels and trophies.</p>
+  <h3>What I did</h3><ul><li>Designed the Home, Quest, Trophy, History and Create Mission screens in Figma.</li><li>Built the frontend for sign-in, sign-up and password reset by email OTP, plus Home, Quest, Trophy, History, the mission battle screen and the step-by-step Create Mission flow.</li><li>Built the Create Monster feature end to end, frontend and backend.</li></ul>
+  <h3>Demo</h3><div class="vids" style="grid-template-columns:minmax(0,220px)"><figure><video src="vid/ml-battle.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Mission battle: each task done hits the monster's HP</figcaption></figure></div>
+  <h3>Screens I built</h3>${shots([["ml-s-login","Sign-in"],["ml-s-home","Home: profile, XP and mission stats"],["ml-s-quest","Quest list by category"],["ml-s-create","Create Mission: pick a goal type"],["ml-s-goal","Set the goal, days and XP"],["ml-s-trophy","Trophies unlock as you level up"]],"ph")}
+  <h3>Stack</h3>${chips(["React Native","Expo","Firebase Firestore","Figma","Node.js","MongoDB"])}
+  <h3>Team</h3><p class="credit">Course 1101103, group 09: สมบัติชัย คำขาว (admin UI design, user backend and database), ศิริชัย เทียบพา (admin frontend and backend), ณัฐภูมิ อยู่คง (design and build of sign-up, profile, feedback, logout and create character), ธนากร เชื่อมาก (dashboard design, guide backend) and me.</p>
+  <a class="link" href="https://github.com/chatthadasainoi-cmyk/Mission-Life" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  stock:{hero:"sm-dash",k:"Team project · Software Engineering Project course · Term 2/2025",t:"StockMB",m:"Software engineering & frontend · Stock Manager Basic System",
   body:`<p>A Windows desktop app that replaces hand-written notes and Excel for a small shop's stock: sales at the counter, stock in and out, profit reports and staff accounts with role-based access.</p>
   <h3>What I did</h3><ul><li>Member of the six-person team that wrote the Software Requirements Specification (SRS) for the system in the Software Engineering Project course (1101163).</li><li>Refined the app's frontend: screens, layout and usability fixes.</li></ul>
@@ -372,13 +378,13 @@ const D={
  skills:{k:"Skills",t:"What I build with",m:"Every skill below comes from a project I shipped",
   body:`<div class="skgroup">Hard skills</div>
   <h3>Programming</h3>${chips(["JavaScript","SQL","HTML/CSS","Java"])}<p class="used">Used in every project; Java from university coursework</p>
-  <h3>Backend</h3>${chips(["Node.js","Express","REST APIs","Socket.IO real-time","Google OAuth","Email OTP","bcrypt"])}<p class="used">AECverse · Mission Life</p>
+  <h3>Backend</h3>${chips(["Node.js","Express","REST APIs","Socket.IO real-time","Google OAuth","Email OTP"])}<p class="used">AECverse · Mission Life</p>
   <h3>Frontend & mobile</h3>${chips(["React Native","Expo","Three.js","Tailwind CSS","Bootstrap","PWA / Service Worker","Electron"])}<p class="used">RideCare · Mission Life · AECverse · SUT Navigator · Pharmacy Stock Ledger · StockMB</p>
   <h3>Databases</h3>${chips(["Supabase","Firebase Auth & Firestore","MongoDB","SQLite","Excel import / export"])}<p class="used">AECverse · Pharmacy Stock Ledger · RideCare · Mission Life · StockMB</p>
   <h3>Deploy & tools</h3>${chips(["Git / GitHub","Vercel","Railway","GitHub Pages","EAS Build (APK)","AI coding tools"])}<p class="used">AECverse · Pharmacy Stock Ledger · RideCare</p>
-  <h3>Design</h3>${chips(["UX/UI design","Map & pin design"])}<p class="used">SUT Navigator · AE&amp;C · Pharmacy Stock Ledger</p>
+  <h3>Design</h3>${chips(["UX/UI design","Figma","Map & pin design"])}<p class="used">Mission Life · SUT Navigator · AE&amp;C · Pharmacy Stock Ledger</p>
   <div class="skgroup">Soft skills</div>
-  <ul><li><b>Leadership</b>: led the faculty student council as president; CTO of the DeckVance startup team.</li><li><b>Teamwork</b>: shipped team projects with clear role splits (backend on AECverse and Mission Life, frontend on SUT Navigator, UI & database on StockMB).</li><li><b>Communication</b>: pitched to judges at depa, SUT Startup and the DGT Hackathon.</li><li><b>Working with real users</b>: built the pharmacy app around how my sibling's shop actually works, and it is used daily.</li><li><b>Working under pressure</b>: research to working prototype in four days at the hackathon (Top 10).</li><li><b>Fast learner</b>: picked up React Native, Three.js and Supabase on the job to ship each project.</li></ul>
+  <ul><li><b>Leadership</b>: led the faculty student council as president; CTO of the DeckVance startup team.</li><li><b>Teamwork</b>: shipped team projects with clear role splits (backend on AECverse, UI and frontend on Mission Life and SUT Navigator, SRS and frontend on StockMB).</li><li><b>Communication</b>: pitched to judges at depa, SUT Startup and the DGT Hackathon.</li><li><b>Working with real users</b>: built the pharmacy app around how my sibling's shop actually works, and it is used daily.</li><li><b>Working under pressure</b>: research to working prototype in four days at the hackathon (Top 10).</li><li><b>Fast learner</b>: picked up React Native, Three.js and Supabase on the job to ship each project.</li></ul>
   <div class="skgroup">Languages spoken</div>
   <p>Thai (native) · English (CEFR B2) · Japanese (basic)</p>`},
  contact:{hero:"city",k:"Contact",t:"Get in touch",m:"Samut Prakan, Thailand",
@@ -400,7 +406,7 @@ const TABS=[
  {name:"Projects",tiles:[
   ["aec",1,1,2,2,"big","aec-brand","50% 60%","2025 – now","Backend lead · team of 3","AECverse","Node.js · Socket.IO · Supabase · Three.js"],
   ["rx",3,1,2,1,"wide","rx-expiry","0% 10%","Live","Solo developer","Pharmacy Stock Ledger","PWA · barcode scanning · Firebase"],
-  ["ml",3,2,1,1,"","ml-battle","50% 66%","","Backend & admin","Mission Life","Express · MongoDB"],
+  ["ml",3,2,1,1,"","ml-battle","50% 66%","","UI & frontend","Mission Life","React Native · Figma"],
   ["stock",4,2,1,1,"","sm-dash","40% 30%","","SE & frontend","StockMB","Electron · SQLite"],
   ["deck",1,3,1,1,"","depa-team","50% 35%","CTO","Startup project","DeckVance","depa & SUT Startup"],
   ["nav",2,3,1,1,"","nav-map","55% 100%","New","Frontend & UX/UI","SUT Navigator","OOP team project"],
