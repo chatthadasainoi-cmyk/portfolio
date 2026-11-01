@@ -193,6 +193,7 @@ html.calm .tile.me .tx *{opacity:1!important}
 .drawer li::marker{color:var(--red)}
 .drawer h3{font-family:var(--f-display);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;color:var(--dim);margin:22px 0 8px;border-top:1px solid var(--line);padding-top:14px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
+.credit{font-size:13px!important;line-height:1.55!important;color:var(--dim)!important}
 .used{font-size:12px!important;line-height:1.4!important;color:var(--dim)!important;margin-top:6px!important;font-family:var(--f-mono,monospace)}
 .skgroup{font-family:var(--f-display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:22px;letter-spacing:.02em;color:#fff;margin:26px 0 -4px;padding-left:10px;border-left:4px solid var(--red)}
 .chip{font-family:var(--f-mono);font-size:11.5px;padding:4px 8px;border-radius:2px;border:1px solid var(--line);color:var(--text)}
@@ -346,8 +347,14 @@ const D={
   <h3>Photos</h3>${shots([["council-team","Won the student council presidential election",1],["council-portrait","Council president, DGT #5"],["council","DIGITECH member introduction"],["council-art","Illustration made for the council introduction",1]])}`},
  ml:{hero:"ml-admin",k:"Team project",t:"Mission Life",m:"Backend & admin developer",
   body:`<p>A mobile app that turns life goals into a game: players create a character, take on missions, battle monsters and earn trophies.</p><h3>What I did</h3><ul><li>Built the REST API with Node.js/Express and MongoDB.</li><li>Password reset by email OTP (Nodemailer) and hashed passwords (bcrypt).</li><li>Admin dashboard for managing quests and reading player feedback.</li></ul><h3>Demo</h3><div class="vids"><figure><video src="vid/ml-battle.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Mission battle: each task done hits the monster's HP</figcaption></figure><figure><video src="vid/ml-admin.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Admin dashboard I built: user stats, activity and quest management (4× speed, test data)</figcaption></figure></div><h3>Stack</h3>${chips(["React Native","Node.js","Express","MongoDB","Firebase Admin"])}<a class="link" href="https://github.com/chatthadasainoi-cmyk/Mission-Life" target="_blank" rel="noopener">View on GitHub ↗</a>`},
- stock:{k:"Team project",t:"StockMB",m:"UI & database developer",
-  body:`<p>A Windows desktop app for running a shop's stock: login, employee records, sales entry, daily sales recap and Excel import.</p><h3>Stack</h3>${chips(["Electron","SQLite","JavaScript","HTML/CSS"])}<a class="link" href="https://github.com/chatthadasainoi-cmyk/StockMB" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+ stock:{hero:"sm-dash",k:"Team project · Software Engineering course · Jan 2026",t:"StockMB",m:"Software engineering & frontend · Stock Manager Basic System",
+  body:`<p>A Windows desktop app that replaces hand-written notes and Excel for a small shop's stock: sales at the counter, stock in and out, profit reports and staff accounts with role-based access.</p>
+  <h3>What I did</h3><ul><li>Handled the Software Engineering course work for the system.</li><li>Refined the app's frontend: screens, layout and usability fixes.</li></ul>
+  <h3>Features</h3><ul><li><b>Dashboard</b>: income from sales against import cost and staff salaries, by day, month or year.</li><li><b>Product Sales</b>: pick items into a cart, checkout and record every sale with seller and time.</li><li><b>Product Management</b>: add, edit, restock or delete products, or bulk-import them from an Excel file.</li><li><b>Reports</b>: sales and import history, per-product statistics, search and category filters.</li><li><b>Employee Data</b>: staff records, roles and account status; staff accounts are locked out of admin pages.</li></ul>
+  <h3>Screens</h3>${shots([["sm-sale","Product Sales: cart and receipt before checkout",1],["sm-products","Product Management with search, category filter and Excel import"],["sm-sales","Sales history with seller and time"],["sm-stats","Per-product statistics: imported, sold, income and cost",1]])}
+  <h3>Stack</h3>${chips(["Electron","SQLite","JavaScript","HTML/CSS","Chart.js"])}
+  <h3>Team</h3><p class="credit">Built in the OOP course by group C09: สมบัติชัย คำขาว (system design, dashboard, database), ศิริชัย เทียบพา (login, password reset, class diagram), ณัฐภูมิ อยู่คง (UI, product sales), อาทิวราห์ เยาวราช (UI), กิตติชัย ปริวันตัง and วรวัฒน์ สูญนอก (requirements). I worked on it in the Software Engineering course and on the frontend.</p>
+  <a class="link" href="https://github.com/chatthadasainoi-cmyk/StockMB" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  nav:{hero:"nav-map",k:"Team project · OOP course · Jan 2026",t:"SUT Navigator",m:"Frontend & UX/UI developer",
   body:`<p>An app that helps students and visitors find their way around SUT: a campus map with pins for teaching buildings, food, dorms and services, plus search down to the room. Built as a team for the Object-Oriented Programming course.</p>
   <h3>What I did</h3><ul><li>Built the frontend and designed the UX/UI: layout, navigation tabs, buttons and screens.</li><li>Made the campus map and its category pins.</li><li>Prepared the place photos and recommended-place cards.</li></ul>
@@ -392,7 +399,7 @@ const TABS=[
   ["aec",1,1,2,2,"big","aec-brand","50% 60%","2025 – now","Backend lead · team of 3","AECverse","Node.js · Socket.IO · Supabase · Three.js"],
   ["rx",3,1,2,1,"wide","rx-expiry","0% 10%","Live","Solo developer","Pharmacy Stock Ledger","PWA · barcode scanning · Firebase"],
   ["ml",3,2,1,1,"","ml-battle","50% 66%","","Backend & admin","Mission Life","Express · MongoDB"],
-  ["stock",4,2,1,1,"flat","","","","UI & database","StockMB","Electron · SQLite"],
+  ["stock",4,2,1,1,"","sm-dash","40% 30%","","SE & frontend","StockMB","Electron · SQLite"],
   ["deck",1,3,1,1,"","depa-team","50% 35%","CTO","Startup project","DeckVance","depa & SUT Startup"],
   ["nav",2,3,1,1,"","nav-map","55% 100%","New","Frontend & UX/UI","SUT Navigator","OOP team project"],
   ["hack",3,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon · mobile","RideCare","React Native · Firebase"],
