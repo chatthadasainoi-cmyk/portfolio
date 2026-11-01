@@ -208,7 +208,7 @@ html.calm .tile.me .tx *{opacity:1!important}
 .shots .wide{grid-column:1/-1}.shots .wide img{aspect-ratio:16/10}
 .vids{display:grid;grid-template-columns:1fr 2.6fr;gap:8px;align-items:start}.vids figure{margin:0}.vids video{width:100%;display:block;border-radius:2px;background:#000}.vids figcaption{font-size:12px;color:var(--dim);margin-top:4px;line-height:1.35}@media(max-width:560px){.vids{grid-template-columns:1fr}}
 .shots.sl img,.shots.sl .wide img{aspect-ratio:16/9;object-fit:cover}
-.shots.dg img{object-fit:contain;background:#fff;padding:6px}
+.shots.dg img{object-fit:contain;background:#f4f7f2;padding:6px}
 .shots.ph{grid-template-columns:repeat(3,1fr)}.shots.ph img{aspect-ratio:9/16;object-position:top}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
 .fact{border:1px solid var(--line);border-radius:2px;padding:10px}
@@ -322,6 +322,8 @@ const D={
   <h3>Screens</h3>${shots([["aec-login","Sign-in page with Google OAuth and email",1],["aec-twin","Digital Twin: click a plant zone to see its safety rules, risks, PPE and simulated IoT readings",1],["aec-tour","Virtual Tour: walk the plant as your avatar with other users in real time"],["aec-hazard","Top view: methane spread (LEL) and hazard radius around a tank"],["aec-avatar","Avatar page: pick a body, walk style and colour that others see in the tour",1]])}
   <p style="font-size:12.5px;color:var(--dim)">Plant readings in the screens are simulated data.</p>
   <h3>What I did</h3><ul><li>Built the backend: Node.js/Express server, real-time sync with Socket.IO, data storage on Supabase.</li><li>Re-architected the codebase to remove layered patches and technical debt.</li><li>Fixed 3D model sync across browser sessions by keying meshes on stable names instead of per-session IDs.</li><li>Added Google OAuth and Email OTP sign-in, and admin model lock/unlock on the server.</li><li>Deployed the client on Vercel and the server on Railway; used in A/B user testing for research.</li></ul>
+  <h3>System design</h3>${shots([["aec-arch","Architecture: Three.js client, Node/Express server over Socket.IO, Supabase Storage and Auth",1],["aec-flow","Emergency flow: a trainee raises an alert, the server checks it and moves everyone in the 3D world to the assembly point",1]],"dg")}
+  <h3>Supported by</h3>${shots([["aec-partners","Accepted Engineering & Consultant and TITON Engineering & Consultant",1]],"sl")}
   <h3>Stack</h3>${chips(["JavaScript","Three.js","Node.js","Express","Socket.IO","Supabase","Vercel","Railway"])}
   <a class="link" href="https://aecverse.up.railway.app" target="_blank" rel="noopener">Open live demo ↗</a>`},
  rx:{hero:"rx-alerts",k:"Project · solo",t:"Pharmacy Stock Ledger",m:"In daily use at a Lotus's pharmacy in Chumphon",
@@ -355,7 +357,7 @@ const D={
   <h3>Demo</h3><div class="vids" style="grid-template-columns:minmax(0,220px)"><figure><video src="vid/ml-battle.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Mission battle: each task done hits the monster's HP</figcaption></figure></div>
   <h3>Screens I built</h3>${shots([["ml-s-login","Sign-in"],["ml-s-home","Home: profile, XP and mission stats"],["ml-s-quest","Quest list by category"],["ml-s-create","Create Mission: pick a goal type"],["ml-s-goal","Set the goal, days and XP"],["ml-s-trophy","Trophies unlock as you level up"]],"ph")}
   <h3>Stack</h3>${chips(["React Native","Expo","Firebase Firestore","Figma","Node.js","MongoDB"])}
-  <h3>Team</h3><p class="credit">Course 1101103, group 09: สมบัติชัย คำขาว (admin UI design, user backend and database), ศิริชัย เทียบพา (admin frontend and backend), ณัฐภูมิ อยู่คง (design and build of sign-up, profile, feedback, logout and create character), ธนากร เชื่อมาก (dashboard design, guide backend) and me.</p>
+  <h3>Team</h3><p class="credit">Course 1101103, group 09: Sombatchai Khamkhao (admin UI design, user backend and database), Sirichai Thiappha (admin frontend and backend), Natthapum Yukhong (design and build of sign-up, profile, feedback, logout and create character), Thanakorn Chueamak (dashboard design, guide backend) and me.</p>
   <a class="link" href="https://github.com/chatthadasainoi-cmyk/Mission-Life" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  stock:{hero:"sm-dash",k:"Team project · Software Engineering Project course · Term 2/2025",t:"StockMB",m:"Software engineering & frontend · Stock Manager Basic System",
   body:`<p>A Windows desktop app that replaces hand-written notes and Excel for a small shop's stock: sales at the counter, stock in and out, profit reports and staff accounts with role-based access.</p>
@@ -364,7 +366,7 @@ const D={
   <h3>Screens</h3>${shots([["sm-sale","Product Sales: cart and receipt before checkout",1],["sm-products","Product Management with search, category filter and Excel import"],["sm-sales","Sales history with seller and time"],["sm-stats","Per-product statistics: imported, sold, income and cost",1]])}
   <h3>Software engineering (SRS)</h3><p>Scope, user roles (owner and staff), functional and non-functional requirements, and the system models below.</p>${shots([["sm-context","Context diagram"],["sm-usecase","Use case diagram: employee and owner"],["sm-dfd","Data flow diagram, level 1 (staff)"],["sm-erd","Relational schema: products, sales, employees"]],"dg")}
   <h3>Stack</h3>${chips(["Electron","SQLite","JavaScript","HTML/CSS","Chart.js"])}
-  <h3>Team</h3><p class="credit"><b>Software Engineering Project (SRS):</b> ณัฐภูมิ อยู่คง, ศิริชัย เทียบพา, สมบัติชัย คำขาว, กิตติชัย ปริวันตัง, วรวัฒน์ สูญนอก and me.<br><b>App build (OOP course, group C09):</b> สมบัติชัย คำขาว (system design, dashboard, database), ศิริชัย เทียบพา (login, password reset, class diagram), ณัฐภูมิ อยู่คง (UI, product sales), อาทิวราห์ เยาวราช (UI), กิตติชัย ปริวันตัง and วรวัฒน์ สูญนอก (requirements).</p>
+  <h3>Team</h3><p class="credit"><b>Software Engineering Project (SRS):</b> Natthapum Yukhong, Sirichai Thiappha, Sombatchai Khamkhao, Kittichai Pariwantang, Worawat Sunnok and me.<br><b>App build (OOP course, group C09):</b> Sombatchai Khamkhao (system design, dashboard, database), Sirichai Thiappha (login, password reset, class diagram), Natthapum Yukhong (UI, product sales), Athiwara Yaowarat (UI), Kittichai Pariwantang and Worawat Sunnok (requirements).</p>
   <a class="link" href="https://github.com/chatthadasainoi-cmyk/StockMB" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  nav:{hero:"nav-map",k:"Team project · OOP course · Jan 2026",t:"SUT Navigator",m:"Frontend & UX/UI developer",
   body:`<p>An app that helps students and visitors find their way around SUT: a campus map with pins for teaching buildings, food, dorms and services, plus search down to the room. Built as a team for the Object-Oriented Programming course.</p>
