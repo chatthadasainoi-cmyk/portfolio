@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chatthada Sainoi, Software Developer. Portfolio for the IT Trainee co-op at Cube SoftTech: AECverse, Pharmacy Stock Ledger, RideCare, Mission Life and more.">
+<meta property="og:title" content="Chatthada Sainoi | Software Developer Portfolio">
+<meta property="og:description" content="Backend-first developer from SUT. Projects, demos and contact.">
+<link rel="icon" href="img/cube-icon.png">
+<title>Chatthada Sainoi Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700;1,800&family=Barlow:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a launch-menu of photo tiles on a flat stage. One accent (Cube-style red) on graphite; every tile reacts to the pointer on its own. */
+:root{
+  --stage:#0E0C0D;      /* page */
+  --panel:#171415;      /* tiles without photos, drawer */
+  --line:#2A2526;       /* hairlines */
+  --text:#F4F1F1;       /* main text */
+  --dim:#A39C9D;        /* secondary text */
+  --red:#E3173E;        /* the one accent */
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Barlow","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-th:"IBM Plex Sans Thai","Barlow",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--stage);color:var(--text);font-family:var(--f-body);overflow:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+img{display:block;max-width:100%}
+
+.glow{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(900px 520px at var(--gx,70%) var(--gy,20%),rgba(227,23,62,.10),transparent 65%)}
+
+.app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;max-width:1240px;margin:0 auto;padding-block:clamp(14px,3vh,28px)}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.mark{width:34px;height:34px;flex:none;display:grid;grid-template-columns:1fr 1fr;gap:3px;transform:rotate(45deg) scale(.78)}
+.target{display:flex;align-items:center;gap:8px;padding-right:14px;margin-right:2px;border-right:1px solid rgba(255,255,255,.14);flex:none}.target img{height:34px;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(227,23,62,.35))}.target span{display:flex;flex-direction:column;font-family:var(--f-display);font-weight:700;font-size:14px;line-height:1.05;letter-spacing:.04em;text-transform:uppercase;color:#fff!important;white-space:nowrap}.target small{font-family:var(--f-mono,monospace);font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--dim)}@media(max-width:560px){.target span{display:none}}
+.tile.work-logo .logo-mark{padding-top:5%}.tile.work-logo .logo-mark img{width:min(28%,84px)}.tile.work-logo{background:radial-gradient(60% 70% at 50% 25%,rgba(227,23,62,.22),transparent 70%),var(--panel,#171415)}
+.mark i{background:var(--text);border-radius:1px}.mark i:first-child{background:var(--red)}
+.brand b{font-family:var(--f-display);font-weight:800;font-style:italic;font-size:clamp(20px,2.4vw,28px);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.brand span{font-family:var(--f-th);color:var(--dim);font-size:13px;white-space:nowrap}
+.status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;color:var(--dim)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,23,62,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(227,23,62,0)}100%{box-shadow:0 0 0 0 rgba(227,23,62,0)}}
+
+/* tabs */
+.tabs-wrap{margin-top:16px;display:flex;align-items:center;gap:8px;min-width:0}
+.bump{font-family:var(--f-mono);font-size:11px;padding:7px 9px;border-radius:3px;border:1px solid var(--line);color:var(--dim);flex:none}
+.tabs{position:relative;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{position:relative;z-index:1;font-family:var(--f-display);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;padding:8px 18px;color:var(--dim);white-space:nowrap;transition:color .25s}
+.tab[aria-selected="true"]{color:#fff}
+.tab:hover{color:var(--text)}
+.pill{position:absolute;z-index:0;top:0;bottom:0;left:0;background:var(--red);border-radius:2px;transform:skewX(-12deg);transition:transform .38s cubic-bezier(.2,.8,.2,1),width .38s cubic-bezier(.2,.8,.2,1)}
+
+/* board */
+.board{flex:1;min-height:0;margin-top:clamp(12px,2.4vh,24px);perspective:1200px}
+.grid{width:100%;height:100%;max-height:620px;display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+
+.tile{position:relative;overflow:hidden;border-radius:3px;background:var(--panel);text-align:left;min-width:0;min-height:0;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;color:#fff;isolation:isolate;
+  transform:perspective(900px) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg)) translateZ(var(--tz,0px));
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;box-shadow:0 14px 30px -18px rgba(0,0,0,.9)}
+.tile .bg{position:absolute;inset:-6%;z-index:-2;background-size:cover;background-position:var(--pos,50% 50%);
+  transform:translate(var(--px,0px),var(--py,0px)) scale(1.04);transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .4s;filter:saturate(.85) brightness(.82)}
+.tile::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,12,13,0) 30%,rgba(14,12,13,.86) 100%)}
+.tile.flat::before{background:none}
+.tile::after{content:"";position:absolute;inset:0;border:2px solid transparent;border-radius:3px;transition:border-color .25s;pointer-events:none}
+.tile .shine{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(420px 220px at var(--mx,50%) var(--my,0%),rgba(255,255,255,.16),transparent 60%);opacity:0;transition:opacity .3s}
+.tile.sel{--tz:28px;box-shadow:0 28px 50px -22px rgba(0,0,0,.95)}
+.tile.sel::after{border-color:#fff}
+.tile.sel .bg{filter:saturate(1) brightness(.95)}
+.tile.sel .shine{opacity:1}
+.tile .k,.tile .h,.tile .s{position:relative;z-index:2}
+.tile .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-bottom:5px}
+.tile .h{font-family:var(--f-display);font-weight:800;font-style:italic;text-transform:uppercase;line-height:.95;font-size:clamp(19px,2.2vw,30px);text-wrap:balance}
+.tile .s{font-size:12.5px;color:rgba(255,255,255,.82);margin-top:5px;line-height:1.35;max-width:46ch}
+.tile .tag{position:absolute;z-index:2;top:12px;left:12px;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px;background:var(--red);color:#fff}
+.tile .tag.ghost{background:rgba(14,12,13,.7);border:1px solid rgba(255,255,255,.18)}
+.tile.big .h{font-size:clamp(30px,4.2vw,58px)}
+.tile.red{background:var(--red)}
+.tile.red .k,.tile.red .s{color:rgba(255,255,255,.9)}
+.tile .bar{position:relative;z-index:2;width:34px;height:3px;background:var(--red);margin-bottom:10px;transition:width .35s}
+.tile.sel .bar{width:64px}
+.tile.red .bar{background:#fff}
+
+/* hero tile: cinematic title card */
+.tile.me{padding:0;flex-direction:row;background:#060505;color:#fff;isolation:isolate}
+.tile.me::before{display:none}
+.me .ph{position:absolute;inset:0;overflow:hidden;z-index:0}
+.me .ph .bg{inset:-2%;z-index:0;background-size:auto 112%;background-repeat:no-repeat;background-color:#060505;background-position:8% 18%;filter:grayscale(.2) contrast(1.18) brightness(.78) saturate(1.05);animation:kb 22s ease-in-out infinite alternate}
+.me .vbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0% 50%;z-index:0;filter:contrast(1.05)}
+.me .ph::after{z-index:1}
+html.calm .me .vbg{display:none}
+.tile.me:not(.go) .tx,.tile.me:not(.go) .tx *{animation-play-state:paused!important}
+.tile.me:not(.go) .tx .k,.tile.me:not(.go) .tx .th,.tile.me:not(.go) .tx .role,.tile.me:not(.go) .tx .facts,.tile.me:not(.go) .ln i{opacity:0}
+html.calm .tile.me .tx *{opacity:1!important}
+@keyframes kb{from{transform:scale(1.03)}to{transform:scale(1.13) translate(-2%,1%)}}
+.tile.me.sel .bg{filter:grayscale(.1) contrast(1.2) brightness(.86) saturate(1.1)}
+.me .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,5,5,.15) 0%,transparent 22%,rgba(6,5,5,.7) 46%,#060505 64%),linear-gradient(0deg,rgba(6,5,5,.9),transparent 35%),radial-gradient(120% 90% at 40% 30%,transparent 50%,rgba(0,0,0,.6))}
+.me .glow{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(50% 80% at 85% 65%,rgba(227,23,62,.22),transparent 70%),radial-gradient(30% 60% at 52% 35%,rgba(227,23,62,.16),transparent 70%)}
+.me .rim{display:none}
+.me .flare{position:absolute;left:-60%;top:61%;width:70%;height:2px;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,80,110,.95),#fff 50%,rgba(255,80,110,.95),transparent);box-shadow:0 0 22px 5px rgba(227,23,62,.55);opacity:0;animation:flare 8s cubic-bezier(.4,0,.2,1) infinite 1.6s}
+@keyframes flare{0%{transform:translateX(0);opacity:0}6%{opacity:1}40%{transform:translateX(260%);opacity:0}100%{transform:translateX(260%);opacity:0}}
+.me .grain{position:absolute;inset:-50%;z-index:3;pointer-events:none;opacity:.13;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain .9s steps(4) infinite}
+@keyframes grain{25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-5%)}75%{transform:translate(-2%,-2%)}}
+.me .lb{position:absolute;inset:0;z-index:4;pointer-events:none}
+.me .lb::before,.me .lb::after{content:"";position:absolute;left:0;right:0;height:7%;background:#000;animation:curtain 1.3s cubic-bezier(.7,0,.2,1) both .1s}
+.me .lb::before{top:0}.me .lb::after{bottom:0}
+@keyframes curtain{from{height:50%}}
+.me .slate{position:absolute;top:0;left:0;right:0;height:7%;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.45);text-transform:uppercase;animation:fadeIn .6s both 1.2s}
+.me .slate b{color:var(--red);font-weight:500}
+@keyframes fadeIn{from{opacity:0}}
+.me .tx{position:relative;z-index:6;margin-left:auto;width:56%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 26px calc(7% + 18px) 0;min-width:0}
+.me .tx .k{color:var(--red);letter-spacing:.32em;display:flex;align-items:center;gap:10px;animation:fadeIn .8s both .5s}
+.me .tx .k::before{content:"";width:28px;height:1px;background:var(--red)}
+.me .tx .h{font-size:clamp(30px,3.5vw,52px);line-height:.92;color:#fff;margin-top:8px;text-shadow:0 6px 30px rgba(0,0,0,.6)}
+.me .ln{display:block;white-space:nowrap}
+.me .ln i{display:inline-block;font-style:inherit;animation:ltr .9s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.55s + var(--d)*55ms)}
+.me .ln+.ln i{color:var(--red)}
+@keyframes ltr{from{opacity:0;transform:translateY(55%) scale(1.2);filter:blur(10px)}}
+.me .th{font-family:var(--f-th);font-size:14px;color:rgba(255,255,255,.7);margin-top:8px;animation:fadeIn .8s both 1.4s}
+.me .role{align-self:flex-start;margin-top:14px;font-family:var(--f-display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:#fff;padding:6px 12px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);backdrop-filter:blur(4px);border-radius:2px;animation:fadeIn .8s both 1.6s}
+.me .role b{color:var(--red);font-weight:700}
+.me .facts{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.55);animation:fadeIn .8s both 1.8s}
+.me .facts span::before{content:"▸ ";color:var(--red)}
+
+/* skills tile code */
+.code{position:absolute;top:14px;right:14px;font-family:var(--f-mono);font-size:11px;line-height:1.55;color:var(--dim);text-align:left;white-space:pre}
+.code em{font-style:normal;color:var(--red)}
+
+
+/* AECverse drawn scene */
+.scene{position:absolute;inset:0;z-index:-1;display:flex;align-items:flex-start;justify-content:center;padding-top:6%;transform:translate(var(--px,0px),var(--py,0px));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.scene svg{width:92%;max-width:520px;height:auto;overflow:visible}
+.scene .tank{animation:bob 6s ease-in-out infinite}
+.scene .ring{animation:spin 18s linear infinite;transform-origin:200px 132px}
+.scene .ping{animation:ping 2.4s ease-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ping{from{opacity:.9;r:4}to{opacity:0;r:16}}
+
+.logo-mark{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-start;justify-content:center;padding-top:9%;pointer-events:none;transform:translate(calc(var(--px,0px)*-.6),calc(var(--py,0px)*-.6));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.logo-mark img{width:min(78%,260px);height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.65));animation:logoIn .9s cubic-bezier(.2,.8,.2,1) both .25s}
+.tile.big .logo-mark{padding-top:5%}
+.tile.big .logo-mark img{width:min(38%,230px)}
+@keyframes logoIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:none}}
+.tile.has-logo .bg{filter:saturate(.7) brightness(.42)}
+.tile.has-logo.sel .bg{filter:saturate(.8) brightness(.5)}
+/* entrances */
+.grid.in .tile{animation:rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*60ms)}
+.grid.to-l .tile{animation:fromR .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*35ms)}
+.grid.to-r .tile{animation:fromL .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*35ms)}
+@keyframes rise{from{opacity:.25;transform:perspective(900px) translateY(26px) rotateX(10deg)}to{opacity:1}}
+@keyframes fromR{from{opacity:.25;transform:perspective(900px) translateX(48px) rotateY(-10deg)}to{opacity:1}}
+@keyframes fromL{from{opacity:.25;transform:perspective(900px) translateX(-48px) rotateY(10deg)}to{opacity:1}}
+
+/* footer hint */
+.hint{margin-top:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-mono);font-size:11px;color:var(--dim)}
+.hint kbd{font-family:inherit;border:1px solid var(--line);border-radius:3px;padding:1px 6px;color:var(--text);margin-right:4px}
+
+/* drawer */
+.scrim{position:fixed;inset:0;z-index:5;background:rgba(8,6,7,.6);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:6;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--panel);border-left:3px solid var(--red);
+  transform:translateX(105%);transition:transform .45s cubic-bezier(.2,.8,.2,1);overflow-y:auto;overscroll-behavior:contain;
+  padding:0 0 calc(28px + env(safe-area-inset-bottom,0px))}
+.drawer.on{transform:none}
+.d-hero{position:relative;height:240px;overflow:hidden;background:var(--stage)}
+.d-hero img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.drawer.on .d-hero img{transform:scale(1)}
+.d-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--panel))}
+.d-in{padding:0 max(26px,env(safe-area-inset-right,0px)) 0 26px;margin-top:-34px;position:relative}
+.d-in.nohero{margin-top:0;padding-top:calc(30px + env(safe-area-inset-top,0px))}
+.d-in>*{opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s}
+.drawer.on .d-in>*{opacity:1;transform:none}
+.drawer.on .d-in>*:nth-child(2){transition-delay:.06s}.drawer.on .d-in>*:nth-child(3){transition-delay:.1s}.drawer.on .d-in>*:nth-child(n+4){transition-delay:.14s}
+.close{position:fixed;z-index:7;top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));font-family:var(--f-mono);font-size:11px;padding:7px 10px;border-radius:3px;background:rgba(14,12,13,.8);border:1px solid var(--line);opacity:0;pointer-events:none;transition:opacity .3s}
+.drawer.on~.close{opacity:1;pointer-events:auto}
+.d-k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.d-t{font-family:var(--f-display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:42px;line-height:.95;margin:8px 0 6px;text-wrap:balance}
+.d-m{color:var(--dim);font-size:14px}
+.drawer p,.drawer li{font-size:15px;line-height:1.6;color:#DCD6D7;max-width:62ch}
+.drawer ul{padding-left:18px}
+.drawer li::marker{color:var(--red)}
+.drawer h3{font-family:var(--f-display);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;color:var(--dim);margin:22px 0 8px;border-top:1px solid var(--line);padding-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.used{font-size:12px!important;line-height:1.4!important;color:var(--dim)!important;margin-top:6px!important;font-family:var(--f-mono,monospace)}
+.skgroup{font-family:var(--f-display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:22px;letter-spacing:.02em;color:#fff;margin:26px 0 -4px;padding-left:10px;border-left:4px solid var(--red)}
+.chip{font-family:var(--f-mono);font-size:11.5px;padding:4px 8px;border-radius:2px;border:1px solid var(--line);color:var(--text)}
+.link{display:inline-flex;gap:6px;align-items:center;margin:14px 8px 0 0;font-family:var(--f-display);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:15px;color:#fff;background:var(--red);padding:9px 14px;border-radius:2px;text-decoration:none;transition:transform .2s}
+.link:hover{transform:translateX(3px)}
+.link.ghost{background:none;border:1px solid var(--line)}
+.shots{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.shots figure{margin:0}
+.shots img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;cursor:zoom-in;transition:filter .2s}
+.shots img:hover{filter:brightness(1.1)}
+.shots figcaption{font-size:12px;color:var(--dim);margin-top:4px;line-height:1.35}
+.shots .wide{grid-column:1/-1}.shots .wide img{aspect-ratio:16/10}
+.vids{display:grid;grid-template-columns:1fr 2.6fr;gap:8px;align-items:start}.vids figure{margin:0}.vids video{width:100%;display:block;border-radius:2px;background:#000}.vids figcaption{font-size:12px;color:var(--dim);margin-top:4px;line-height:1.35}@media(max-width:560px){.vids{grid-template-columns:1fr}}
+.shots.ph{grid-template-columns:repeat(3,1fr)}.shots.ph img{aspect-ratio:9/16;object-position:top}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.fact{border:1px solid var(--line);border-radius:2px;padding:10px}
+.fact b{display:block;font-family:var(--f-display);font-weight:800;font-style:italic;font-size:26px}
+.fact span{font-size:12px;color:var(--dim)}
+.copyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.copyrow code{font-family:var(--f-mono);font-size:13px;background:rgba(255,255,255,.05);padding:7px 10px;border-radius:2px;user-select:all;word-break:break-all}
+.copyrow button{font-family:var(--f-mono);font-size:11px;padding:7px 10px;border-radius:2px;border:1px solid var(--line)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:9;background:rgba(8,6,7,.92);display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
+.lb.on{opacity:1;pointer-events:auto}
+.lb img{max-height:86vh;max-width:min(1100px,100%);border-radius:2px;transform:scale(.96);transition:transform .3s}
+.lb.on img{transform:none}
+.lb p{color:var(--dim);font-size:13px;margin-top:10px;text-align:center}
+
+/* phone */
+@media (max-width:760px){
+  body{overflow:auto}
+  .app{height:auto;min-height:100%}
+  .board{perspective:none}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:minmax(160px,auto);max-height:none}
+  .grid .tile{grid-column:auto!important;grid-row:auto!important}
+  .grid .tile.big,.grid .tile.wide{grid-column:1/-1!important}
+  .grid .tile.big{min-height:240px}
+  .hint .keys{display:none}
+  .brand span{display:none}
+  .d-t{font-size:34px}
+  .code{display:none}
+  .tile:not(.big) .scene{display:none}
+  .grid .tile.me{min-height:520px}
+  .tile.me .tx .h{font-size:42px}
+  .me .ph .bg{background-size:cover;background-position:50% 8%}
+  .me .slate span:last-child{display:none}
+  .me .vbg{object-position:28% 50%}
+  .me .ph,.me .rim{width:100%}
+  .me .ph::after{background:linear-gradient(0deg,#060505 30%,rgba(6,5,5,.5) 55%,transparent 75%)}
+  .me .tx{width:100%;padding:0 16px calc(7% + 12px)}
+}
+/* calm mode: on when the computer asks for less motion, switchable from the footer */
+html.calm *,html.calm *::before,html.calm *::after{animation:none!important;transition-duration:.15s!important}
+.motion{font-family:var(--f-mono);font-size:11px;color:var(--dim);border:1px solid var(--line);border-radius:3px;padding:2px 8px;margin-left:10px}
+.motion b{color:var(--red);font-weight:500}
+
+/* phone polish */
+@media(max-width:560px){
+  .bump{display:none}
+  .tabs{flex:1;justify-content:space-between}
+  .tab{padding:8px 12px;font-size:15px;letter-spacing:.06em}
+  .target{gap:6px;padding-right:10px}.target img{height:28px}
+  .target span{display:flex!important;font-size:11px}.target small{font-size:8.5px}
+  .brand b{font-size:19px}
+  .tile .h{font-size:20px;overflow-wrap:break-word}
+  .tile .s{font-size:12px;line-height:1.3}
+  .tile.has-logo:not(.big) .s{display:none}
+  .tile.has-logo:not(.big) .logo-mark{padding-top:10%}
+  .tile.has-logo:not(.big) .logo-mark img{width:46%}
+  .tile.has-logo:not(.big) .k{display:none}
+  .grid:not(:has(.wide)) .tile.big:first-child ~ .tile:last-child:nth-child(even){grid-column:1 / -1!important;min-height:180px}
+  .tile.flat .h,.tile.wide.red .h{font-size:17px}
+  .grid .tile.me{min-height:560px}
+  .me .ph{bottom:auto;height:66%}
+  .me .ph::after{background:linear-gradient(0deg,#060505 0%,rgba(6,5,5,.4) 30%,transparent 55%),radial-gradient(120% 90% at 40% 30%,transparent 55%,rgba(0,0,0,.55))}
+  .me .vbg{object-position:30% 40%}
+  .me .ph .bg{background-size:cover;background-position:50% 12%}
+  .me .tx{padding:0 18px calc(7% + 14px)}
+  .tile.me .tx .h{font-size:44px}
+}
+</style>
+
+<div class="glow" aria-hidden="true"></div>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="target"><img src="img/cube-icon.png" alt="Cube SoftTech"><span><small>Applying to</small>Cube SoftTech</span></div><b>Chatthada Sainoi</b><span>ชาติธาดา สายน้อย</span></div>
+    <div class="status"><span class="dot"></span>Open to co-op · IT Trainee</div>
+  </header>
+
+  <nav class="tabs-wrap" aria-label="Sections">
+    <button class="bump" id="prevTab" aria-label="Previous section">◀ Q</button>
+    <div class="tabs" role="tablist" id="tabs"><span class="pill" id="pill"></span></div>
+    <button class="bump" id="nextTab" aria-label="Next section">E ▶</button>
+  </nav>
+
+  <main class="board"><div class="grid" id="grid" role="tabpanel"></div></main>
+
+  <footer class="hint">
+    <span class="keys"><kbd>←↑↓→</kbd>select <kbd>Enter</kbd>open <kbd>Q</kbd><kbd>E</kbd>switch tab <kbd>Esc</kbd>close</span>
+    <span>Software Developer track · Suranaree University of Technology<button class="motion" id="motionBtn" aria-pressed="true"></button></span>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" tabindex="-1"></aside>
+<button class="close" id="dClose">Esc · Close</button>
+<div class="lb" id="lb" role="dialog" aria-label="Photo"><div><img id="lbImg" alt=""><p id="lbCap"></p></div></div>
+
+<script>
+const IMG=n=>`img/${n}.jpg`;
+const chips=a=>`<div class="chips">${a.map(c=>`<span class="chip">${c}</span>`).join("")}</div>`;
+const shots=(a,cl="")=>`<div class="shots ${cl}">${a.map(([n,c,w])=>`<figure class="${w?"wide":""}"><img src="${IMG(n)}" alt="${c}" data-cap="${c}" loading="lazy"><figcaption>${c}</figcaption></figure>`).join("")}</div>`;
+
+const D={
+ me:{hero:"portrait",k:"Profile",t:"Chatthada Sainoi",m:"ชาติธาดา สายน้อย · Year 3, Digital Technology (Software Developer track), Suranaree University of Technology",
+  body:`<p>I design, build and improve software that people use in real work. Most of my work sits on the backend: Node.js services, REST APIs, real-time sync and databases, with React and TypeScript on the front.</p>
+  <p>I'm applying for a co-op placement as an IT Trainee in enterprise software for Term 3/2569.</p>
+  <h3>Education</h3><p>Bachelor's degree in Digital Technology, Institute of Digital Arts and Science, SUT · 2024 – present · expected graduation April 2028</p>
+  <p>Training: Data Engineering and Industrial Data Warehouse, BOI-STEM++ (Oct 2026)</p>
+  <h3>Experience</h3><p><b>Accepted Engineering & Consultant Co., Ltd.</b> · Developer trainee · Chumphon · 2024, 4 months. Developed and tested features for company systems, designed their UX/UI and supported the company's metaverse platform on Spatial.io.</p>`},
+ aec:{hero:"aec-twin",k:"Project · 2025 – present",t:"AECverse",m:"Backend lead · team of 3 · built for Accepted Engineering & Consultant Co., Ltd.",
+  body:`<img src="img/aec-logo.png" alt="AECverse logo" style="width:96px;height:96px;object-fit:contain;margin:14px 0 4px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))"><p>A multiplayer metaverse web app for biogas plant safety training. Trainees enter a shared 3D space, upload and adjust 3D models of the plant, and see each other's changes in real time.</p>
+  <h3>Screens</h3>${shots([["aec-login","Sign-in page with Google OAuth and email",1],["aec-twin","Digital Twin: click a plant zone to see its safety rules, risks, PPE and simulated IoT readings",1],["aec-tour","Virtual Tour: walk the plant as your avatar with other users in real time"],["aec-hazard","Top view: methane spread (LEL) and hazard radius around a tank"],["aec-avatar","Avatar page: pick a body, walk style and colour that others see in the tour",1]])}
+  <p style="font-size:12.5px;color:var(--dim)">Plant readings in the screens are simulated data.</p>
+  <h3>What I did</h3><ul><li>Built the backend: Node.js/Express server, real-time sync with Socket.IO, data storage on Supabase.</li><li>Re-architected the codebase to remove layered patches and technical debt.</li><li>Fixed 3D model sync across browser sessions by keying meshes on stable names instead of per-session IDs.</li><li>Added Google OAuth and Email OTP sign-in, and admin model lock/unlock on the server.</li><li>Deployed the client on Vercel and the server on Railway; used in A/B user testing for research.</li></ul>
+  <h3>Stack</h3>${chips(["JavaScript","Three.js","Node.js","Express","Socket.IO","Supabase","Vercel","Railway"])}
+  <a class="link" href="https://aecverse.up.railway.app" target="_blank" rel="noopener">Open live demo ↗</a>`},
+ rx:{hero:"rx-alerts",k:"Project · solo",t:"Pharmacy Stock Ledger",m:"In daily use at a Lotus's pharmacy in Chumphon",
+  body:`<p>A web app that replaced an Excel colour-coding routine for checking drug expiry dates. It sorts every lot by how long it has left and reminds the pharmacist when a lot is due to be returned to the supplier.</p>
+  <div class="facts"><div class="fact"><b>5</b><span>expiry colour bands</span></div><div class="fact"><b>2</b><span>barcode formats read</span></div><div class="fact"><b>30 d</b><span>return-alert window</span></div></div>
+  <h3>Screens</h3>${shots([["rx-login","Sign-in with a Google account; data syncs across every device the shop logs in on"],["rx-alerts","Alerts: lots due for return, grouped by expiry colour",1],["rx-expiry","Expiry table with filters by colour, status, class and vendor",1]])}
+  <p style="font-size:12.5px;color:var(--dim)">Screens show the app's built-in sample data, not the store's real stock.</p>
+  <h3>Features</h3><ul><li>Imports the store's receiving files (.xlsx, .xls, .csv) and maps columns automatically.</li><li>Scans EAN-13 and GS1 DataMatrix with a USB scanner or the camera, reading LOT and EXP from the code.</li><li>Return deadlines per lot, parsed from rules like "return 7 months before expiry".</li><li>Installs as a PWA, works on phones and exports filtered tables back to Excel.</li></ul>
+  <h3>Stack</h3>${chips(["JavaScript","Firebase Firestore","Service Worker","GitHub Pages"])}
+  <a class="link" href="https://chatthadasainoi-cmyk.github.io/pharmacy-stock-ledger/" target="_blank" rel="noopener">Open live app ↗</a>`},
+ deck:{hero:"depa-pitch",k:"Startup competitions · 2025",t:"DeckVance",m:"CTO · Team Edge Innovation · 4 people",
+  body:`<p>An AI website that turns raw data into presentation slides: it sorts the content, suggests a layout and decoration, and keeps every slide easy to edit.</p>
+  <h3>Results</h3><ul><li><b>depa Digital Startup Fund</b>: passed the regional round on 22 March 2025 at the Digital Economy Promotion Agency, Bangkok, and advanced to the national round.</li><li><b>SUT Startup</b>: Honorable Mention (entered as DuckSlide).</li></ul>
+  <h3>My role</h3><p>As CTO I analysed the core technology, planned the system architecture and defined the features the team built and pitched.</p>
+  <h3>Photos</h3>${shots([["depa-seda","Official announcement by SEDA, 22 Mar 2025"],["depa-team","Team Edge Innovation, regional round"],["depa-work","Working session at depa"],["sut-startup","SUT Startup, Honorable Mention"]])}`},
+ hack:{hero:"hack-main",k:"Hackathon · 1–4 Jun 2025 · Top 10 Finalist",t:"RideCare",m:"DGT Digital Hackathon “Hack the Research: From Paper to Prototype”, SUT",
+  body:`<p>A safety app for motorcycle riders, built in four days from research to a working prototype. It watches speed and lean angle from the phone's sensors and speaks warnings in Thai, so the rider never has to look at the screen. The team made the final 10 and presented it to the judges.</p>
+  <h3>Features</h3><ul><li><b>Speed alerts</b>: GPS speed checked against a limit the rider sets; voice and vibration warnings, also while the app runs in the background.</li><li><b>Fall detection</b>: lean angle from the motion sensor; past 80° the app treats it as a crash and raises a hazard alert.</li><li><b>Hands-free messages</b>: customer messages are held in a queue while riding fast and read aloud once the rider slows down.</li><li><b>Hands-free confirm</b>: accept an action by shaking the phone or pressing the volume button.</li><li><b>Shared hazard map</b>: riders pin dangerous spots that sync to everyone through Firestore; speed violations are logged with location.</li></ul>
+  <h3>Stack</h3>${chips(["React Native","Expo","Firebase Auth","Firestore","expo-location","expo-sensors","expo-speech","Task Manager"])}
+  <a class="link" href="https://github.com/chatthadasainoi-cmyk/RideCare/releases/latest/download/RideCare.apk" rel="noopener">Download APK ↓</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/RideCare" target="_blank" rel="noopener">View on GitHub ↗</a>
+  <h3>Screens</h3>${shots([["ride-home","Home: hands-free settings, one-tap hazard reports and the safety panel"],["ride-alert","Lean angle past the limit: the app asks if the rider is safe"],["ride-chat","Sound Chat: messages wait in a queue at high speed, then are read aloud"]],"ph")}
+  <h3>Photos</h3>${shots([["hack-screen","Hack the Research, 1–4 June 2025",1],["hack-team","With the team"],["hack-talk","Presenting to the judges"],["hack-stage","Opening session"]])}`},
+ lead:{hero:"council-team",k:"Leadership · 2024 – 2025",t:"Student Council President",m:"Institute of Digital Arts and Science, SUT",
+  body:`<p>Led the student council of the Institute of Digital Arts and Science in my first year at SUT, working with the council team and representing students to the institute.</p>
+  <h3>Photos</h3>${shots([["council-team","Won the student council presidential election",1],["council-portrait","Council president, DGT #5"],["council","DIGITECH member introduction"],["council-art","Illustration made for the council introduction",1]])}`},
+ ml:{hero:"ml-admin",k:"Team project",t:"Mission Life",m:"Backend & admin developer",
+  body:`<p>A mobile app that turns life goals into a game: players create a character, take on missions, battle monsters and earn trophies.</p><h3>What I did</h3><ul><li>Built the REST API with Node.js/Express and MongoDB.</li><li>Password reset by email OTP (Nodemailer) and hashed passwords (bcrypt).</li><li>Admin dashboard for managing quests and reading player feedback.</li></ul><h3>Demo</h3><div class="vids"><figure><video src="vid/ml-battle.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Mission battle: each task done hits the monster's HP</figcaption></figure><figure><video src="vid/ml-admin.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Admin dashboard I built: user stats, activity and quest management (4× speed, test data)</figcaption></figure></div><h3>Stack</h3>${chips(["React Native","Node.js","Express","MongoDB","Firebase Admin"])}<a class="link" href="https://github.com/chatthadasainoi-cmyk/Mission-Life" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+ stock:{k:"Team project",t:"StockMB",m:"UI & database developer",
+  body:`<p>A Windows desktop app for running a shop's stock: login, employee records, sales entry, daily sales recap and Excel import.</p><h3>Stack</h3>${chips(["Electron","SQLite","JavaScript","HTML/CSS"])}<a class="link" href="https://github.com/chatthadasainoi-cmyk/StockMB" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+ nav:{hero:"nav-map",k:"Team project · OOP course · Jan 2026",t:"SUT Navigator",m:"Frontend & UX/UI developer",
+  body:`<p>An app that helps students and visitors find their way around SUT: a campus map with pins for teaching buildings, food, dorms and services, plus search down to the room. Built as a team for the Object-Oriented Programming course.</p>
+  <h3>What I did</h3><ul><li>Built the frontend and designed the UX/UI: layout, navigation tabs, buttons and screens.</li><li>Made the campus map and its category pins.</li><li>Prepared the place photos and recommended-place cards.</li></ul>
+  <h3>Features</h3><ul><li><b>Campus map</b>: pins by category, recommended places and a jump to each location.</li><li><b>Search</b>: find buildings and rooms with category filters.</li><li><b>Room list</b>: browse every building and the rooms inside it.</li><li><b>Report</b>: top 5 most-viewed places and visits per category.</li><li><b>Accounts</b>: sign-up, sign-in, password reset and a guest mode; admins see a user dashboard and can add rooms.</li></ul>
+  <h3>Demo</h3><div class="vids" style="grid-template-columns:1fr"><figure><video src="vid/nav-user.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>User view: map, search and the room list (2.5× speed)</figcaption></figure><figure><video src="vid/nav-admin.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Admin view: user dashboard and adding a room (2× speed, test data)</figcaption></figure></div>
+  <h3>Screens</h3>${shots([["nav-stats","Report: most-viewed places and visits by category"],["nav-admin","Admin dashboard: users, roles and sign-up dates"]])}
+  <h3>Stack</h3>${chips(["JavaScript","HTML","Tailwind CSS"])}
+  <a class="link" href="https://github.com/chatthadasainoi-cmyk/SUT-NAVIGATOR" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+ work:{hero:"aec-ceo-hero",k:"Work experience · 2024 · 4 months",t:"AE&C",m:"Developer trainee · Accepted Engineering & Consultant Co., Ltd. · Chumphon",
+  body:`<p>A four-month trial stint at an engineering consultancy, working on the company's own systems. Photo: with Mr. Khwanchat Sainoi, CEO of AE&amp;C.</p>
+  <h3>What I did</h3><ul><li>Developed and tested features for company systems.</li><li>Designed the UX/UI of those systems.</li><li>Supported the company's metaverse platform on Spatial.io.</li></ul>
+  <h3>What came next</h3><p>The work led to AECverse, a biogas digital-twin safety training platform my university team now builds for AE&amp;C, where I lead the backend.</p>`},
+ skills:{k:"Skills",t:"What I build with",m:"Every skill below comes from a project I shipped",
+  body:`<div class="skgroup">Hard skills</div>
+  <h3>Programming</h3>${chips(["JavaScript","SQL","HTML/CSS","Java"])}<p class="used">Used in every project; Java from university coursework</p>
+  <h3>Backend</h3>${chips(["Node.js","Express","REST APIs","Socket.IO real-time","Google OAuth","Email OTP","bcrypt"])}<p class="used">AECverse · Mission Life</p>
+  <h3>Frontend & mobile</h3>${chips(["React Native","Expo","Three.js","Tailwind CSS","Bootstrap","PWA / Service Worker","Electron"])}<p class="used">RideCare · Mission Life · AECverse · SUT Navigator · Pharmacy Stock Ledger · StockMB</p>
+  <h3>Databases</h3>${chips(["Supabase","Firebase Auth & Firestore","MongoDB","SQLite","Excel import / export"])}<p class="used">AECverse · Pharmacy Stock Ledger · RideCare · Mission Life · StockMB</p>
+  <h3>Deploy & tools</h3>${chips(["Git / GitHub","Vercel","Railway","GitHub Pages","EAS Build (APK)","AI coding tools"])}<p class="used">AECverse · Pharmacy Stock Ledger · RideCare</p>
+  <h3>Design</h3>${chips(["UX/UI design","Map & pin design"])}<p class="used">SUT Navigator · AE&amp;C · Pharmacy Stock Ledger</p>
+  <div class="skgroup">Soft skills</div>
+  <ul><li><b>Leadership</b>: led the faculty student council as president; CTO of the DeckVance startup team.</li><li><b>Teamwork</b>: shipped team projects with clear role splits (backend on AECverse and Mission Life, frontend on SUT Navigator, UI & database on StockMB).</li><li><b>Communication</b>: pitched to judges at depa, SUT Startup and the DGT Hackathon.</li><li><b>Working with real users</b>: built the pharmacy app around how my sibling's shop actually works, and it is used daily.</li><li><b>Working under pressure</b>: research to working prototype in four days at the hackathon (Top 10).</li><li><b>Fast learner</b>: picked up React Native, Three.js and Supabase on the job to ship each project.</li></ul>
+  <div class="skgroup">Languages spoken</div>
+  <p>Thai (native) · English (CEFR B2) · Japanese (basic)</p>`},
+ contact:{hero:"city",k:"Contact",t:"Get in touch",m:"Samut Prakan, Thailand",
+  body:`${[["Email","chatthadasainoi@gmail.com"],["Phone","095-319-4360"],["GitHub","github.com/chatthadasainoi-cmyk"],["LinkedIn","linkedin.com/in/chatthada-sainoi-636933351"]].map(([l,v],i)=>`<h3>${l}</h3><div class="copyrow"><code id="c${i}">${v}</code><button data-copy="c${i}">Copy</button></div>`).join("")}
+  <div><a class="link" href="https://github.com/chatthadasainoi-cmyk" target="_blank" rel="noopener">GitHub ↗</a><a class="link ghost" href="https://linkedin.com/in/chatthada-sainoi-636933351" target="_blank" rel="noopener">LinkedIn ↗</a></div>`}
+};
+
+/* [id, col,row,cs,rs, class, img, pos, tag, kicker, heading, sub] */
+const TABS=[
+ {name:"Home",tiles:[
+  ["me",1,1,2,2,"me big","portrait","50% 18%","","IT Trainee applicant","Chatthada<br>Sainoi",""],
+  ["aec",3,1,1,2,"","aec-brand","30% 55%","Featured","Project · 2025 – now","AECverse","Multiplayer metaverse for biogas safety training"],
+  ["rx",4,1,1,1,"","rx-brand","50% 0%","In daily use","Project · solo","Pharmacy Stock Ledger",""],
+  ["deck",4,2,1,1,"","depa-pitch","50% 40%","National round","depa · CTO","DeckVance",""],
+  ["skills",1,3,1,1,"flat code-tile","","","","Skills","Backend first","Node · JS · SQL · React Native"],
+  ["hack",2,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon","RideCare","Rider safety app"],
+  ["lead",3,3,1,1,"","council-art","68% 30%","","Leadership","Council President",""],
+  ["contact",4,3,1,1,"","contact-main","50% 32%","","Contact","Get in touch","Email · GitHub · LinkedIn"]]},
+ {name:"Projects",tiles:[
+  ["aec",1,1,2,2,"big","aec-brand","50% 60%","2025 – now","Backend lead · team of 3","AECverse","Node.js · Socket.IO · Supabase · Three.js"],
+  ["rx",3,1,2,1,"wide","rx-expiry","0% 10%","Live","Solo developer","Pharmacy Stock Ledger","PWA · barcode scanning · Firebase"],
+  ["ml",3,2,1,1,"","ml-battle","50% 66%","","Backend & admin","Mission Life","Express · MongoDB"],
+  ["stock",4,2,1,1,"flat","","","","UI & database","StockMB","Electron · SQLite"],
+  ["deck",1,3,1,1,"","depa-team","50% 35%","CTO","Startup project","DeckVance","depa & SUT Startup"],
+  ["nav",2,3,1,1,"","nav-map","55% 100%","New","Frontend & UX/UI","SUT Navigator","OOP team project"],
+  ["hack",3,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon · mobile","RideCare","React Native · Firebase"],
+  ["work",4,3,1,1,"","","","2024","Work experience","AE&C","Developer trainee · 4 months"]]},
+ {name:"Contact",tiles:[
+  ["contact",1,1,2,3,"big","smile","45% 25%","Open to co-op","IT Trainee · Term 3/2569","Let's<br>build","Samut Prakan, Thailand"],
+  ["contact",3,1,2,1,"wide red","","","","Email","chatthadasainoi@gmail.com",""],
+  ["contact",3,2,1,1,"flat","","","","Phone","095-319-4360",""],
+  ["contact",4,2,1,1,"flat","","","","GitHub","chatthadasainoi-cmyk",""],
+  ["contact",3,3,2,1,"wide flat","","","","LinkedIn","chatthada-sainoi",""]]}
+];
+
+const $=s=>document.querySelector(s);
+const grid=$("#grid"),tabsEl=$("#tabs"),pill=$("#pill"),drawer=$("#drawer"),scrim=$("#scrim"),lb=$("#lb");
+let reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+try{const m=localStorage.getItem("pf-motion");if(m)reduce=m==="off"}catch(e){}
+function applyMotion(){document.documentElement.classList.toggle("calm",reduce);const b=document.getElementById("motionBtn");if(b){b.innerHTML=`Motion: <b>${reduce?"Off":"On"}</b>`;b.setAttribute("aria-pressed",String(!reduce))}}
+applyMotion();
+document.getElementById("motionBtn").onclick=()=>{reduce=!reduce;try{localStorage.setItem("pf-motion",reduce?"off":"on")}catch(e){}applyMotion();render()};
+const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+let tab=0,sel=0,lastFocus=null;
+try{const t=+localStorage.getItem("pf-tab2");if(t>=0&&t<TABS.length)tab=t}catch(e){}
+
+TABS.forEach((t,i)=>{const b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");b.id="tab"+i;b.textContent=t.name;b.onclick=()=>go(i);tabsEl.appendChild(b)});
+function movePill(){const b=$("#tab"+tab);pill.style.width=b.offsetWidth+"px";pill.style.transform=`translateX(${b.offsetLeft}px) skewX(-12deg)`}
+
+function tileHTML(d){
+  const [id,c,r,cs,rs,cls,img,pos,tag,k,h,s]=d;
+  if(cls.includes("me")&&img){
+    let n=0;const name=h.split("<br>").map(l=>`<span class="ln">${[...l].map(c=>`<i style="--d:${n++}">${c===" "?"&nbsp;":c}</i>`).join("")}</span>`).join("");
+    return `<div class="ph"><div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div><video class="vbg" src="vid/me-ai.mp4" poster="${IMG(img)}" muted playsinline autoplay preload="auto" aria-hidden="true"></video></div><div class="rim"></div><div class="glow"></div><div class="flare"></div><div class="grain"></div><div class="lb"></div><div class="slate"><span><b>●</b> Portfolio 2026</span><span>SUT · Digital Technology</span></div><div class="tx"><div class="k">${k}</div><div class="h">${name}</div><div class="th">ชาติธาดา สายน้อย</div><span class="role">Software <b>Developer</b></span></div><div class="shine"></div>`;}
+  const LOGO={aec:"aec-logo.png",work:"aec-co-emblem.png"};
+  const scene=LOGO[id]?`<div class="logo-mark" aria-hidden="true"><img src="img/${LOGO[id]}" alt=""></div>`:"";
+  const code=cls.includes("code-tile")?`<div class="code" aria-hidden="true">app.post(<em>'/sync'</em>, auth,\n  (req, res) =&gt; {\n    io.emit(<em>'model'</em>, …)\n  });</div>`:"";
+  return `${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
+}
+
+function render(dir){
+  [...tabsEl.querySelectorAll(".tab")].forEach((b,i)=>{b.setAttribute("aria-selected",i===tab);b.tabIndex=i===tab?0:-1});
+  movePill();
+  grid.setAttribute("aria-labelledby","tab"+tab);
+  grid.innerHTML="";
+  TABS[tab].tiles.forEach((d,i)=>{
+    const el=document.createElement("button");
+    const [id,c,r,cs,rs,cls]=d;
+    el.className="tile "+cls+(id==="aec"?" has-logo":id==="work"?" has-logo work-logo":"");el.style.setProperty("--i",i);
+    el.style.gridColumn=`${c} / span ${cs}`;el.style.gridRow=`${r} / span ${rs}`;
+    el.innerHTML=tileHTML(d);
+    el.setAttribute("aria-label",`${d[9]} ${d[10].replace(/<br>/g," ")}. Open details`);
+    el.onclick=()=>{sel=i;mark();open(id)};
+    el.onpointerenter=()=>{sel=i;mark()};
+    if(fine){
+      el.onpointermove=e=>{if(reduce)return;const b=el.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;
+        el.style.setProperty("--ty",(x*9).toFixed(2)+"deg");el.style.setProperty("--tx",(-y*9).toFixed(2)+"deg");
+        el.style.setProperty("--mx",((x+.5)*100)+"%");el.style.setProperty("--my",((y+.5)*100)+"%");
+        el.querySelectorAll(".bg").forEach(bg=>{bg.style.setProperty("--px",(-x*16).toFixed(1)+"px");bg.style.setProperty("--py",(-y*12).toFixed(1)+"px")})};
+      el.onpointerleave=()=>{["--tx","--ty"].forEach(p=>el.style.setProperty(p,"0deg"));el.querySelectorAll(".bg").forEach(bg=>{bg.style.setProperty("--px","0px");bg.style.setProperty("--py","0px")})};
+    }
+    grid.appendChild(el);
+  });
+  grid.classList.remove("in","to-l","to-r");void grid.offsetWidth;
+  grid.classList.add(dir===undefined?"in":dir>0?"to-l":"to-r");
+  sel=0;mark();
+}
+function mark(){[...grid.children].forEach((e,i)=>e.classList.toggle("sel",i===sel))}
+function go(i,dir){const d=dir??Math.sign(i-tab);tab=(i+TABS.length)%TABS.length;try{localStorage.setItem("pf-tab2",tab)}catch(e){}render(d)}
+
+function open(id){
+  const d=D[id];if(!d)return;lastFocus=document.activeElement;
+  drawer.innerHTML=`${d.hero?`<div class="d-hero"><img src="${IMG(d.hero)}" alt=""></div>`:""}<div class="d-in ${d.hero?"":"nohero"}"><div class="d-k">${d.k}</div><h2 class="d-t" id="dTitle">${d.t}</h2><div class="d-m">${d.m}</div>${d.body}</div>`;
+  drawer.scrollTop=0;
+  requestAnimationFrame(()=>{drawer.classList.add("on");scrim.classList.add("on")});
+  drawer.focus({preventScroll:true});
+  drawer.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{const t=$("#"+b.dataset.copy).textContent;
+    const sel=()=>{const r=document.createRange();r.selectNodeContents($("#"+b.dataset.copy));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected"};
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>b.textContent="Copied",sel);else sel()});
+  drawer.querySelectorAll(".shots img").forEach(im=>im.onclick=()=>{$("#lbImg").src=im.src;$("#lbCap").textContent=im.dataset.cap;lb.classList.add("on")});
+}
+function close(){if(lb.classList.contains("on")){lb.classList.remove("on");return}drawer.classList.remove("on");scrim.classList.remove("on");(lastFocus||grid.children[sel])?.focus?.({preventScroll:true})}
+scrim.onclick=close;$("#dClose").onclick=close;lb.onclick=()=>lb.classList.remove("on");
+$("#prevTab").onclick=()=>go(tab-1,-1);$("#nextTab").onclick=()=>go(tab+1,1);
+addEventListener("resize",movePill);
+
+function moveSel(dx,dy){
+  const rects=[...grid.children].map(e=>e.getBoundingClientRect());const a=rects[sel];
+  const ax=a.left+a.width/2,ay=a.top+a.height/2;let best=-1,bd=1e9;
+  rects.forEach((r,i)=>{if(i===sel)return;const vx=r.left+r.width/2-ax,vy=r.top+r.height/2-ay;
+    if(dx&&(Math.sign(vx)!==dx||Math.abs(vx)<4))return;if(dy&&(Math.sign(vy)!==dy||Math.abs(vy)<4))return;
+    const dist=dx?Math.abs(vx)+Math.abs(vy)*2:Math.abs(vy)+Math.abs(vx)*2;if(dist<bd){bd=dist;best=i}});
+  if(best>=0){sel=best;mark();grid.children[sel].focus({preventScroll:true})}
+}
+addEventListener("keydown",e=>{
+  if(drawer.classList.contains("on")||lb.classList.contains("on")){if(e.key==="Escape")close();return}
+  const k=e.key;
+  if(k==="q"||k==="Q"){go(tab-1,-1);e.preventDefault()}
+  else if(k==="e"||k==="E"){go(tab+1,1);e.preventDefault()}
+  else if(k==="ArrowRight"){moveSel(1,0);e.preventDefault()}
+  else if(k==="ArrowLeft"){moveSel(-1,0);e.preventDefault()}
+  else if(k==="ArrowDown"){moveSel(0,1);e.preventDefault()}
+  else if(k==="ArrowUp"){moveSel(0,-1);e.preventDefault()}
+  else if(k==="Enter"&&document.activeElement===document.body){grid.children[sel]?.click()}
+});
+if(fine)addEventListener("pointermove",e=>{if(reduce)return;const r=document.documentElement.style;r.setProperty("--gx",e.clientX/innerWidth*100+"%");r.setProperty("--gy",e.clientY/innerHeight*100+"%")});
+
+render();
+document.fonts?.ready.then(movePill);
+
+/* hero clip: name rises as he looks at the camera, clip holds on the last frame, hover replays */
+(()=>{const GO=2.9;
+ const go=t=>t&&t.classList.add("go");
+ const reset=t=>{t.classList.remove("go");t.querySelectorAll(".tx *").forEach(e=>e.style.animation="none");void t.offsetWidth;t.querySelectorAll(".tx *").forEach(e=>e.style.animation="")};
+ const start=t=>{const v=t.querySelector(".vbg");reset(t);if(!v||reduce){go(t);return}v.playbackRate=1;try{v.currentTime=0}catch(e){}const p=v.play();if(p&&p.catch)p.catch(()=>go(t));setTimeout(()=>go(t),GO*1000+1500)};
+ document.addEventListener("timeupdate",e=>{const v=e.target;if(!v.classList||!v.classList.contains("vbg"))return;const t=v.closest(".tile");if(v.currentTime>=GO)go(t);const left=(v.duration||5)-v.currentTime;v.playbackRate=left<1?Math.max(.35,left):1},true);
+ document.addEventListener("ended",e=>{const v=e.target;if(v.classList&&v.classList.contains("vbg"))go(v.closest(".tile"))},true);
+ document.addEventListener("error",e=>{const v=e.target;if(v.classList&&v.classList.contains("vbg"))go(v.closest(".tile"))},true);
+ document.addEventListener("mouseover",e=>{const t=e.target.closest&&e.target.closest(".tile.me");if(!t||t.contains(e.relatedTarget))return;const v=t.querySelector(".vbg");if(v&&v.ended)start(t)});
+ new MutationObserver(()=>{document.querySelectorAll(".tile.me:not([data-cine])").forEach(t=>{t.dataset.cine=1;if(reduce||!t.querySelector(".vbg"))go(t);else setTimeout(()=>go(t),GO*1000+1500)})}).observe(document.body,{childList:true,subtree:true});
+ document.querySelectorAll(".tile.me").forEach(t=>{t.dataset.cine=1;if(reduce)go(t);else setTimeout(()=>go(t),GO*1000+1500)});
+})();
+</script>
