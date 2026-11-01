@@ -407,7 +407,7 @@ const TABS=[
 
 const $=s=>document.querySelector(s);
 const grid=$("#grid"),tabsEl=$("#tabs"),pill=$("#pill"),drawer=$("#drawer"),scrim=$("#scrim"),lb=$("#lb");
-let reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let reduce=false; /* motion on by default; visitors can switch it off from the footer */
 try{const m=localStorage.getItem("pf-motion");if(m)reduce=m==="off"}catch(e){}
 function applyMotion(){document.documentElement.classList.toggle("calm",reduce);const b=document.getElementById("motionBtn");if(b){b.innerHTML=`Motion: <b>${reduce?"Off":"On"}</b>`;b.setAttribute("aria-pressed",String(!reduce))}}
 applyMotion();
