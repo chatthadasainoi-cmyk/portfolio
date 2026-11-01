@@ -435,6 +435,7 @@ document.getElementById("motionBtn").onclick=()=>{reduce=!reduce;try{localStorag
 const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
 let tab=0,sel=0,lastFocus=null;
 try{const t=+localStorage.getItem("pf-tab2");if(t>=0&&t<TABS.length)tab=t}catch(e){}
+try{const q=new URLSearchParams(location.search).get("tab");if(q){const i=TABS.findIndex(t=>t.name.toLowerCase()===q.toLowerCase());if(i>=0)tab=i}}catch(e){}
 
 TABS.forEach((t,i)=>{const b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");b.id="tab"+i;b.textContent=t.name;b.onclick=()=>go(i);tabsEl.appendChild(b)});
 function movePill(){const b=$("#tab"+tab);pill.style.width=b.offsetWidth+"px";pill.style.transform=`translateX(${b.offsetLeft}px) skewX(-12deg)`}
