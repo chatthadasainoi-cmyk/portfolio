@@ -501,7 +501,7 @@ render();
 document.fonts?.ready.then(movePill);
 
 /* hero clip: name rises as he looks at the camera, clip holds on the last frame, hover replays */
-(()=>{const GO=2.9;
+(()=>{const GO=3.0;
  const go=t=>t&&t.classList.add("go");
  const reset=t=>{t.classList.remove("go");t.querySelectorAll(".tx *").forEach(e=>e.style.animation="none");void t.offsetWidth;t.querySelectorAll(".tx *").forEach(e=>e.style.animation="")};
  const start=t=>{const v=t.querySelector(".vbg");reset(t);if(!v||reduce){go(t);return}v.playbackRate=1;try{v.currentTime=0}catch(e){}const p=v.play();if(p&&p.catch)p.catch(()=>go(t));setTimeout(()=>go(t),GO*1000+1500)};
