@@ -117,6 +117,33 @@ img{display:block;max-width:100%}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 html.calm .grid.puzzle .tile{animation:none!important}html.calm .grid.puzzle::after{display:none}
 
+/* intro: rotating cube maze -> dive into the portfolio */
+:root{--icu:clamp(34px,6vmin,58px)}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(70% 70% at 50% 50%,#1d0d12 0%,#070506 70%);overflow:hidden;cursor:pointer;transition:opacity .6s ease}
+#intro.out{opacity:0;pointer-events:none}
+html.intro-on body{overflow:hidden}
+.ic-scene{perspective:900px;width:calc(var(--icu)*3);height:calc(var(--icu)*3);position:relative;z-index:2}
+.ic-cube{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-28deg) rotateY(-40deg)}
+#intro.run .ic-cube{animation:icSpin 3.1s cubic-bezier(.65,0,.35,1) forwards}
+@keyframes icSpin{0%{transform:scale(.2) rotateX(-28deg) rotateY(-220deg)}35%{transform:scale(1) rotateX(-28deg) rotateY(-40deg)}62%{transform:scale(1) rotateX(-28deg) rotateY(45deg)}100%{transform:scale(16) rotateX(-8deg) rotateY(225deg)}}
+.ic-v{--h:calc(var(--icu)/2);--e:0;position:absolute;left:var(--icu);top:var(--icu);width:var(--icu);height:var(--icu);transform-style:preserve-3d;
+ transform:translate3d(calc(var(--x)*var(--icu)*(1 + var(--e))),calc(var(--y)*var(--icu)*(1 + var(--e))),calc(var(--z)*var(--icu)*(1 + var(--e))))}
+#intro.run .ic-v{animation:icMaze 3.1s ease-in-out both;animation-delay:calc(var(--n)*8ms)}
+@property --e{syntax:"<number>";inherits:true;initial-value:0}
+@keyframes icMaze{0%{--e:1.6}30%{--e:0}45%{--e:.38}58%{--e:0}100%{--e:0}}
+.ic-v b{position:absolute;inset:0;backface-visibility:hidden;border:1px solid rgba(0,0,0,.25)}
+.ic-v .tp{background:#ff3355}.ic-v .ft{background:#e3173e}.ic-v .lt{background:#c4122f}.ic-v .rt{background:#8f0c22}.ic-v .bk{background:#a50f2b}.ic-v .bt{background:#5c0716}
+.ic-tunnel{position:absolute;inset:0;display:grid;place-items:center;z-index:1;perspective:600px}
+.ic-tunnel i{position:absolute;width:40vmin;height:40vmin;border:1px solid rgba(227,23,62,.35);transform:rotate(calc(var(--k)*11deg)) scale(calc(.3 + var(--k)*.35));opacity:0}
+#intro.run .ic-tunnel i{animation:icRing 3.1s ease-in both;animation-delay:calc(var(--k)*90ms)}
+@keyframes icRing{0%,30%{opacity:0;transform:rotate(calc(var(--k)*11deg)) scale(calc(.3 + var(--k)*.35))}55%{opacity:.8}100%{opacity:0;transform:rotate(calc(var(--k)*11deg + 120deg)) scale(calc(2 + var(--k)*1.4))}}
+.ic-tag{position:absolute;left:0;right:0;bottom:16vh;text-align:center;z-index:3;font-family:var(--f-mono);letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.55);font-size:11px;display:flex;flex-direction:column;gap:6px;opacity:0}
+.ic-tag b{font-family:var(--f-display);font-style:italic;font-weight:800;letter-spacing:.06em;font-size:clamp(22px,3vw,34px);color:#fff}
+#intro.run .ic-tag{animation:icTag 3.1s ease both}
+@keyframes icTag{0%,20%{opacity:0;transform:translateY(10px)}35%,62%{opacity:1;transform:none}80%,100%{opacity:0;transform:scale(1.4)}}
+.ic-skip{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);z-index:3}
+a.tile{text-decoration:none;color:#fff}
+
 /* hero tile: cinematic title card */
 .tile.me{padding:0;flex-direction:row;background:#060505;color:#fff;isolation:isolate}
 .tile.me::before{display:none}
@@ -305,6 +332,33 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 </style>
 
 <div class="glow" aria-hidden="true"></div>
+<div id="intro" aria-hidden="true">
+  <div class="ic-tunnel"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i></div>
+  <div class="ic-scene"><div class="ic-cube" id="icCube"></div></div>
+  <div class="ic-tag"><span>Applying to</span><b>Cube SoftTech</b></div>
+  <div class="ic-skip">Click or press any key to skip</div>
+</div>
+<script>
+(()=>{const el=document.getElementById("intro");
+ let off=false;try{off=localStorage.getItem("pf-motion")==="off"||sessionStorage.getItem("pf-intro")==="seen"}catch(e){}
+ const force=/[?&]intro=1/.test(location.search);
+ if(!force&&(off||matchMedia("(prefers-reduced-motion: reduce)").matches)){el.remove();return}
+ window.__introOn=true;document.documentElement.classList.add("intro-on");
+ const cube=document.getElementById("icCube"),u=getComputedStyle(document.documentElement).getPropertyValue("--icu")||"";
+ const holes=new Set(["0,-1,1","0,-1,0","1,0,1","1,0,0","-1,1,1","0,0,0"]);
+ const F=[["ft","translateZ(var(--h))"],["bk","rotateY(180deg) translateZ(var(--h))"],["rt","rotateY(90deg) translateZ(var(--h))"],["lt","rotateY(-90deg) translateZ(var(--h))"],["tp","rotateX(90deg) translateZ(var(--h))"],["bt","rotateX(-90deg) translateZ(var(--h))"]];
+ let n=0;for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++)for(let z=-1;z<=1;z++){if(holes.has(x+","+y+","+z))continue;
+  const v=document.createElement("div");v.className="ic-v";v.style.setProperty("--x",x);v.style.setProperty("--y",y);v.style.setProperty("--z",z);v.style.setProperty("--n",n++);
+  v.innerHTML=F.map(([c,t])=>`<b class="${c}" style="transform:${t}"></b>`).join("");cube.appendChild(v)}
+ document.addEventListener("play",e=>{if(window.__introOn&&e.target.classList&&e.target.classList.contains("vbg")){e.target.pause();try{e.target.currentTime=0}catch(_){}}},true);
+ let done=false;const end=()=>{if(done)return;done=true;try{sessionStorage.setItem("pf-intro","seen")}catch(e){}
+  el.classList.add("out");document.documentElement.classList.remove("intro-on");window.__introOn=false;
+  setTimeout(()=>{el.remove();window.__heroStart&&document.querySelectorAll(".tile.me").forEach(t=>window.__heroStart(t))},650)};
+ el.addEventListener("click",end);addEventListener("keydown",e=>{if(window.__introOn)end()},{once:true});
+ requestAnimationFrame(()=>el.classList.add("run"));setTimeout(end,3200);
+})();
+</script>
+
 <div class="app">
   <header class="top">
     <div class="brand"><div class="target"><img src="img/cube-icon.png" alt="Cube SoftTech"><span><small>Applying to</small>Cube SoftTech</span></div><b>Chatthada Sainoi</b><span>ชาติธาดา สายน้อย</span></div>
@@ -503,11 +557,15 @@ function render(dir){
   grid.setAttribute("aria-labelledby","tab"+tab);
   grid.innerHTML="";
   TABS[tab].tiles.forEach((d,i)=>{
-    const el=document.createElement("button");
+    const HREF={"act:github":"https://github.com/chatthadasainoi-cmyk","act:linkedin":"https://linkedin.com/in/chatthada-sainoi-636933351"};
+    if(!fine)HREF["act:phone"]="tel:+66953194360";
+    const href=HREF[d[0]];const el=document.createElement(href?"a":"button");
+    if(href){el.href=href;if(!href.startsWith("tel:")){el.target="_blank";el.rel="noopener"}}
     const [id,c,r,cs,rs,cls]=d;
     el.className="tile "+cls+(id==="aec"?" has-logo":id==="work"?" has-logo work-logo":"");el.style.setProperty("--i",i);
     el.style.gridColumn=`${c} / span ${cs}`;el.style.gridRow=`${r} / span ${rs}`;
-    el.innerHTML=tileHTML(d);
+    let dd=d;if(!fine&&d[0].startsWith("act:")){dd=[...d];dd[11]=d[0]==="act:phone"?"Tap to call":d[11].replace("Click","Tap")}
+    el.innerHTML=tileHTML(dd);
     el.setAttribute("aria-label",`${d[9]} ${d[10].replace(/<br>/g," ")}. Open details`);
     if(cls.includes("piece")){const a=Math.random()*Math.PI*2,r=180+Math.random()*160;el.style.setProperty("--sx",(Math.cos(a)*r).toFixed(0)+"px");el.style.setProperty("--sy",(Math.sin(a)*r).toFixed(0)+"px");el.style.setProperty("--sr",((Math.random()-.5)*40).toFixed(1)+"deg")}
     if(id.startsWith("act:"))el.setAttribute("aria-label",`${d[9]} ${d[10]}. ${d[11].replace(" ↗","")}`);
@@ -548,9 +606,9 @@ function ripple(el,e){if(reduce)return;const b=el.getBoundingClientRect(),r=docu
 function copyText(v,label){const done=()=>toast(label+" copied ✓");if(navigator.clipboard)navigator.clipboard.writeText(v).then(done,()=>toast(v));else toast(v)}
 function act(k,el,e){ripple(el,e);
   if(k==="email")copyText("chatthadasainoi@gmail.com","Email");
-  else if(k==="phone"){if(!fine)location.href="tel:0953194360";else copyText("095-319-4360","Phone number")}
-  else if(k==="github"){toast("Opening GitHub…");window.open("https://github.com/chatthadasainoi-cmyk","_blank","noopener")}
-  else if(k==="linkedin"){toast("Opening LinkedIn…");window.open("https://linkedin.com/in/chatthada-sainoi-636933351","_blank","noopener")}
+  else if(k==="phone"){if(!fine)toast("Calling 095-319-4360…");else copyText("095-319-4360","Phone number")}
+  else if(k==="github")toast("Opening GitHub…");
+  else if(k==="linkedin")toast("Opening LinkedIn…");
 }
 function mark(){[...grid.children].forEach((e,i)=>e.classList.toggle("sel",i===sel))}
 function go(i,dir){const d=dir??Math.sign(i-tab);tab=(i+TABS.length)%TABS.length;try{localStorage.setItem("pf-tab2",tab)}catch(e){}render(d)}
@@ -604,7 +662,8 @@ document.fonts?.ready.then(movePill);
  document.addEventListener("ended",e=>{const v=e.target;if(v.classList&&v.classList.contains("vbg"))go(v.closest(".tile"))},true);
  document.addEventListener("error",e=>{const v=e.target;if(v.classList&&v.classList.contains("vbg"))go(v.closest(".tile"))},true);
  document.addEventListener("mouseover",e=>{const t=e.target.closest&&e.target.closest(".tile.me");if(!t||t.contains(e.relatedTarget))return;const v=t.querySelector(".vbg");if(v&&v.ended)start(t)});
- new MutationObserver(()=>{document.querySelectorAll(".tile.me:not([data-cine])").forEach(t=>{t.dataset.cine=1;if(reduce||!t.querySelector(".vbg"))go(t);else setTimeout(()=>go(t),GO*1000+1500)})}).observe(document.body,{childList:true,subtree:true});
- document.querySelectorAll(".tile.me").forEach(t=>{t.dataset.cine=1;if(reduce)go(t);else setTimeout(()=>go(t),GO*1000+1500)});
+ new MutationObserver(()=>{document.querySelectorAll(".tile.me:not([data-cine])").forEach(t=>{t.dataset.cine=1;if(reduce||!t.querySelector(".vbg"))go(t);else if(!window.__introOn)setTimeout(()=>go(t),GO*1000+1500)})}).observe(document.body,{childList:true,subtree:true});
+ window.__heroStart=start;
+ document.querySelectorAll(".tile.me").forEach(t=>{t.dataset.cine=1;if(reduce)go(t);else if(!window.__introOn)setTimeout(()=>go(t),GO*1000+1500)});
 })();
 </script>
