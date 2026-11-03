@@ -48,6 +48,8 @@ img{display:block;max-width:100%}
 .brand b{font-family:var(--f-display);font-weight:800;font-style:italic;font-size:clamp(20px,2.4vw,28px);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
 .brand span{font-family:var(--f-th);color:var(--dim);font-size:13px;white-space:nowrap}
 .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;color:var(--dim)}
+.cv{margin-left:10px;padding:5px 10px;border:1px solid var(--red);border-radius:2px;color:#fff;text-decoration:none;letter-spacing:.06em;white-space:nowrap}.cv:hover,.cv:focus-visible{background:var(--red);outline:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,23,62,.6);animation:pulse 2.4s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(227,23,62,0)}100%{box-shadow:0 0 0 0 rgba(227,23,62,0)}}
 
@@ -283,7 +285,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 <div class="app">
   <header class="top">
     <div class="brand"><div class="target"><img src="img/cube-icon.png" alt="Cube SoftTech"><span><small>Applying to</small>Cube SoftTech</span></div><b>Chatthada Sainoi</b><span>ชาติธาดา สายน้อย</span></div>
-    <div class="status"><span class="dot"></span>Open to co-op · IT Trainee</div>
+    <div class="status"><span class="dot"></span>Open to co-op · IT Trainee<a class="cv" href="Resume-Chatthada-Sainoi.pdf" target="_blank" rel="noopener">Résumé PDF ↓</a></div>
   </header>
 
   <nav class="tabs-wrap" aria-label="Sections">
@@ -291,6 +293,23 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
     <div class="tabs" role="tablist" id="tabs"><span class="pill" id="pill"></span></div>
     <button class="bump" id="nextTab" aria-label="Next section">E ▶</button>
   </nav>
+
+  <section class="sr" aria-label="Summary">
+    <h1>Chatthada Sainoi — Software Developer, applying for IT Trainee co-op</h1>
+    <p>Year 3 Digital Technology (Enterprise Software / Mobile Application), Suranaree University of Technology. GPAX 2.96, GPA 4.00 in the latest term, grade A in all four project courses. Available full-time for co-op, Bangkok area.</p>
+    <ul>
+      <li>AECverse: multiplayer 3D biogas-plant safety training web app for Accepted Engineering &amp; Consultant. Role: Scrum Master and backend lead (Node.js, Express, Socket.IO, Supabase, Google OAuth, Email OTP, Vercel, Railway). Live demo aecverse.up.railway.app, code github.com/chatthadasainoi-cmyk/AECverse.</li>
+      <li>Pharmacy Stock Ledger: solo-built PWA for the pharmacist at Lotus's Chumphon, in daily use; tracks drug expiry and return deadlines with barcode scanning and Excel import/export (JavaScript, Firebase). Code github.com/chatthadasainoi-cmyk/pharmacy-stock-ledger.</li>
+      <li>Mission Life: gamified goal-tracking mobile app (React Native, Firebase). Role: UI design in Figma and frontend.</li>
+      <li>RideCare: Top 10, DGT Digital Hackathon at SUT (React Native / Expo app, APK on GitHub).</li>
+      <li>SUT Navigator: campus navigation web app; frontend and UX/UI (JavaScript, HTML, Tailwind).</li>
+      <li>StockMB: desktop stock and sales app (Electron, SQLite); co-wrote the SRS and refined the frontend.</li>
+      <li>DeckVance: CTO of a 5-person team; passed the depa Digital Startup Fund regional round; Honorable Mention at SUT Startup.</li>
+      <li>Experience: Developer Trainee, Accepted Engineering &amp; Consultant Co., Ltd., 2024 (4 months). Student council president, Institute of Digital Arts and Science.</li>
+    </ul>
+    <p>Skills: Node.js/Express, Socket.IO, REST APIs, OAuth/OTP, JavaScript, HTML/CSS, SCSS, Tailwind CSS, responsive web design, React Native (Expo), Three.js, SQL, Supabase, Firebase, MongoDB, Git/GitHub, Figma, AI coding tools. Currently learning: Java, TypeScript, Bootstrap.</p>
+    <p>Résumé PDF: Resume-Chatthada-Sainoi.pdf · GitHub github.com/chatthadasainoi-cmyk · Email chatthadasainoi@gmail.com</p>
+  </section>
 
   <main class="board"><div class="grid" id="grid" role="tabpanel"></div></main>
 
@@ -315,6 +334,7 @@ const D={
   body:`<p>I design, build and improve software that people use in real work. Most of my work sits on the backend: Node.js services, REST APIs, real-time sync and databases, with React Native, Tailwind and plain JavaScript on the front.</p>
   <p>I'm applying for a co-op placement as an IT Trainee in enterprise software for Term 3/2569.</p>
   <h3>Education</h3><p>Bachelor's degree in Digital Technology (Enterprise Software / Mobile Application), Institute of Digital Arts and Science, SUT · 2024 – present · expected graduation April 2028</p>
+  <p><b>GPAX 2.96 · GPA 4.00 in the latest term (Term 1/2026)</b> · grade A in all four project courses (OOP &amp; Data Structures, Scripting Application, UI Development, BI &amp; Visualization)</p>
   <p>Training: Data Engineering and Industrial Data Warehouse, BOI-STEM++ (Oct 2026)</p>
   <h3>Experience</h3><p><b>Accepted Engineering & Consultant Co., Ltd.</b> · Developer trainee · Chumphon · 2024, 4 months. Developed and tested features for company systems, designed their UX/UI and supported the company's metaverse platform on Spatial.io.</p>`},
  aec:{hero:"aec-twin",k:"Project · 2025 – present",t:"AECverse",m:"Scrum Master & backend lead · team of 3 · built for Accepted Engineering & Consultant Co., Ltd.",
@@ -325,7 +345,7 @@ const D={
   <h3>System design</h3>${shots([["aec-arch","Architecture: Three.js client, Node/Express server over Socket.IO, Supabase Storage and Auth",1],["aec-flow","Emergency flow: a trainee raises an alert, the server checks it and moves everyone in the 3D world to the assembly point",1]],"dg")}
   <h3>Supported by</h3>${shots([["aec-partners","Accepted Engineering & Consultant and TITON Engineering & Consultant",1]],"sl")}
   <h3>Stack</h3>${chips(["JavaScript","Three.js","Node.js","Express","Socket.IO","Supabase","Vercel","Railway"])}
-  <a class="link" href="https://aecverse.up.railway.app" target="_blank" rel="noopener">Open live demo ↗</a>`},
+  <a class="link" href="https://aecverse.up.railway.app" target="_blank" rel="noopener">Open live demo ↗</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/AECverse" target="_blank" rel="noopener">View code on GitHub ↗</a>`},
  rx:{hero:"rx-alerts",k:"Project · solo",t:"Pharmacy Stock Ledger",m:"Built for the pharmacist at Lotus's Chumphon, now in daily use",
   body:`<p>A web app that replaced an Excel colour-coding routine for checking drug expiry dates. It sorts every lot by how long it has left and reminds the pharmacist when a lot is due to be returned to the supplier.</p>
   <div class="facts"><div class="fact"><b>5</b><span>expiry colour bands</span></div><div class="fact"><b>2</b><span>barcode formats read</span></div><div class="fact"><b>30 d</b><span>return-alert window</span></div></div>
@@ -333,7 +353,7 @@ const D={
   <p style="font-size:12.5px;color:var(--dim)">Screens show the app's built-in sample data, not the store's real stock.</p>
   <h3>Features</h3><ul><li>Imports the store's receiving files (.xlsx, .xls, .csv) and maps columns automatically.</li><li>Scans EAN-13 and GS1 DataMatrix with a USB scanner or the camera, reading LOT and EXP from the code.</li><li>Return deadlines per lot, parsed from rules like "return 7 months before expiry".</li><li>Installs as a PWA, works on phones and exports filtered tables back to Excel.</li></ul>
   <h3>Stack</h3>${chips(["JavaScript","Firebase Firestore","Service Worker","GitHub Pages"])}
-  <a class="link" href="https://chatthadasainoi-cmyk.github.io/pharmacy-stock-ledger/" target="_blank" rel="noopener">Open live app ↗</a>`},
+  <a class="link" href="https://chatthadasainoi-cmyk.github.io/pharmacy-stock-ledger/" target="_blank" rel="noopener">Open live app ↗</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/pharmacy-stock-ledger" target="_blank" rel="noopener">View code on GitHub ↗</a>`},
  deck:{hero:"dv-cover",k:"Startup competitions · 2024–2025",t:"DeckVance",m:"CTO · Team Edge Innovation · 5 people",
   body:`<p>An AI website that turns raw data into presentation slides. Users upload their data and a few of their own past slides; the AI sorts the content, arranges it in their style, and leaves every slide easy to edit. Built for Gen Z office workers in factories, who often make reports and slides after long shifts.</p>
   <h3>Results</h3><ul><li><b>depa Digital Startup Fund</b>: passed the regional round on 22 March 2025 at the Digital Economy Promotion Agency, Bangkok, and advanced to the national round.</li><li><b>SUT Startup Camp #23</b>: Honorable Mention, with the first version of the idea, Dump Slide.</li></ul>
