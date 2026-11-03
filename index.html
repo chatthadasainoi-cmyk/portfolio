@@ -117,31 +117,18 @@ img{display:block;max-width:100%}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 html.calm .grid.puzzle .tile{animation:none!important}html.calm .grid.puzzle::after{display:none}
 
-/* intro: rotating cube maze -> dive into the portfolio */
-:root{--icu:clamp(34px,6vmin,58px)}
-#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(70% 70% at 50% 50%,#1d0d12 0%,#070506 70%);overflow:hidden;cursor:pointer;transition:opacity .6s ease}
+/* intro: fly through a tunnel into the portfolio */
+#intro{position:fixed;inset:0;z-index:100;background:#050304;overflow:hidden;cursor:pointer;transition:opacity .45s ease}
 #intro.out{opacity:0;pointer-events:none}
+#intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 html.intro-on body{overflow:hidden}
-.ic-scene{perspective:900px;width:calc(var(--icu)*3);height:calc(var(--icu)*3);position:relative;z-index:2}
-.ic-cube{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-28deg) rotateY(-40deg)}
-#intro.run .ic-cube{animation:icSpin 3.1s cubic-bezier(.65,0,.35,1) forwards}
-@keyframes icSpin{0%{transform:scale(.2) rotateX(-28deg) rotateY(-220deg)}35%{transform:scale(1) rotateX(-28deg) rotateY(-40deg)}62%{transform:scale(1) rotateX(-28deg) rotateY(45deg)}100%{transform:scale(16) rotateX(-8deg) rotateY(225deg)}}
-.ic-v{--h:calc(var(--icu)/2);--e:0;position:absolute;left:var(--icu);top:var(--icu);width:var(--icu);height:var(--icu);transform-style:preserve-3d;
- transform:translate3d(calc(var(--x)*var(--icu)*(1 + var(--e))),calc(var(--y)*var(--icu)*(1 + var(--e))),calc(var(--z)*var(--icu)*(1 + var(--e))))}
-#intro.run .ic-v{animation:icMaze 3.1s ease-in-out both;animation-delay:calc(var(--n)*8ms)}
-@property --e{syntax:"<number>";inherits:true;initial-value:0}
-@keyframes icMaze{0%{--e:1.6}30%{--e:0}45%{--e:.38}58%{--e:0}100%{--e:0}}
-.ic-v b{position:absolute;inset:0;backface-visibility:hidden;border:1px solid rgba(0,0,0,.25)}
-.ic-v .tp{background:#ff3355}.ic-v .ft{background:#e3173e}.ic-v .lt{background:#c4122f}.ic-v .rt{background:#8f0c22}.ic-v .bk{background:#a50f2b}.ic-v .bt{background:#5c0716}
-.ic-tunnel{position:absolute;inset:0;display:grid;place-items:center;z-index:1;perspective:600px}
-.ic-tunnel i{position:absolute;width:40vmin;height:40vmin;border:1px solid rgba(227,23,62,.35);transform:rotate(calc(var(--k)*11deg)) scale(calc(.3 + var(--k)*.35));opacity:0}
-#intro.run .ic-tunnel i{animation:icRing 3.1s ease-in both;animation-delay:calc(var(--k)*90ms)}
-@keyframes icRing{0%,30%{opacity:0;transform:rotate(calc(var(--k)*11deg)) scale(calc(.3 + var(--k)*.35))}55%{opacity:.8}100%{opacity:0;transform:rotate(calc(var(--k)*11deg + 120deg)) scale(calc(2 + var(--k)*1.4))}}
-.ic-tag{position:absolute;left:0;right:0;bottom:16vh;text-align:center;z-index:3;font-family:var(--f-mono);letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.55);font-size:11px;display:flex;flex-direction:column;gap:6px;opacity:0}
-.ic-tag b{font-family:var(--f-display);font-style:italic;font-weight:800;letter-spacing:.06em;font-size:clamp(22px,3vw,34px);color:#fff}
-#intro.run .ic-tag{animation:icTag 3.1s ease both}
-@keyframes icTag{0%,20%{opacity:0;transform:translateY(10px)}35%,62%{opacity:1;transform:none}80%,100%{opacity:0;transform:scale(1.4)}}
-.ic-skip{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);z-index:3}
+.ic-tag{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;opacity:0;text-shadow:0 4px 30px rgba(0,0,0,.8)}
+.ic-tag span{font-family:var(--f-mono);font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.ic-tag b{font-family:var(--f-display);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(34px,6.5vw,86px);line-height:.95;color:#fff}
+.ic-tag em{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#ff4d6d}
+#intro.run .ic-tag{animation:icTag 3.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes icTag{0%,12%{opacity:0;transform:translateY(-50%) scale(.92);filter:blur(8px)}30%,70%{opacity:1;transform:translateY(-50%) scale(1);filter:blur(0)}100%{opacity:0;transform:translateY(-50%) scale(2.2);filter:blur(6px)}}
+.ic-skip{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);z-index:3}
 a.tile{text-decoration:none;color:#fff}
 
 /* hero tile: cinematic title card */
@@ -333,29 +320,57 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 
 <div class="glow" aria-hidden="true"></div>
 <div id="intro" aria-hidden="true">
-  <div class="ic-tunnel"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i></div>
-  <div class="ic-scene"><div class="ic-cube" id="icCube"></div></div>
-  <div class="ic-tag"><span>Applying to</span><b>Cube SoftTech</b></div>
+  <canvas id="icGL"></canvas>
+  <div class="ic-tag"><span>Entering the portfolio of</span><b>Chatthada Sainoi</b><em>Software Developer · Applying to Cube SoftTech</em></div>
   <div class="ic-skip">Click or press any key to skip</div>
 </div>
 <script>
 (()=>{const el=document.getElementById("intro");
  let off=false;try{off=localStorage.getItem("pf-motion")==="off"||sessionStorage.getItem("pf-intro")==="seen"}catch(e){}
  const force=/[?&]intro=1/.test(location.search);
- if(!force&&(off||matchMedia("(prefers-reduced-motion: reduce)").matches)){el.remove();return}
+ const cv=document.getElementById("icGL");const gl=cv.getContext("webgl",{antialias:false,alpha:false});
+ if(!gl||(!force&&(off||matchMedia("(prefers-reduced-motion: reduce)").matches))){el.remove();return}
+ const VS="attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+ const FS=`precision mediump float;uniform vec2 R;uniform float T,D,F,V;
+ float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+ vec3 scene(vec2 uv,float d){
+  float ax=abs(uv.x),ay=abs(uv.y),r=max(ax,ay);float side=ax>ay?(uv.x>0.?0.:2.):(uv.y>0.?1.:3.);
+  float u=(ax>ay?uv.y:uv.x)/r;float dep=.25/max(r,.002);float z=dep+d;
+  vec3 red=vec3(.89,.09,.24),pink=vec3(1.,.3,.58),hot=vec3(1.,.86,.9),dark=vec3(.09,.02,.035);
+  vec2 g=vec2(u*5.+side*11.,z*2.6);vec2 id=floor(g),f=fract(g);float c1=h(id),c2=h(id+3.1);
+  float e=min(min(f.x,1.-f.x),min(f.y,1.-f.y));
+  float seam=1.-smoothstep(.0,.014,e);
+  float inset=1.-smoothstep(.0,.012,abs(e-.16));
+  vec2 f3=fract(f*vec2(4.,3.));float e3=min(min(f3.x,1.-f3.x),min(f3.y,1.-f3.y));float greeb=(1.-smoothstep(0.,.05,e3))*step(.55,c2)*step(.2,e);
+  float win=step(.72,c1)*step(.4,f.y)*step(f.y,.6)*step(.24,f.x)*step(f.x,.76)*(.7+.3*sin(T*7.+c1*50.));
+  float rib=smoothstep(.455,.495,abs(fract(z*.65)-.5));
+  float cpx=r*r/(.25*2.6)*R.y,lf=smoothstep(8.,40.,cpx),wf=smoothstep(3.,14.,cpx);seam*=lf;inset*=lf;greeb*=lf*lf;win*=wf;rib*=smoothstep(4.,20.,cpx);
+  vec3 c=dark*(.3+.5*c2)+red*seam*1.25+red*inset*.4+pink*greeb*.3+mix(pink,hot,.55)*win*1.5+mix(red,hot,.45)*rib*1.1+pink*step(.72,c1)*.06*wf;
+  c*=exp(-dep*.7);
+  c+=red*.008/r+hot*.0012/r;return c;}
+ void main(){vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;float ang=T*.35+T*T*.04;uv=mat2(cos(ang),-sin(ang),sin(ang),cos(ang))*uv;
+  vec3 c=vec3(0.);for(int i=0;i<4;i++){c+=scene(uv*(1.+float(i)*.006*V),D-float(i)*.018*V);}c/=4.;
+  c=pow(c,vec3(1.15));c*=1.-.45*dot(uv,uv);c=mix(c,vec3(1.,.93,.95),F);gl_FragColor=vec4(c,1.);}`;
+ const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return gl.getShaderParameter(o,gl.COMPILE_STATUS)?o:null};
+ const vs=sh(gl.VERTEX_SHADER,VS),fs=sh(gl.FRAGMENT_SHADER,FS);if(!vs||!fs){el.remove();return}
+ const pr=gl.createProgram();gl.attachShader(pr,vs);gl.attachShader(pr,fs);gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){el.remove();return}
+ gl.useProgram(pr);const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+ const lp=gl.getAttribLocation(pr,"p");gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
+ const U=n=>gl.getUniformLocation(pr,n),uR=U("R"),uT=U("T"),uD=U("D"),uF=U("F"),uV=U("V");
+ const fit=()=>{const q=Math.min(devicePixelRatio||1,1.5)*.75;cv.width=Math.round(innerWidth*q);cv.height=Math.round(innerHeight*q);gl.viewport(0,0,cv.width,cv.height)};fit();addEventListener("resize",fit);
  window.__introOn=true;document.documentElement.classList.add("intro-on");
- const cube=document.getElementById("icCube"),u=getComputedStyle(document.documentElement).getPropertyValue("--icu")||"";
- const holes=new Set(["0,-1,1","0,-1,0","1,0,1","1,0,0","-1,1,1","0,0,0"]);
- const F=[["ft","translateZ(var(--h))"],["bk","rotateY(180deg) translateZ(var(--h))"],["rt","rotateY(90deg) translateZ(var(--h))"],["lt","rotateY(-90deg) translateZ(var(--h))"],["tp","rotateX(90deg) translateZ(var(--h))"],["bt","rotateX(-90deg) translateZ(var(--h))"]];
- let n=0;for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++)for(let z=-1;z<=1;z++){if(holes.has(x+","+y+","+z))continue;
-  const v=document.createElement("div");v.className="ic-v";v.style.setProperty("--x",x);v.style.setProperty("--y",y);v.style.setProperty("--z",z);v.style.setProperty("--n",n++);
-  v.innerHTML=F.map(([c,t])=>`<b class="${c}" style="transform:${t}"></b>`).join("");cube.appendChild(v)}
  document.addEventListener("play",e=>{if(window.__introOn&&e.target.classList&&e.target.classList.contains("vbg")){e.target.pause();try{e.target.currentTime=0}catch(_){}}},true);
- let done=false;const end=()=>{if(done)return;done=true;try{sessionStorage.setItem("pf-intro","seen")}catch(e){}
+ const DUR=3.6;let t0=0,last=0,dist=0,raf=0,done=false;
+ const frame=now=>{if(!t0){t0=now;last=now}const t=(now-t0)/1000,dt=Math.min(.05,(now-last)/1000);last=now;
+  const x=Math.min(t/DUR,1),v=.5+9*Math.pow(x,3);dist+=v*dt;
+  const fl=Math.max(0,Math.min(1,(t-(DUR-.35))/.35));
+  gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uT,t);gl.uniform1f(uD,dist);gl.uniform1f(uF,fl*fl);gl.uniform1f(uV,v);gl.drawArrays(gl.TRIANGLES,0,3);
+  if(t>=DUR)end();else raf=requestAnimationFrame(frame)};
+ const end=()=>{if(done)return;done=true;cancelAnimationFrame(raf);try{sessionStorage.setItem("pf-intro","seen")}catch(e){}
   el.classList.add("out");document.documentElement.classList.remove("intro-on");window.__introOn=false;
-  setTimeout(()=>{el.remove();window.__heroStart&&document.querySelectorAll(".tile.me").forEach(t=>window.__heroStart(t))},650)};
- el.addEventListener("click",end);addEventListener("keydown",e=>{if(window.__introOn)end()},{once:true});
- requestAnimationFrame(()=>el.classList.add("run"));setTimeout(end,3200);
+  setTimeout(()=>{el.remove();window.__heroStart&&document.querySelectorAll(".tile.me").forEach(t=>window.__heroStart(t))},480)};
+ el.addEventListener("click",end);addEventListener("keydown",()=>{if(window.__introOn)end()},{once:true});
+ el.classList.add("run");raf=requestAnimationFrame(frame);setTimeout(end,DUR*1000+1500);
 })();
 </script>
 
