@@ -65,7 +65,7 @@ img{display:block;max-width:100%}
 
 /* board */
 .board{flex:1;min-height:0;margin-top:clamp(12px,2.4vh,24px);perspective:1200px}
-.grid{width:100%;height:100%;max-height:620px;display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+.grid{width:100%;height:100%;max-height:760px;display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
 
 .tile{position:relative;overflow:hidden;border-radius:3px;background:var(--panel);text-align:left;min-width:0;min-height:0;
   display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;color:#fff;isolation:isolate;
@@ -103,6 +103,8 @@ img{display:block;max-width:100%}
 @keyframes scanIn{0%{clip-path:inset(0 100% 0 0);filter:saturate(0) brightness(1.8)}75%{clip-path:inset(0 0 0 0);filter:saturate(.4) brightness(1.3)}100%{clip-path:inset(0 0 0 0);filter:none}}
 @keyframes scanBar{0%{left:-22%;opacity:1}75%{left:100%;opacity:1}100%{left:100%;opacity:0}}
 html.calm .grid .tile,html.calm .grid .tile .scan{animation:none!important}
+.tile.dim .bg{filter:blur(3px) saturate(.6) brightness(.42)!important}
+.tile.dim.sel .bg{filter:blur(2px) saturate(.8) brightness(.55)!important}
 /* contact puzzle: one photo split across the cards */
 .tile.piece .pc{position:absolute;inset:0;z-index:-2;background-repeat:no-repeat;filter:grayscale(.35) brightness(.62) contrast(1.05);transition:filter .45s}
 .tile.piece.sel .pc{filter:grayscale(0) brightness(.85) contrast(1.05)}
@@ -551,22 +553,22 @@ const D={
 const TABS=[
  {name:"Home",tiles:[
   ["me",1,1,2,2,"me big","portrait","50% 18%","","IT Trainee applicant","Chatthada<br>Sainoi",""],
-  ["aec",3,1,1,2,"","aec-brand","30% 55%","Featured","Project · 2025 – now","AECverse","Multiplayer metaverse for biogas safety training"],
+  ["aec",3,1,1,2,"","aec-scene","45% 50%","","Project · 2025 – now","AECverse","Multiplayer metaverse for biogas safety training"],
   ["rx",4,1,1,1,"","rx-brand","50% 0%","In daily use","Project · solo","Pharmacy Stock Ledger",""],
-  ["deck",4,2,1,1,"","depa-pitch","50% 40%","National round","depa · CTO","DeckVance",""],
+  ["deck",4,2,1,1,"","depa-pitch","50% 40%","","depa · CTO","DeckVance",""],
   ["skills",1,3,1,1,"flat code-tile","","","","Skills","Backend first","Node · JS · SQL · React Native"],
   ["hack",2,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon","RideCare","Rider safety app"],
   ["lead",3,3,1,1,"","council-art","68% 30%","","Leadership","Council President",""],
   ["contact",4,3,1,1,"","contact-main","50% 32%","","Contact","Get in touch","Email · GitHub · LinkedIn"]]},
  {name:"Projects",tiles:[
-  ["aec",1,1,2,2,"big","aec-brand","50% 60%","2025 – now","Scrum Master & backend · team of 3","AECverse","Node.js · Socket.IO · Supabase · Three.js"],
-  ["rx",3,1,2,1,"wide","rx-expiry","0% 10%","Live","Solo developer","Pharmacy Stock Ledger","PWA · barcode scanning · Firebase"],
+  ["aec",1,1,2,2,"big","aec-brand","50% 60%","","Scrum Master & backend · team of 3","AECverse","Node.js · Socket.IO · Supabase · Three.js"],
+  ["rx",3,1,2,1,"wide dim","rx-expiry","0% 10%","Live","Solo developer","Pharmacy Stock Ledger","PWA · barcode scanning · Firebase"],
   ["ml",3,2,1,1,"","ml-battle","50% 66%","","UI & frontend","Mission Life","React Native · Figma"],
   ["stock",4,2,1,1,"","sm-dash","40% 30%","","SE & frontend","StockMB","Electron · SQLite"],
-  ["deck",1,3,1,1,"","depa-team","50% 35%","CTO","Startup project","DeckVance","depa & SUT Startup"],
-  ["nav",2,3,1,1,"","nav-map","55% 100%","New","Frontend & UX/UI","SUT Navigator","OOP team project"],
+  ["deck",1,3,1,1,"","depa-team","50% 35%","","Startup project","DeckVance","depa & SUT Startup"],
+  ["nav",2,3,1,1,"","nav-map","55% 100%","","Frontend & UX/UI","SUT Navigator","OOP team project"],
   ["hack",3,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon · mobile","RideCare","React Native · Firebase"],
-  ["work",4,3,1,1,"","","","2023","Work experience","AE&C","Developer trainee · 4 months"]]},
+  ["work",4,3,1,1,"","","","","Work experience","AE&C","Developer trainee · 4 months"]]},
  {name:"Contact",tiles:[
   ["contact",1,1,2,3,"big piece","","","Open to co-op","IT Trainee · Term 3/2569","Let's<br>build","Samut Prakan, Thailand · tap a card"],
   ["act:email",3,1,2,1,"wide piece red","","","","Email","chatthadasainoi@gmail.com","Click to copy"],
