@@ -95,30 +95,39 @@ img{display:block;max-width:100%}
 .tile.red .bar{background:#fff}
 
 /* contact puzzle: one photo split across the cards */
-.tile.piece .pc{position:absolute;inset:0;z-index:-2;background-repeat:no-repeat;filter:grayscale(.35) brightness(.62) contrast(1.05);transition:filter .45s}
-.tile.piece.sel .pc{filter:grayscale(0) brightness(.85) contrast(1.05)}
+.tile.piece .pc{position:absolute;inset:0;z-index:-2;background-repeat:no-repeat;filter:grayscale(.5) brightness(.5) contrast(1.05);transition:filter .45s}
+.tile.piece.sel .pc{filter:grayscale(.2) brightness(.7) contrast(1.05)}
 .tile.piece::before{background:linear-gradient(180deg,rgba(14,12,13,.05) 20%,rgba(14,12,13,.82) 100%)}
 .tile.piece.red::before{background:linear-gradient(180deg,rgba(227,23,62,.45),rgba(227,23,62,.9))}
 .tile.piece.red .pc{filter:grayscale(1) brightness(.8) contrast(1.1)}
 .tile.piece .s{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
 .tile.piece:not(.big) .h{font-size:clamp(15px,1.6vw,24px);text-transform:none;word-break:break-word}
-.grid.puzzle.in .tile,.grid.puzzle.to-l .tile,.grid.puzzle.to-r .tile{animation:assemble .95s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*80ms)}
-@keyframes assemble{0%{transform:translate(var(--sx,0),var(--sy,0)) rotate(var(--sr,0)) scale(.82);opacity:0}60%{opacity:1}}
-.grid.puzzle.in::after,.grid.puzzle.to-l::after,.grid.puzzle.to-r::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 60% at 50% 45%,rgba(255,255,255,.22),transparent 70%);opacity:0;animation:snap 1.6s ease-out both}
-@keyframes snap{0%,55%{opacity:0}65%{opacity:1}100%{opacity:0}}
 .grid.puzzle{position:relative}
 @media (max-width:760px){.grid.puzzle .tile.big{min-height:320px}}
 .rip{position:absolute;z-index:5;width:0;height:0;pointer-events:none}
-.rip::before{content:"";position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:2px solid #fff;animation:rip .7s ease-out forwards}
-.spark{position:absolute;width:6px;height:6px;margin:-3px;background:#fff;border-radius:1px;animation:spark .7s ease-out forwards}
+.rip::before{content:"";position:absolute;left:-40px;top:-40px;width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,.7);animation:rip .7s ease-out forwards}
 @keyframes rip{from{transform:scale(.1);opacity:.9}to{transform:scale(2.6);opacity:0}}
-@keyframes spark{to{transform:translate(var(--dx),var(--dy)) rotate(90deg) scale(.2);opacity:0}}
 #toast{position:fixed;left:50%;bottom:28px;z-index:60;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#fff;color:#111;font-family:var(--f-display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:10px 18px;border-left:4px solid var(--red);border-radius:2px;box-shadow:0 14px 30px -10px rgba(0,0,0,.7);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 html.calm .grid.puzzle .tile{animation:none!important}html.calm .grid.puzzle::after{display:none}
 
+/* 3D Cube SoftTech logo in the header */
+.c3d{width:40px;height:44px;padding:0;border:0;background:none;cursor:pointer;perspective:240px;flex:none;position:relative}
+.c3d:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.c3-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--rx,8deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.c3d.auto .c3-in{animation:c3sway 7s ease-in-out infinite alternate}
+@keyframes c3sway{0%{transform:rotateX(10deg) rotateY(-34deg)}50%{transform:rotateX(-4deg) rotateY(6deg)}100%{transform:rotateX(12deg) rotateY(38deg)}}
+.c3p{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+.c3p svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.c3d.split .c3p.a{transform:translate3d(-7px,-2px,10px) rotateY(-18deg) rotateZ(-6deg)}
+.c3d.split .c3p.b{transform:translate3d(6px,-7px,6px) rotateX(16deg) rotateZ(5deg)}
+.c3d.split .c3p.c{transform:translate3d(5px,7px,14px) rotateX(-14deg) rotateY(12deg)}
+.c3d::after{content:"";position:absolute;left:10%;right:10%;bottom:-4px;height:6px;border-radius:50%;background:radial-gradient(closest-side,rgba(227,23,62,.45),transparent);filter:blur(2px)}
+html.calm .c3d.auto .c3-in{animation:none}
+@media (max-width:760px){.c3d{width:32px;height:36px}}
 /* intro: fly through a tunnel into the portfolio */
-#intro{position:fixed;inset:0;z-index:100;background:#050304;overflow:hidden;cursor:pointer;transition:opacity .45s ease}
+#intro{position:fixed;inset:0;z-index:100;background:#050304;overflow:hidden;cursor:pointer;transition:opacity 1s ease}
+html.intro-on .app{opacity:0}.app{transition:opacity 1.2s ease .1s}
 #intro.out{opacity:0;pointer-events:none}
 #intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 html.intro-on body{overflow:hidden}
@@ -350,7 +359,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
   c+=red*.008/r+hot*.0012/r;return c;}
  void main(){vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;float ang=T*.35+T*T*.04;uv=mat2(cos(ang),-sin(ang),sin(ang),cos(ang))*uv;
   vec3 c=vec3(0.);for(int i=0;i<4;i++){c+=scene(uv*(1.+float(i)*.006*V),D-float(i)*.018*V);}c/=4.;
-  c=pow(c,vec3(1.15));c*=1.-.45*dot(uv,uv);c=mix(c,vec3(1.,.93,.95),F);gl_FragColor=vec4(c,1.);}`;
+  c=pow(c,vec3(1.15));c*=1.-.45*dot(uv,uv);c=mix(c,vec3(.027,.02,.024),F);gl_FragColor=vec4(c,1.);}`;
  const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return gl.getShaderParameter(o,gl.COMPILE_STATUS)?o:null};
  const vs=sh(gl.VERTEX_SHADER,VS),fs=sh(gl.FRAGMENT_SHADER,FS);if(!vs||!fs){el.remove();return}
  const pr=gl.createProgram();gl.attachShader(pr,vs);gl.attachShader(pr,fs);gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){el.remove();return}
@@ -363,12 +372,14 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
  const DUR=3.6;let t0=0,last=0,dist=0,raf=0,done=false;
  const frame=now=>{if(!t0){t0=now;last=now}const t=(now-t0)/1000,dt=Math.min(.05,(now-last)/1000);last=now;
   const x=Math.min(t/DUR,1),v=.5+9*Math.pow(x,3);dist+=v*dt;
-  const fl=Math.max(0,Math.min(1,(t-(DUR-.35))/.35));
+  const fl=Math.max(0,Math.min(1,(t-(DUR-.6))/.6));
   gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uT,t);gl.uniform1f(uD,dist);gl.uniform1f(uF,fl*fl);gl.uniform1f(uV,v);gl.drawArrays(gl.TRIANGLES,0,3);
   if(t>=DUR)end();else raf=requestAnimationFrame(frame)};
  const end=()=>{if(done)return;done=true;cancelAnimationFrame(raf);try{sessionStorage.setItem("pf-intro","seen")}catch(e){}
   el.classList.add("out");document.documentElement.classList.remove("intro-on");window.__introOn=false;
-  setTimeout(()=>{el.remove();window.__heroStart&&document.querySelectorAll(".tile.me").forEach(t=>window.__heroStart(t))},480)};
+  const g=document.getElementById("grid");if(g){g.classList.remove("in","to-l","to-r");void g.offsetWidth;g.classList.add("in")}
+  window.__heroStart&&document.querySelectorAll(".tile.me").forEach(t=>window.__heroStart(t));
+  setTimeout(()=>el.remove(),1100)};
  el.addEventListener("click",end);addEventListener("keydown",()=>{if(window.__introOn)end()},{once:true});
  el.classList.add("run");raf=requestAnimationFrame(frame);setTimeout(end,DUR*1000+1500);
 })();
@@ -376,7 +387,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 
 <div class="app">
   <header class="top">
-    <div class="brand"><div class="target"><img src="img/cube-icon.png" alt="Cube SoftTech"><span><small>Applying to</small>Cube SoftTech</span></div><b>Chatthada Sainoi</b><span>ชาติธาดา สายน้อย</span></div>
+    <div class="brand"><div class="target"><button class="c3d" id="c3d" type="button" aria-label="Cube SoftTech logo in 3D. Click to split it apart"><span class="c3-in" id="c3in"></span></button><span><small>Applying to</small>Cube SoftTech</span></div><b>Chatthada Sainoi</b><span>ชาติธาดา สายน้อย</span></div>
     <div class="status"><span class="dot"></span>Open to co-op · IT Trainee<a class="cv" href="Resume-Chatthada-Sainoi.pdf" target="_blank" rel="noopener">Résumé PDF ↓</a></div>
   </header>
 
@@ -616,7 +627,7 @@ let toastT;
 function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2200)}
 function ripple(el,e){if(reduce)return;const b=el.getBoundingClientRect(),r=document.createElement("span");r.className="rip";
   r.style.left=((e&&e.clientX?e.clientX:b.left+b.width/2)-b.left)+"px";r.style.top=((e&&e.clientY?e.clientY:b.top+b.height/2)-b.top)+"px";
-  el.appendChild(r);for(let k=0;k<10;k++){const s=document.createElement("i");s.className="spark";const a=k/10*Math.PI*2;s.style.setProperty("--dx",Math.cos(a)*70+"px");s.style.setProperty("--dy",Math.sin(a)*70+"px");r.appendChild(s)}
+  el.appendChild(r);
   setTimeout(()=>r.remove(),900)}
 function copyText(v,label){const done=()=>toast(label+" copied ✓");if(navigator.clipboard)navigator.clipboard.writeText(v).then(done,()=>toast(v));else toast(v)}
 function act(k,el,e){ripple(el,e);
@@ -680,5 +691,19 @@ document.fonts?.ready.then(movePill);
  new MutationObserver(()=>{document.querySelectorAll(".tile.me:not([data-cine])").forEach(t=>{t.dataset.cine=1;if(reduce||!t.querySelector(".vbg"))go(t);else if(!window.__introOn)setTimeout(()=>go(t),GO*1000+1500)})}).observe(document.body,{childList:true,subtree:true});
  window.__heroStart=start;
  document.querySelectorAll(".tile.me").forEach(t=>{t.dataset.cine=1;if(reduce)go(t);else if(!window.__introOn)setTimeout(()=>go(t),GO*1000+1500)});
+})();
+
+/* 3D Cube SoftTech logo: three extruded pieces traced from the logo */
+(()=>{const btn=document.getElementById("c3d"),host=document.getElementById("c3in");if(!btn)return;
+ const P={a:[["#e8212a","43,59 2,84 76,123 114,98"],["#c11f27","2,84 2,241 74,279 76,123"]],
+          b:[["#e8212a","72,44 141,2 274,80 205,122"],["#7e1416","276,83 207,124 206,171 277,130"]],
+          c:[["#c11f27","102,213 100,295 141,317 141,234"],["#7e1416","278,157 142,234 142,319 280,242"]]};
+ const L=11,dz=1,shade=(hex,k)=>{const n=parseInt(hex.slice(1),16),f=x=>Math.round(x*k);return`rgb(${f(n>>16)},${f(n>>8&255)},${f(n&255)})`};
+ host.innerHTML=Object.entries(P).map(([id,faces])=>`<span class="c3p ${id}">${Array.from({length:L},(_,i)=>`<svg viewBox="-4 -4 292 331" style="transform:translateZ(${i*dz-(L-1)*dz/2}px)" aria-hidden="true">${faces.map(([c,pts])=>`<polygon points="${pts}" fill="${i===L-1?c:shade(c,.4+.035*i)}"/>`).join("")}</svg>`).join("")}</span>`).join("");
+ btn.classList.add("auto");
+ const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+ if(fine){btn.addEventListener("pointermove",e=>{const b=btn.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;btn.classList.remove("auto");host.style.setProperty("--ry",(x*80).toFixed(1)+"deg");host.style.setProperty("--rx",(-y*60).toFixed(1)+"deg")});
+  btn.addEventListener("pointerleave",()=>{host.style.removeProperty("--ry");host.style.removeProperty("--rx");btn.classList.add("auto")})}
+ let tm;btn.addEventListener("click",()=>{btn.classList.add("split");clearTimeout(tm);tm=setTimeout(()=>btn.classList.remove("split"),750)});
 })();
 </script>
