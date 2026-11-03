@@ -94,18 +94,33 @@ img{display:block;max-width:100%}
 .tile.sel .bar{width:64px}
 .tile.red .bar{background:#fff}
 
+/* per-tab entrances: Home deals cards, Projects scans in, Contact assembles */
+.grid.fx-home.in .tile,.grid.fx-home.to-l .tile,.grid.fx-home.to-r .tile{animation:deal .85s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*90ms)}
+@keyframes deal{0%{transform:perspective(900px) translateY(60px) rotateY(-80deg) scale(.88);opacity:0;filter:brightness(2.2)}55%{opacity:1;filter:brightness(1.3)}100%{transform:perspective(900px);filter:none}}
+.tile .scan{position:absolute;top:-10%;bottom:-10%;left:0;width:22%;z-index:4;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,rgba(227,23,62,.0) 20%,rgba(255,60,95,.75) 85%,#fff 100%);mix-blend-mode:screen}
+.grid.fx-proj.in .tile,.grid.fx-proj.to-l .tile,.grid.fx-proj.to-r .tile{animation:scanIn .8s cubic-bezier(.65,0,.35,1) both;animation-delay:calc(var(--i)*70ms)}
+.grid.fx-proj.in .tile .scan,.grid.fx-proj.to-l .tile .scan,.grid.fx-proj.to-r .tile .scan{animation:scanBar .8s cubic-bezier(.65,0,.35,1) both;animation-delay:calc(var(--i)*70ms)}
+@keyframes scanIn{0%{clip-path:inset(0 100% 0 0);filter:saturate(0) brightness(1.8)}75%{clip-path:inset(0 0 0 0);filter:saturate(.4) brightness(1.3)}100%{clip-path:inset(0 0 0 0);filter:none}}
+@keyframes scanBar{0%{left:-22%;opacity:1}75%{left:100%;opacity:1}100%{left:100%;opacity:0}}
+html.calm .grid .tile,html.calm .grid .tile .scan{animation:none!important}
 /* contact puzzle: one photo split across the cards */
-.tile.piece .pc{position:absolute;inset:0;z-index:-2;background-repeat:no-repeat;filter:grayscale(.5) brightness(.5) contrast(1.05);transition:filter .45s}
-.tile.piece.sel .pc{filter:grayscale(.2) brightness(.7) contrast(1.05)}
+.tile.piece .pc{position:absolute;inset:0;z-index:-2;background-repeat:no-repeat;filter:grayscale(.35) brightness(.62) contrast(1.05);transition:filter .45s}
+.tile.piece.sel .pc{filter:grayscale(0) brightness(.85) contrast(1.05)}
 .tile.piece::before{background:linear-gradient(180deg,rgba(14,12,13,.05) 20%,rgba(14,12,13,.82) 100%)}
 .tile.piece.red::before{background:linear-gradient(180deg,rgba(227,23,62,.45),rgba(227,23,62,.9))}
 .tile.piece.red .pc{filter:grayscale(1) brightness(.8) contrast(1.1)}
 .tile.piece .s{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
 .tile.piece:not(.big) .h{font-size:clamp(15px,1.6vw,24px);text-transform:none;word-break:break-word}
+.grid.puzzle.in .tile,.grid.puzzle.to-l .tile,.grid.puzzle.to-r .tile{animation:assemble .95s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*80ms)}
+@keyframes assemble{0%{transform:translate(var(--sx,0),var(--sy,0)) rotate(var(--sr,0)) scale(.82);opacity:0}60%{opacity:1}}
+.grid.puzzle.in::after,.grid.puzzle.to-l::after,.grid.puzzle.to-r::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 60% at 50% 45%,rgba(255,255,255,.22),transparent 70%);opacity:0;animation:snap 1.6s ease-out both}
+@keyframes snap{0%,55%{opacity:0}65%{opacity:1}100%{opacity:0}}
 .grid.puzzle{position:relative}
 @media (max-width:760px){.grid.puzzle .tile.big{min-height:320px}}
 .rip{position:absolute;z-index:5;width:0;height:0;pointer-events:none}
-.rip::before{content:"";position:absolute;left:-40px;top:-40px;width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,.7);animation:rip .7s ease-out forwards}
+.rip::before{content:"";position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:2px solid #fff;animation:rip .7s ease-out forwards}
+.spark{position:absolute;width:6px;height:6px;margin:-3px;background:#fff;border-radius:1px;animation:spark .7s ease-out forwards}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) rotate(90deg) scale(.2);opacity:0}}
 @keyframes rip{from{transform:scale(.1);opacity:.9}to{transform:scale(2.6);opacity:0}}
 #toast{position:fixed;left:50%;bottom:28px;z-index:60;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#fff;color:#111;font-family:var(--f-display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:10px 18px;border-left:4px solid var(--red);border-radius:2px;box-shadow:0 14px 30px -10px rgba(0,0,0,.7);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
 #toast.on{opacity:1;transform:translate(-50%,0)}
@@ -574,7 +589,7 @@ function tileHTML(d){
   const scene=LOGO[id]?`<div class="logo-mark" aria-hidden="true"><img src="img/${LOGO[id]}" alt=""></div>`:"";
   const code=cls.includes("code-tile")?`<div class="code" aria-hidden="true">app.post(<em>'/sync'</em>, auth,\n  (req, res) =&gt; {\n    io.emit(<em>'model'</em>, …)\n  });</div>`:"";
   const piece=cls.includes("piece")?`<div class="pc" aria-hidden="true"></div>`:"";
-  return `${piece}${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
+  return `<i class="scan" aria-hidden="true"></i>${piece}${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
 }
 
 function render(dir){
@@ -595,7 +610,7 @@ function render(dir){
     el.setAttribute("aria-label",`${d[9]} ${d[10].replace(/<br>/g," ")}. Open details`);
     if(cls.includes("piece")){const a=Math.random()*Math.PI*2,r=180+Math.random()*160;el.style.setProperty("--sx",(Math.cos(a)*r).toFixed(0)+"px");el.style.setProperty("--sy",(Math.sin(a)*r).toFixed(0)+"px");el.style.setProperty("--sr",((Math.random()-.5)*40).toFixed(1)+"deg")}
     if(id.startsWith("act:"))el.setAttribute("aria-label",`${d[9]} ${d[10]}. ${d[11].replace(" ↗","")}`);
-    el.onclick=e=>{sel=i;mark();if(id.startsWith("act:"))act(id.slice(4),el,e);else open(id)};
+    el.onclick=e=>{sel=i;mark();if(id.startsWith("act:"))act(id.slice(4),el,e);else{ripple(el,e);setTimeout(()=>open(id),reduce?0:160)}};
     el.onpointerenter=()=>{sel=i;mark()};
     if(fine){
       el.onpointermove=e=>{if(reduce)return;const b=el.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;
@@ -606,6 +621,7 @@ function render(dir){
     }
     grid.appendChild(el);
   });
+  grid.classList.toggle("fx-home",TABS[tab].name==="Home");grid.classList.toggle("fx-proj",TABS[tab].name==="Projects");
   grid.classList.toggle("puzzle",TABS[tab].tiles.some(t=>t[5].includes("piece")));layoutPieces();
   grid.classList.remove("in","to-l","to-r");void grid.offsetWidth;
   grid.classList.add(dir===undefined?"in":dir>0?"to-l":"to-r");
@@ -627,7 +643,7 @@ let toastT;
 function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2200)}
 function ripple(el,e){if(reduce)return;const b=el.getBoundingClientRect(),r=document.createElement("span");r.className="rip";
   r.style.left=((e&&e.clientX?e.clientX:b.left+b.width/2)-b.left)+"px";r.style.top=((e&&e.clientY?e.clientY:b.top+b.height/2)-b.top)+"px";
-  el.appendChild(r);
+  el.appendChild(r);for(let k=0;k<10;k++){const s=document.createElement("i");s.className="spark";const a=k/10*Math.PI*2;s.style.setProperty("--dx",Math.cos(a)*70+"px");s.style.setProperty("--dy",Math.sin(a)*70+"px");r.appendChild(s)}
   setTimeout(()=>r.remove(),900)}
 function copyText(v,label){const done=()=>toast(label+" copied ✓");if(navigator.clipboard)navigator.clipboard.writeText(v).then(done,()=>toast(v));else toast(v)}
 function act(k,el,e){ripple(el,e);
