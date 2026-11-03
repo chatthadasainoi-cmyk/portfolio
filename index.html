@@ -639,14 +639,15 @@ function render(dir){
   grid.classList.add(dir===undefined?"in":dir>0?"to-l":"to-r");
   sel=0;mark();
 }
-const PIECE={src:"img/smile.jpg",w:880,h:1100,fx:.5,fy:.3};
+const PIECE={src:"img/contact-suit.jpg",w:1100,h:1650,fx:.49,fy:.28};
 function layoutPieces(){
   if(!grid.classList.contains("puzzle"))return;
   const g=grid.getBoundingClientRect();if(!g.width)return;
-  const narrow=g.width<760,sc=Math.max(g.width/PIECE.w,g.height/PIECE.h)*(narrow?1.35:1),W=PIECE.w*sc,H=PIECE.h*sc;
-  let ox=(g.width-W)*PIECE.fx,oy=Math.min(0,Math.max(g.height-H,(g.height-H)*PIECE.fy*2));
-  const big=grid.querySelector(".tile.big");
-  if(narrow&&big){ox=Math.min(0,Math.max(g.width-W,g.width*.5-W*.42));oy=Math.min(0,Math.max(g.height-H,big.offsetTop+big.offsetHeight*.32-H*.33))}
+  const narrow=g.width<760,sc=Math.max(g.width/PIECE.w,g.height/PIECE.h)*(narrow?1.5:1.15),W=PIECE.w*sc,H=PIECE.h*sc;
+  const cl=(v,lo)=>Math.min(0,Math.max(lo,v)),big=grid.querySelector(".tile.big");
+  let tx=g.width*.5,ty=g.height*.36;
+  if(narrow&&big){tx=g.width*.5;ty=big.offsetTop+big.offsetHeight*.34}
+  const ox=cl(tx-W*PIECE.fx,g.width-W),oy=cl(ty-H*PIECE.fy,g.height-H);
   [...grid.children].forEach(t=>{const pc=t.querySelector(".pc");if(!pc)return;
     pc.style.backgroundImage=`url(${PIECE.src})`;pc.style.backgroundSize=`${W}px ${H}px`;
     pc.style.backgroundPosition=`${ox-t.offsetLeft}px ${oy-t.offsetTop}px`});
