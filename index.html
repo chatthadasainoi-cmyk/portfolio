@@ -94,6 +94,29 @@ img{display:block;max-width:100%}
 .tile.sel .bar{width:64px}
 .tile.red .bar{background:#fff}
 
+/* contact puzzle: one photo split across the cards */
+.tile.piece .pc{position:absolute;inset:0;z-index:-2;background-repeat:no-repeat;filter:grayscale(.35) brightness(.62) contrast(1.05);transition:filter .45s}
+.tile.piece.sel .pc{filter:grayscale(0) brightness(.85) contrast(1.05)}
+.tile.piece::before{background:linear-gradient(180deg,rgba(14,12,13,.05) 20%,rgba(14,12,13,.82) 100%)}
+.tile.piece.red::before{background:linear-gradient(180deg,rgba(227,23,62,.45),rgba(227,23,62,.9))}
+.tile.piece.red .pc{filter:grayscale(1) brightness(.8) contrast(1.1)}
+.tile.piece .s{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.tile.piece:not(.big) .h{font-size:clamp(15px,1.6vw,24px);text-transform:none;word-break:break-word}
+.grid.puzzle.in .tile,.grid.puzzle.to-l .tile,.grid.puzzle.to-r .tile{animation:assemble .95s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*80ms)}
+@keyframes assemble{0%{transform:translate(var(--sx,0),var(--sy,0)) rotate(var(--sr,0)) scale(.82);opacity:0}60%{opacity:1}}
+.grid.puzzle.in::after,.grid.puzzle.to-l::after,.grid.puzzle.to-r::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 60% at 50% 45%,rgba(255,255,255,.22),transparent 70%);opacity:0;animation:snap 1.6s ease-out both}
+@keyframes snap{0%,55%{opacity:0}65%{opacity:1}100%{opacity:0}}
+.grid.puzzle{position:relative}
+@media (max-width:760px){.grid.puzzle .tile.big{min-height:320px}}
+.rip{position:absolute;z-index:5;width:0;height:0;pointer-events:none}
+.rip::before{content:"";position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:2px solid #fff;animation:rip .7s ease-out forwards}
+.spark{position:absolute;width:6px;height:6px;margin:-3px;background:#fff;border-radius:1px;animation:spark .7s ease-out forwards}
+@keyframes rip{from{transform:scale(.1);opacity:.9}to{transform:scale(2.6);opacity:0}}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) rotate(90deg) scale(.2);opacity:0}}
+#toast{position:fixed;left:50%;bottom:28px;z-index:60;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#fff;color:#111;font-family:var(--f-display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:10px 18px;border-left:4px solid var(--red);border-radius:2px;box-shadow:0 14px 30px -10px rgba(0,0,0,.7);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+html.calm .grid.puzzle .tile{animation:none!important}html.calm .grid.puzzle::after{display:none}
+
 /* hero tile: cinematic title card */
 .tile.me{padding:0;flex-direction:row;background:#060505;color:#fff;isolation:isolate}
 .tile.me::before{display:none}
@@ -311,6 +334,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
     <p>Résumé PDF: Resume-Chatthada-Sainoi.pdf · GitHub github.com/chatthadasainoi-cmyk · Email chatthadasainoi@gmail.com</p>
   </section>
 
+  <div id="toast" role="status" aria-live="polite"></div>
   <main class="board"><div class="grid" id="grid" role="tabpanel"></div></main>
 
   <footer class="hint">
@@ -439,11 +463,11 @@ const TABS=[
   ["hack",3,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon · mobile","RideCare","React Native · Firebase"],
   ["work",4,3,1,1,"","","","2024","Work experience","AE&C","Developer trainee · 4 months"]]},
  {name:"Contact",tiles:[
-  ["contact",1,1,2,3,"big","smile","45% 25%","Open to co-op","IT Trainee · Term 3/2569","Let's<br>build","Samut Prakan, Thailand"],
-  ["contact",3,1,2,1,"wide red","","","","Email","chatthadasainoi@gmail.com",""],
-  ["contact",3,2,1,1,"flat","","","","Phone","095-319-4360",""],
-  ["contact",4,2,1,1,"flat","","","","GitHub","chatthadasainoi-cmyk",""],
-  ["contact",3,3,2,1,"wide flat","","","","LinkedIn","chatthada-sainoi",""]]}
+  ["contact",1,1,2,3,"big piece","","","Open to co-op","IT Trainee · Term 3/2569","Let's<br>build","Samut Prakan, Thailand · tap a card"],
+  ["act:email",3,1,2,1,"wide piece red","","","","Email","chatthadasainoi@gmail.com","Click to copy"],
+  ["act:phone",3,2,1,1,"piece","","","","Phone","095-319-4360","Click to copy"],
+  ["act:github",4,2,1,1,"piece","","","","GitHub","chatthadasainoi-cmyk","Open profile ↗"],
+  ["act:linkedin",3,3,2,1,"wide piece","","","","LinkedIn","chatthada-sainoi","Open profile ↗"]]}
 ];
 
 const $=s=>document.querySelector(s);
@@ -469,7 +493,8 @@ function tileHTML(d){
   const LOGO={aec:"aec-logo.png",work:"aec-co-emblem.png"};
   const scene=LOGO[id]?`<div class="logo-mark" aria-hidden="true"><img src="img/${LOGO[id]}" alt=""></div>`:"";
   const code=cls.includes("code-tile")?`<div class="code" aria-hidden="true">app.post(<em>'/sync'</em>, auth,\n  (req, res) =&gt; {\n    io.emit(<em>'model'</em>, …)\n  });</div>`:"";
-  return `${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
+  const piece=cls.includes("piece")?`<div class="pc" aria-hidden="true"></div>`:"";
+  return `${piece}${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
 }
 
 function render(dir){
@@ -484,7 +509,9 @@ function render(dir){
     el.style.gridColumn=`${c} / span ${cs}`;el.style.gridRow=`${r} / span ${rs}`;
     el.innerHTML=tileHTML(d);
     el.setAttribute("aria-label",`${d[9]} ${d[10].replace(/<br>/g," ")}. Open details`);
-    el.onclick=()=>{sel=i;mark();open(id)};
+    if(cls.includes("piece")){const a=Math.random()*Math.PI*2,r=180+Math.random()*160;el.style.setProperty("--sx",(Math.cos(a)*r).toFixed(0)+"px");el.style.setProperty("--sy",(Math.sin(a)*r).toFixed(0)+"px");el.style.setProperty("--sr",((Math.random()-.5)*40).toFixed(1)+"deg")}
+    if(id.startsWith("act:"))el.setAttribute("aria-label",`${d[9]} ${d[10]}. ${d[11].replace(" ↗","")}`);
+    el.onclick=e=>{sel=i;mark();if(id.startsWith("act:"))act(id.slice(4),el,e);else open(id)};
     el.onpointerenter=()=>{sel=i;mark()};
     if(fine){
       el.onpointermove=e=>{if(reduce)return;const b=el.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;
@@ -495,9 +522,35 @@ function render(dir){
     }
     grid.appendChild(el);
   });
+  grid.classList.toggle("puzzle",TABS[tab].tiles.some(t=>t[5].includes("piece")));layoutPieces();
   grid.classList.remove("in","to-l","to-r");void grid.offsetWidth;
   grid.classList.add(dir===undefined?"in":dir>0?"to-l":"to-r");
   sel=0;mark();
+}
+const PIECE={src:"img/smile.jpg",w:880,h:1100,fx:.5,fy:.3};
+function layoutPieces(){
+  if(!grid.classList.contains("puzzle"))return;
+  const g=grid.getBoundingClientRect();if(!g.width)return;
+  const narrow=g.width<760,sc=Math.max(g.width/PIECE.w,g.height/PIECE.h)*(narrow?1.35:1),W=PIECE.w*sc,H=PIECE.h*sc;
+  let ox=(g.width-W)*PIECE.fx,oy=Math.min(0,Math.max(g.height-H,(g.height-H)*PIECE.fy*2));
+  const big=grid.querySelector(".tile.big");
+  if(narrow&&big){ox=Math.min(0,Math.max(g.width-W,g.width*.5-W*.42));oy=Math.min(0,Math.max(g.height-H,big.offsetTop+big.offsetHeight*.32-H*.33))}
+  [...grid.children].forEach(t=>{const pc=t.querySelector(".pc");if(!pc)return;
+    pc.style.backgroundImage=`url(${PIECE.src})`;pc.style.backgroundSize=`${W}px ${H}px`;
+    pc.style.backgroundPosition=`${ox-t.offsetLeft}px ${oy-t.offsetTop}px`});
+}
+let toastT;
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2200)}
+function ripple(el,e){if(reduce)return;const b=el.getBoundingClientRect(),r=document.createElement("span");r.className="rip";
+  r.style.left=((e&&e.clientX?e.clientX:b.left+b.width/2)-b.left)+"px";r.style.top=((e&&e.clientY?e.clientY:b.top+b.height/2)-b.top)+"px";
+  el.appendChild(r);for(let k=0;k<10;k++){const s=document.createElement("i");s.className="spark";const a=k/10*Math.PI*2;s.style.setProperty("--dx",Math.cos(a)*70+"px");s.style.setProperty("--dy",Math.sin(a)*70+"px");r.appendChild(s)}
+  setTimeout(()=>r.remove(),900)}
+function copyText(v,label){const done=()=>toast(label+" copied ✓");if(navigator.clipboard)navigator.clipboard.writeText(v).then(done,()=>toast(v));else toast(v)}
+function act(k,el,e){ripple(el,e);
+  if(k==="email")copyText("chatthadasainoi@gmail.com","Email");
+  else if(k==="phone"){if(!fine)location.href="tel:0953194360";else copyText("095-319-4360","Phone number")}
+  else if(k==="github"){toast("Opening GitHub…");window.open("https://github.com/chatthadasainoi-cmyk","_blank","noopener")}
+  else if(k==="linkedin"){toast("Opening LinkedIn…");window.open("https://linkedin.com/in/chatthada-sainoi-636933351","_blank","noopener")}
 }
 function mark(){[...grid.children].forEach((e,i)=>e.classList.toggle("sel",i===sel))}
 function go(i,dir){const d=dir??Math.sign(i-tab);tab=(i+TABS.length)%TABS.length;try{localStorage.setItem("pf-tab2",tab)}catch(e){}render(d)}
@@ -516,7 +569,7 @@ function open(id){
 function close(){if(lb.classList.contains("on")){lb.classList.remove("on");return}drawer.classList.remove("on");scrim.classList.remove("on");(lastFocus||grid.children[sel])?.focus?.({preventScroll:true})}
 scrim.onclick=close;$("#dClose").onclick=close;lb.onclick=()=>lb.classList.remove("on");
 $("#prevTab").onclick=()=>go(tab-1,-1);$("#nextTab").onclick=()=>go(tab+1,1);
-addEventListener("resize",movePill);
+addEventListener("resize",()=>{movePill();layoutPieces()});
 
 function moveSel(dx,dy){
   const rects=[...grid.children].map(e=>e.getBoundingClientRect());const a=rects[sel];
