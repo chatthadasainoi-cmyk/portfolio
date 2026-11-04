@@ -341,7 +341,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 @media(max-width:560px){
   .bump{display:none}
   .tabs{flex:1;justify-content:space-between}
-  .tab{padding:8px 12px;font-size:15px;letter-spacing:.06em}
+  .tab{padding:8px 7px;font-size:13px;letter-spacing:.03em}
   .target{gap:6px;padding-right:10px}.target img{height:28px}
   .target span{display:flex!important;font-size:11px}.target small{font-size:8.5px}
   .brand b{font-size:19px}
@@ -447,7 +447,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
       <li>Experience: Developer Trainee, Accepted Engineering &amp; Consultant Co., Ltd., 2023 (4 months). Student council president, Institute of Digital Arts and Science.</li>
     </ul>
     <p>Skills: Node.js/Express, Socket.IO, REST APIs, OAuth/OTP, JavaScript, HTML/CSS, SCSS, Tailwind CSS, responsive web design, React Native (Expo), Three.js, SQL, Supabase, Firebase, MongoDB, Git/GitHub, Figma, AI coding tools. Currently learning: Java, TypeScript, Bootstrap.</p>
-    <p>Certificates: Data Engineering and Industrial Data Warehouse (BOI-STEM++, SUT, Oct 2026); SUT-Digital Hackathon Certificate of Achievement; Design Thinking in Practice (NIA &amp; SET, Jun 2025). Education: Sriyapai School, Chumphon (Arts–Japanese, GPAX 3.61; lower secondary EIS).</p>
+    <p>Certificates: Data Engineering and Industrial Data Warehouse (BOI-STEM++, SUT, Oct 2026); SUT-Digital Hackathon Certificate of Achievement; Design Thinking in Practice (NIA &amp; SET, Jun 2025). Activities: Light &amp; Sound team, Fruitopia The Musical (SUT Acting Club, May 2025). Education: Sriyapai School, Chumphon (Arts–Japanese, GPAX 3.61; lower secondary EIS).</p>
     <p>Résumé PDF: Resume-Chatthada-Sainoi.pdf · GitHub github.com/chatthadasainoi-cmyk · Email chatthadasainoi@gmail.com</p>
   </section>
 
@@ -489,8 +489,6 @@ const D={
   </div>
   <h3>Where it started</h3><p>Before university I was already building: a first-person shooter prototype in Unity for my high-school computer project, an RPG in RPG Maker MV, and my first machine-learning experiments in Azure Machine Learning Studio. I also won a regional gold medal in a Japanese-language drama contest.</p>
   ${shots([["hs-unity","Unity FPS prototype, high-school computer project"],["hs-rpg","RPG made in RPG Maker MV"],["hs-ml","First ML experiment in Azure Machine Learning Studio",1]])}
-  <h3>Beyond code: Fruitopia The Musical</h3><p>Member of the sound effects team for <b>Fruitopia The Musical</b>, the SUT Acting Club stage musical marking the university's 35th year, performed on 3 May 2025 in Wittayapat Hall (Room 1500), SUT. A live show with no second take: every effect has to land on cue with the lighting and the actors.</p>
-  ${shots([["fr-poster","Official poster, SUT Acting Club"],["fr-desk","Sound crew at the mixing desk"],["fr-stage","Live show: lighting, haze and set",1],["fr-booth","Control booth during the show"],["fr-crew","Cast and crew after the show"]])}
   <h3>Experience</h3><p><b>Accepted Engineering & Consultant Co., Ltd.</b> · Developer trainee · Chumphon · 2023, 4 months. Developed and tested features for company systems, designed their UX/UI and supported the company's metaverse platform on Spatial.io.</p>`},
  aec:{hero:"aec-twin",k:"Project · 2025 – present",t:"AECverse",m:"Scrum Master & backend lead · team of 3 · built for Accepted Engineering & Consultant Co., Ltd.",
   body:`<img src="img/aec-logo.png" alt="AECverse logo" style="width:96px;height:96px;object-fit:contain;margin:14px 0 4px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))">${stats([["26","web pages"],["32","API endpoints"],["20+","real-time socket events"]])}<p>A multiplayer metaverse web app for biogas plant safety training. Trainees enter a shared 3D space, upload and adjust 3D models of the plant, and see each other's changes in real time.</p>
@@ -551,6 +549,11 @@ const D={
   <h3>Screens</h3>${shots([["nav-stats","Report: most-viewed places and visits by category"],["nav-admin","Admin dashboard: users, roles and sign-up dates"]])}
   <h3>Stack</h3>${chips(["JavaScript","HTML","Tailwind CSS"])}
   <a class="link" href="https://github.com/chatthadasainoi-cmyk/SUT-NAVIGATOR" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+ stage:{hero:"fr-stage",k:"Stage production · 3 May 2025",t:"Fruitopia The Musical",m:"Light &amp; Sound team · SUT Acting Club · Wittayapat Hall (Room 1500), SUT",
+  body:`<p>A full stage musical by the SUT Acting Club, produced for the university's 35th year and backed by about ten sponsors including Major Group. I was on the <b>Light &amp; Sound team</b>, working on the sound effects that ran live with the lighting and the actors.</p>
+  ${stats([["1","live show, no second take"],["10","sponsors"],["4","people on Light &amp; Sound"]])}
+  <h3>Why it's here</h3><p>A live show is a real-time system with people in it: every cue has to land on time, the crew talks over headsets, and nothing can be fixed after the fact. Same discipline as shipping the real-time sync in AECverse.</p>
+  <h3>Photos</h3>${shots([["fr-thanks","Official thank-you post to the Light &amp; Sound team",1],["fr-poster","Official poster"],["fr-desk","Light &amp; Sound crew at the desk"],["fr-booth","Control booth during the show"],["fr-crew","Cast and crew after the show"]])}`},
  work:{hero:"aec-ceo-hero",hp:"50% 12%",k:"Work experience · 2023 · 4 months",t:"AE&C",m:"Developer trainee · Accepted Engineering & Consultant Co., Ltd. · Chumphon",
   body:`<p>A four-month trial stint at an engineering consultancy, working on the company's own systems.</p>
   ${shots([["aec-ceo","With Mr. Khwanchat Sainoi, CEO of AE&amp;C",1]])}
@@ -596,6 +599,11 @@ const TABS=[
   ["nav",2,3,1,1,"","nav-map","55% 100%","","Frontend & UX/UI","SUT Navigator","OOP team project"],
   ["hack",3,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon · mobile","RideCare","React Native · Firebase"],
   ["work",4,3,1,1,"","","","","Work experience","AE&C","Developer trainee · 4 months"]]},
+ {name:"Activities",tiles:[
+  ["stage",1,1,2,3,"big","fr-thanks","50% 55%","Light & Sound","Stage production · 2025","Fruitopia<br>The Musical","SUT Acting Club · 10 sponsors"],
+  ["lead",3,1,2,2,"","council-team","50% 35%","","Leadership","Council President","Institute of Digital Arts and Science"],
+  ["hack",3,3,1,1,"","hack-main","52% 35%","Top 10","Hackathon","RideCare",""],
+  ["deck",4,3,1,1,"","depa-sign","50% 30%","","depa · CTO","DeckVance",""]]},
  {name:"Contact",tiles:[
   ["contact",1,1,2,3,"big piece","","","Open to co-op","IT Trainee · Term 3/2569","Let's<br>build","Samut Prakan, Thailand · tap a card"],
   ["act:email",3,1,2,1,"wide piece red","","","","Email","chatthadasainoi@gmail.com","Click to copy"],
