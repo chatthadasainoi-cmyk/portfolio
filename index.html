@@ -666,7 +666,7 @@ function tileHTML(d){
   const scene=LOGO[id]?`<div class="logo-mark" aria-hidden="true"><img src="img/${LOGO[id]}" alt=""></div>`:"";
   const code=cls.includes("code-tile")?`<div class="code" aria-hidden="true">app.post(<em>'/sync'</em>, auth,\n  (req, res) =&gt; {\n    io.emit(<em>'model'</em>, …)\n  });</div>`:"";
   const piece=cls.includes("piece")?`<div class="pc" aria-hidden="true"></div>`:"";
-  return `<i class="scan" aria-hidden="true"></i>${piece}${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""} ${/^(Top 10|Live)$/.test(tag)?"burst":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
+  return `<i class="scan" aria-hidden="true"></i>${piece}${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
 }
 
 function render(dir){
