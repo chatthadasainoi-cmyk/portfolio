@@ -117,6 +117,12 @@ html.calm .grid .tile,html.calm .grid .tile .scan{animation:none!important}
 .tile.pulse::after{animation:tpulse 1.4s ease-in-out 3}
 @keyframes tpulse{0%,100%{border-color:transparent;box-shadow:none}50%{border-color:#fff;box-shadow:0 0 0 4px rgba(227,23,62,.45)}}
 @media (max-width:760px){.tip{font-size:11px}}
+.ch{display:grid;gap:10px}.ch>div{border:1px solid var(--line);border-radius:2px;padding:12px 14px;background:rgba(255,255,255,.03)}
+.ch b{display:block;margin-bottom:6px}.ch p{margin:4px 0;font-size:13.5px;color:var(--dim);line-height:1.5}.ch em{font-style:normal;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-right:8px}
+.tile .tag.burst{background:none;padding:15px 17px;top:2px;left:2px;font-size:11.5px;color:#fff;font-weight:700;letter-spacing:.06em;isolation:isolate;transform:rotate(-8deg)}
+.tile .tag.burst::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);clip-path:polygon(50% 0,61% 22%,85% 8%,78% 33%,100% 40%,80% 55%,95% 80%,68% 74%,60% 100%,47% 79%,25% 96%,27% 70%,0 72%,17% 52%,2% 30%,28% 30%,22% 6%,42% 22%);filter:drop-shadow(2px 2px 0 #111)}
+.tile.sel .tag.burst,.tile:hover .tag.burst{animation:pow .35s cubic-bezier(.34,1.8,.5,1)}
+@keyframes pow{0%{transform:rotate(-8deg) scale(.8)}100%{transform:rotate(-8deg) scale(1)}}
 /* contact puzzle: one photo split across the cards */
 .tile.piece .pc{position:absolute;inset:0;z-index:-2;background-repeat:no-repeat;filter:grayscale(.35) brightness(.62) contrast(1.05);transition:filter .45s}
 .tile.piece.sel .pc{filter:grayscale(0) brightness(.85) contrast(1.05)}
@@ -513,16 +519,17 @@ const D={
   <h3>Screens</h3>${shots([["aec-login","Sign-in page with Google OAuth and email",1],["aec-twin","Digital Twin: click a plant zone to see its safety rules, risks, PPE and simulated IoT readings",1],["aec-tour","Virtual Tour: walk the plant as your avatar with other users in real time"],["aec-hazard","Top view: methane spread (LEL) and hazard radius around a tank"],["aec-avatar","Avatar page: pick a body, walk style and colour that others see in the tour",1]])}
   <p style="font-size:12.5px;color:var(--dim)">Plant readings in the screens are simulated data.</p>
   <h3>What I did</h3><ul><li>Scrum Master for the team: ran the sprints and kept the work on track with the client.</li><li>Built the backend: Node.js/Express server, real-time sync with Socket.IO, data storage on Supabase.</li><li>Re-architected the codebase to remove layered patches and technical debt.</li><li>Fixed 3D model sync across browser sessions by keying meshes on stable names instead of per-session IDs.</li><li>Added Google OAuth and Email OTP sign-in, and admin model lock/unlock on the server.</li><li>Deployed the client on Vercel and the server on Railway; used in A/B user testing for research.</li></ul>
+  <h3>Problems I solved</h3><div class="ch"><div><b>Models out of sync between players</b><p><em>Problem</em>Each browser gave the same 3D model a different UUID, so a move on one screen updated the wrong mesh, or nothing, on the others.</p><p><em>Fix</em>Keyed every mesh on its original model name, which is the same in every session, so updates land on the right object.</p></div><div><b>App freezing as features piled up</b><p><em>Problem</em>The renderer and other core functions had been overridden three times over by stacked patches, so one error broke the whole loop.</p><p><em>Fix</em>Rebuilt the client into labelled sections with a single animation loop and a safe-call wrapper that isolates errors.</p></div></div>
   <h3>System design</h3>${shots([["aec-arch","Architecture: Three.js client, Node/Express server over Socket.IO, Supabase Storage and Auth",1],["aec-flow","Emergency flow: a trainee raises an alert, the server checks it and moves everyone in the 3D world to the assembly point",1]],"dg")}
   <h3>Supported by</h3>${shots([["aec-partners","Accepted Engineering & Consultant and TITON Engineering & Consultant",1]],"sl")}
   <h3>Stack</h3>${chips(["JavaScript","Three.js","Node.js","Express","Socket.IO","Supabase","Vercel","Railway"])}
   <a class="link" href="https://aecverse.up.railway.app" target="_blank" rel="noopener">Open live demo ↗</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/AECverse" target="_blank" rel="noopener">View code on GitHub ↗</a>`},
  rx:{hero:"rx-alerts",k:"Project · solo",t:"Pharmacy Stock Ledger",m:"Built for the pharmacist at Lotus's Chumphon, now in daily use",
-  body:`${stats([["1","developer, end to end"],["2","barcode formats (EAN-13, GS1)"],["Daily","in use at the pharmacy"]])}<p>A web app that replaced an Excel colour-coding routine for checking drug expiry dates. It sorts every lot by how long it has left and reminds the pharmacist when a lot is due to be returned to the supplier.</p>
-  <div class="facts"><div class="fact"><b>5</b><span>expiry colour bands</span></div><div class="fact"><b>2</b><span>barcode formats read</span></div><div class="fact"><b>30 d</b><span>return-alert window</span></div></div>
+  body:`${stats([["5","expiry colour bands"],["2","barcode formats (EAN-13, GS1)"],["Daily","in use at the pharmacy"]])}<p>A web app that replaced an Excel colour-coding routine for checking drug expiry dates. It sorts every lot by how long it has left and reminds the pharmacist when a lot is due to be returned to the supplier.</p>
   <h3>Screens</h3>${shots([["rx-login","Sign-in with a Google account; data syncs across every device the shop logs in on"],["rx-alerts","Alerts: lots due for return, grouped by expiry colour",1],["rx-expiry","Expiry table with filters by colour, status, class and vendor",1]])}
   <p style="font-size:12.5px;color:var(--dim)">Screens show the app's built-in sample data, not the store's real stock.</p>
   <h3>Features</h3><ul><li>Imports the store's receiving files (.xlsx, .xls, .csv) and maps columns automatically.</li><li>Scans EAN-13 and GS1 DataMatrix with a USB scanner or the camera, reading LOT and EXP from the code.</li><li>Return deadlines per lot, parsed from rules like "return 7 months before expiry".</li><li>Installs as a PWA, works on phones and exports filtered tables back to Excel.</li></ul>
+  <h3>Problems I solved</h3><div class="ch"><div><b>Every file looks different</b><p><em>Problem</em>The store's receiving files and update files use different columns, and some have no lot numbers.</p><p><em>Fix</em>Detects the columns automatically, lets the pharmacist correct a wrong match, and supports both file types.</p></div><div><b>Duplicate lots after re-import</b><p><em>Problem</em>Staff often import the same file again.</p><p><em>Fix</em>Rows already imported are recognised and skipped.</p></div></div>
   <h3>Stack</h3>${chips(["JavaScript","Firebase Firestore","Service Worker","GitHub Pages"])}
   <a class="link" href="https://chatthadasainoi-cmyk.github.io/pharmacy-stock-ledger/" target="_blank" rel="noopener">Open live app ↗</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/pharmacy-stock-ledger" target="_blank" rel="noopener">View code on GitHub ↗</a>`},
  deck:{hero:"dv-cover",k:"Startup competitions · 2024–2025",t:"DeckVance",m:"CTO · Team Edge Innovation · 5 people",
@@ -654,7 +661,7 @@ function tileHTML(d){
   const scene=LOGO[id]?`<div class="logo-mark" aria-hidden="true"><img src="img/${LOGO[id]}" alt=""></div>`:"";
   const code=cls.includes("code-tile")?`<div class="code" aria-hidden="true">app.post(<em>'/sync'</em>, auth,\n  (req, res) =&gt; {\n    io.emit(<em>'model'</em>, …)\n  });</div>`:"";
   const piece=cls.includes("piece")?`<div class="pc" aria-hidden="true"></div>`:"";
-  return `<i class="scan" aria-hidden="true"></i>${piece}${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
+  return `<i class="scan" aria-hidden="true"></i>${piece}${scene}${img?`<div class="bg" style="background-image:url(${IMG(img)});--pos:${pos}"></div>`:""}${tag?`<span class="tag ${cls.includes("red")?"ghost":""} ${/^(Top 10|Live)$/.test(tag)?"burst":""}">${tag}</span>`:""}${code}<div class="shine"></div><div class="bar"></div><div class="k">${k}</div><div class="h">${h}</div>${s?`<div class="s">${s}</div>`:""}`;
 }
 
 function render(dir){
@@ -805,4 +812,6 @@ document.fonts?.ready.then(movePill);
  document.getElementById("grid").addEventListener("click",done,{once:true});
  const wait=()=>{if(window.__introOn)return setTimeout(wait,300);setTimeout(show,1400)};wait();
 })();
+
+(()=>{const t=document.title;document.addEventListener("visibilitychange",()=>{document.title=document.hidden?"👀 Come back, let's build":t})})();
 </script>
