@@ -106,11 +106,11 @@ html.calm .grid .tile,html.calm .grid .tile .scan{animation:none!important}
 .tile.dim .bg{filter:blur(3px) saturate(.6) brightness(.42)!important}
 .tile.dim.sel .bg{filter:blur(2px) saturate(.8) brightness(.55)!important}
 /* affordances */
-.go-ic{position:absolute;z-index:3;top:10px;right:10px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;font-size:11px;line-height:1;color:rgba(255,255,255,.55);background:rgba(14,12,13,.28);border:1px solid rgba(255,255,255,.1);opacity:.75;transition:transform .25s,background .25s,border-color .25s,color .25s,opacity .25s}
-.tile.sel .go-ic,.tile:hover .go-ic{opacity:1;color:#fff;background:var(--red);border-color:var(--red);transform:scale(1.12) rotate(-8deg)}
-@media (hover:none){.go-ic{opacity:.9;color:rgba(255,255,255,.75)}}
-.tile.red .go-ic{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
-.tile.me .go-ic{top:auto;bottom:calc(7% + 12px);right:14px}
+.go-ic{position:absolute;z-index:3;top:9px;right:11px;font-size:17px;font-weight:900;line-height:1;color:rgba(255,255,255,.6);-webkit-text-stroke:.6px currentColor;text-shadow:0 1px 6px rgba(0,0,0,.7);transition:transform .25s,color .25s}
+.tile.sel .go-ic,.tile:hover .go-ic{color:var(--red);transform:translate(2px,-2px) scale(1.15)}
+.tile.red .go-ic{color:rgba(255,255,255,.7)}.tile.red.sel .go-ic,.tile.red:hover .go-ic{color:#fff}
+.tile.me .go-ic,.tile.piece.big .go-ic{display:none}
+@media (hover:none){.go-ic{color:rgba(255,255,255,.75)}}
 .tip{display:flex;align-items:center;gap:10px;justify-content:center;margin:10px auto 0;width:max-content;max-width:100%;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:#fff;background:rgba(227,23,62,.16);border:1px solid rgba(227,23,62,.55);padding:7px 14px;border-radius:999px;opacity:0;transform:translateY(-6px);max-height:0;overflow:hidden;padding-top:0;padding-bottom:0;transition:opacity .5s,transform .5s,max-height .5s,padding .5s}
 .tip.on{opacity:1;transform:none;max-height:40px;padding-top:7px;padding-bottom:7px}
 .tip-dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(227,23,62,.7);animation:pulse 1.6s infinite;flex:none}
