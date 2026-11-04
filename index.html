@@ -277,6 +277,7 @@ html.calm .tile.me .tx *{opacity:1!important}
 .drawer li::marker{color:var(--red)}
 .drawer h3{font-family:var(--f-display);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;color:var(--dim);margin:22px 0 8px;border-top:1px solid var(--line);padding-top:14px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip.ic{display:inline-flex;align-items:center;gap:6px}.chip img{width:15px;height:15px;flex:none}.chip img.inv{filter:invert(1)}.chip img[src*="threejs"]{filter:invert(1) brightness(1.4)}
 .credit{font-size:13px!important;line-height:1.55!important;color:var(--dim)!important}
 .used{font-size:12px!important;line-height:1.4!important;color:var(--dim)!important;margin-top:6px!important;font-family:var(--f-mono,monospace)}
 .skgroup{font-family:var(--f-display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:22px;letter-spacing:.02em;color:#fff;margin:26px 0 -4px;padding-left:10px;border-left:4px solid var(--red)}
@@ -467,7 +468,9 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 
 <script>
 const IMG=n=>`img/${n}.jpg`;
-const chips=a=>`<div class="chips">${a.map(c=>`<span class="chip">${c}</span>`).join("")}</div>`;
+const ICON={"JavaScript":"javascript","HTML":"html5","HTML/CSS":"html5","SCSS":"sass","Tailwind CSS":"tailwindcss","React Native":"react","Node.js":"nodejs","Express":"express","Socket.IO":"socketio","Socket.IO real-time":"socketio","Three.js":"threejs","Supabase":"supabase","Firebase Auth & Firestore":"firebase","Firebase Firestore":"firebase","Firebase Auth":"firebase","Firestore":"firebase","MongoDB":"mongodb","SQLite":"sqlite","Vercel":"vercel","Railway":"railway","Git / GitHub":"git","GitHub Pages":"github","Figma":"figma","Electron":"electron","Bootstrap":"bootstrap","TypeScript":"typescript","Java":"java"};
+const INV=new Set(["express","socketio","threejs","vercel","github"]);
+const chips=a=>`<div class="chips">${a.map(c=>{const i=ICON[c];return `<span class="chip${i?" ic":""}">${i?`<img src="img/tech/${i}.svg" alt="" class="${INV.has(i)?"inv":""}" loading="lazy">`:""}${c}</span>`}).join("")}</div>`;
 const stats=a=>`<div class="stats">${a.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join("")}</div>`;
 const shots=(a,cl="")=>`<div class="shots ${cl}">${a.map(([n,c,w])=>`<figure class="${w?"wide":""}"><img src="${IMG(n)}" alt="${c}" data-cap="${c}" loading="lazy"><figcaption>${c}</figcaption></figure>`).join("")}</div>`;
 
