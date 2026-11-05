@@ -819,4 +819,13 @@ document.fonts?.ready.then(movePill);
 })();
 
 (()=>{const t=document.title;document.addEventListener("visibilitychange",()=>{document.title=document.hidden?"👀 Come back, let's build":t})})();
+
+/* CV button: inside the claude.ai artifact viewer use the downloads capability; elsewhere a normal link */
+(()=>{const btn=document.getElementById("cvBtn");if(!btn||!window.claude||typeof window.claude.use!=="function")return;
+ let dl=null;window.claude.use("downloads").then(d=>{dl=d}).catch(()=>{});
+ btn.addEventListener("click",async e=>{if(!dl)return;e.preventDefault();
+  try{const r=await fetch("Resume-Chatthada-Sainoi.pdf");if(!r.ok)throw 0;const blob=await r.blob();
+   await dl.save({filename:"Resume-Chatthada-Sainoi.pdf",data:blob});typeof toast==="function"&&toast("CV saved ✓")}
+  catch(err){if(err&&err.code==="declined")return;window.open(btn.href,"_blank","noopener")}});
+})();
 </script>
