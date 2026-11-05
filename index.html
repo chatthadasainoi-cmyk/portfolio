@@ -462,7 +462,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
       <li>Pharmacy Stock Ledger: solo-built PWA for the pharmacist at Lotus's Chumphon, in daily use; tracks drug expiry and return deadlines with barcode scanning and Excel import/export (JavaScript, Firebase). Code github.com/chatthadasainoi-cmyk/pharmacy-stock-ledger.</li>
       <li>Mission Life: gamified goal-tracking mobile app (React Native, Firebase). Role: UI design in Figma and frontend.</li>
       <li>RideCare: Top 10, DGT Digital Hackathon at SUT (React Native / Expo app, APK on GitHub).</li>
-      <li>SUT Navigator: campus navigation web app; frontend and UX/UI (JavaScript, HTML, Tailwind).</li>
+      <li>SUT Navigator: campus navigation app, OOP course team of 6; UX/UI of sign-in, sign-up and home, UML class diagram, user manual.</li>
       <li>StockMB: desktop stock and sales app (Electron, SQLite); co-wrote the SRS and refined the frontend.</li>
       <li>DeckVance: CTO of a 5-person team; passed the depa Digital Startup Fund regional round; Honorable Mention at SUT Startup.</li>
       <li>Experience: Developer Trainee, Accepted Engineering &amp; Consultant Co., Ltd., 2023 (4 months). Student council president, Institute of Digital Arts and Science.</li>
@@ -571,13 +571,15 @@ const D={
   <h3>Stack</h3>${chips(["Electron","SQLite","JavaScript","HTML/CSS","Chart.js"])}
   <h3>Team</h3><p class="credit"><b>Software Engineering Project (SRS):</b> Natthapum Yukhong, Sirichai Thiappha, Sombatchai Khamkhao, Kittichai Pariwantang, Worawat Sunnok and me.<br><b>App build (OOP course, group C09):</b> Sombatchai Khamkhao (system design, dashboard, database), Sirichai Thiappha (login, password reset, class diagram), Natthapum Yukhong (UI, product sales), Athiwara Yaowarat (UI), Kittichai Pariwantang and Worawat Sunnok (requirements).</p>
   <a class="link" href="https://github.com/chatthadasainoi-cmyk/StockMB" target="_blank" rel="noopener">View on GitHub ↗</a>`},
- nav:{hero:"nav-map",k:"Team project · OOP course · Jan 2026",t:"SUT Navigator",m:"Frontend & UX/UI developer",
-  body:`<p>An app that helps students and visitors find their way around SUT: a campus map with pins for teaching buildings, food, dorms and services, plus search down to the room. Built as a team for the Object-Oriented Programming course.</p>
-  <h3>What I did</h3><ul><li>Built the frontend and designed the UX/UI: layout, navigation tabs, buttons and screens.</li><li>Made the campus map and its category pins.</li><li>Prepared the place photos and recommended-place cards.</li></ul>
-  <h3>Features</h3><ul><li><b>Campus map</b>: pins by category, recommended places and a jump to each location.</li><li><b>Search</b>: find buildings and rooms with category filters.</li><li><b>Room list</b>: browse every building and the rooms inside it.</li><li><b>Report</b>: top 5 most-viewed places and visits per category.</li><li><b>Accounts</b>: sign-up, sign-in, password reset and a guest mode; admins see a user dashboard and can add rooms.</li></ul>
+ nav:{hero:"nav-map",k:"Team project · OOP &amp; Data Structures Project (1101093) · Term 2/2025",t:"SUT Navigator",m:"UX/UI design &amp; class diagram · team of 6",
+  body:`<p>An app that helps students and visitors find their way around SUT: a campus map with pins for teaching buildings, food, dorms and services, plus search down to the room. Built as a team for the Object-Oriented Programming and Data Structures Project course (group A10).</p>
+  <h3>What I did</h3><ul><li>Designed the UX/UI of the sign-in, sign-up and home screens.</li><li>Co-designed the system's <b>UML class diagram</b>: the classes, attributes, methods and relationships the app is built on.</li><li>Wrote the user manual and co-wrote the project report.</li></ul>
+  <h3>Class diagram</h3>${shots([["nav-class","UML class diagram of the system (team work, click to enlarge)",1]],"dg")}
+  <h3>Features</h3><ul><li><b>Campus map</b>: pins by category, recommended places and a jump to each location.</li><li><b>Search</b>: find buildings and rooms with category filters.</li><li><b>Room list</b>: browse every building and the rooms inside it.</li><li><b>Report</b>: top 5 most-viewed places and visits per category.</li><li><b>Accounts</b>: sign-up, sign-in, password reset and a guest mode; admins see a user dashboard and can add rooms.</li><li><b>Parking assistant</b>: nearest parking by vehicle type (car or motorcycle) and covered or open-air.</li><li><b>SUT storytelling</b>: history and facts shown when a landmark is searched.</li><li><b>Bus stops</b>: the nearest campus bus stop to each building.</li></ul>
   <h3>Demo</h3><div class="vids" style="grid-template-columns:1fr"><figure><video src="vid/nav-user.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>User view: map, search and the room list (2.5× speed)</figcaption></figure><figure><video src="vid/nav-admin.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Admin view: user dashboard and adding a room (2× speed, test data)</figcaption></figure></div>
-  <h3>Screens</h3>${shots([["nav-stats","Report: most-viewed places and visits by category"],["nav-admin","Admin dashboard: users, roles and sign-up dates"]])}
+  <h3>Screens</h3>${shots([["nav-login","Sign-in screen (my UX/UI)"],["nav-stats","Report: most-viewed places and visits by category"],["nav-admin","Admin dashboard: users, roles and sign-up dates"]])}
   <h3>Stack</h3>${chips(["JavaScript","HTML","Tailwind CSS"])}
+  <h3>Team</h3><p class="credit">Piya Seethanee, Suphakorn Hanying, Kunasin Khunsri, Tawan Rakthankarn, Thepsit Samrit and me. Advisor: Assoc. Prof. Dr. Jitimon Angskun.</p>
   <a class="link" href="https://github.com/chatthadasainoi-cmyk/SUT-NAVIGATOR" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  stage:{hero:"fr-thanks",hp:"50% 62%",k:"Stage production · 3 May 2025",t:"Fruitopia The Musical",m:"Light &amp; Sound team · SUT Acting Club · Wittayapat Hall (Room 1500), SUT",
   body:`<p>A full stage musical by the SUT Acting Club, produced for the university's 35th year and backed by about ten sponsors including Major Group. I was on the <b>Light &amp; Sound team</b>, working on the sound effects that ran live with the lighting and the actors.</p>
@@ -625,7 +627,7 @@ const TABS=[
   ["ml",3,2,1,1,"","ml-battle","50% 66%","","UI & frontend","Mission Life","React Native · Figma"],
   ["stock",4,2,1,1,"","sm-dash","40% 30%","","SE & frontend","StockMB","Electron · SQLite"],
   ["deck",1,3,1,1,"","depa-team","50% 35%","","Startup project","DeckVance","depa & SUT Startup"],
-  ["nav",2,3,1,1,"","nav-map","55% 100%","","Frontend & UX/UI","SUT Navigator","OOP team project"],
+  ["nav",2,3,1,1,"","nav-map","55% 100%","","UX/UI & class diagram","SUT Navigator","OOP team project"],
   ["hack",3,3,1,1,"","hack-team","50% 35%","Top 10","Hackathon · mobile","RideCare","React Native · Firebase"],
   ["work",4,3,1,1,"","","","","Work experience","AE&C","Developer trainee · 4 months"]]},
  {name:"Activities",tiles:[
