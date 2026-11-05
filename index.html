@@ -382,6 +382,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
   .me .tx{padding:0 18px calc(7% + 14px)}
   .tile.me .tx .h{font-size:44px}
 }
+p.demo-note{font-size:13px!important;color:var(--dim)!important;margin:20px 0 -4px!important}
 </style>
 
 <div class="glow" aria-hidden="true"></div>
@@ -561,7 +562,7 @@ const D={
   <h3>Screens I built</h3>${shots([["ml-s-login","Sign-in"],["ml-s-home","Home: profile, XP and mission stats"],["ml-s-quest","Quest list by category"],["ml-s-create","Create Mission: pick a goal type"],["ml-s-goal","Set the goal, days and XP"],["ml-s-trophy","Trophies unlock as you level up"]],"ph")}
   <h3>Stack</h3>${chips(["React Native","Expo","Firebase Firestore","Figma","Node.js","MongoDB"])}
   <h3>Team</h3><p class="credit">Course 1101103, group 09: Sombatchai Khamkhao (admin UI design, user backend and database), Sirichai Thiappha (admin frontend and backend), Natthapum Yukhong (design and build of sign-up, profile, feedback, logout and create character), Thanakorn Chueamak (dashboard design, guide backend) and me.</p>
-  <a class="link" href="https://github.com/chatthadasainoi-cmyk/Mission-Life" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+  <p class="demo-note">Web demo runs in the browser with mock data (no sign-up needed). Hosted by teammate Sombatchai.</p><a class="link" href="https://sombatchai.github.io/portfolio/demo/missionlife/" target="_blank" rel="noopener">Open live demo ↗</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/Mission-Life" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  stock:{hero:"sm-dash",k:"Team project · Software Engineering Project course · Term 2/2025",t:"StockMB",m:"Software engineering & frontend · Stock Manager Basic System",
   body:`<p>A Windows desktop app that replaces hand-written notes and Excel for a small shop's stock: sales at the counter, stock in and out, profit reports and staff accounts with role-based access.</p>
   <h3>What I did</h3><ul><li>Member of the six-person team that wrote the Software Requirements Specification (SRS) for the system in the Software Engineering Project course (1101163).</li><li>Refined the app's frontend: screens, layout and usability fixes.</li></ul>
@@ -570,7 +571,7 @@ const D={
   <h3>Software engineering (SRS)</h3><p>Scope, user roles (owner and staff), functional and non-functional requirements, and the system models below.</p>${shots([["sm-context","Context diagram"],["sm-usecase","Use case diagram: employee and owner"],["sm-dfd","Data flow diagram, level 1 (staff)"],["sm-erd","Relational schema: products, sales, employees"]],"dg")}
   <h3>Stack</h3>${chips(["Electron","SQLite","JavaScript","HTML/CSS","Chart.js"])}
   <h3>Team</h3><p class="credit"><b>Software Engineering Project (SRS):</b> Natthapum Yukhong, Sirichai Thiappha, Sombatchai Khamkhao, Kittichai Pariwantang, Worawat Sunnok and me.<br><b>App build (OOP course, group C09):</b> Sombatchai Khamkhao (system design, dashboard, database), Sirichai Thiappha (login, password reset, class diagram), Natthapum Yukhong (UI, product sales), Athiwara Yaowarat (UI), Kittichai Pariwantang and Worawat Sunnok (requirements).</p>
-  <a class="link" href="https://github.com/chatthadasainoi-cmyk/StockMB" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+  <p class="demo-note">Web demo runs in the browser with mock data. Hosted by teammate Sombatchai.</p><a class="link" href="https://sombatchai.github.io/portfolio/demo/stockmb/" target="_blank" rel="noopener">Open live demo ↗</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/StockMB" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  nav:{hero:"nav-map",k:"Team project · OOP &amp; Data Structures Project (1101093) · Term 2/2025",t:"SUT Navigator",m:"UX/UI design &amp; class diagram · team of 6",
   body:`<p>An app that helps students and visitors find their way around SUT: a campus map with pins for teaching buildings, food, dorms and services, plus search down to the room. Built as a team for the Object-Oriented Programming and Data Structures Project course (group A10).</p>
   <h3>What I did</h3><ul><li>Designed the UX/UI of the sign-in, sign-up and home screens.</li><li>Co-designed the system's <b>UML class diagram</b>: the classes, attributes, methods and relationships the app is built on.</li><li>Wrote the user manual and co-wrote the project report.</li></ul>
@@ -580,7 +581,7 @@ const D={
   <h3>Screens</h3>${shots([["nav-login","Sign-in screen (my UX/UI)"],["nav-stats","Report: most-viewed places and visits by category"],["nav-admin","Admin dashboard: users, roles and sign-up dates"]])}
   <h3>Stack</h3>${chips(["JavaScript","HTML","Tailwind CSS"])}
   <h3>Team</h3><p class="credit">Piya Seethanee, Suphakorn Hanying, Kunasin Khunsri, Tawan Rakthankarn, Thepsit Samrit and me. Advisor: Assoc. Prof. Dr. Jitimon Angskun.</p>
-  <a class="link" href="https://github.com/chatthadasainoi-cmyk/SUT-NAVIGATOR" target="_blank" rel="noopener">View on GitHub ↗</a>`},
+  <p class="demo-note">Web UI prototype of the sign-in, sign-up and home screens I designed. Mock data, login pre-filled.</p><a class="link" href="https://chatthadasainoi-cmyk.github.io/portfolio/demo/sut-navigator/" target="_blank" rel="noopener">Open UI prototype ↗</a><a class="link ghost" href="https://github.com/chatthadasainoi-cmyk/SUT-NAVIGATOR" target="_blank" rel="noopener">View on GitHub ↗</a>`},
  stage:{hero:"fr-thanks",hp:"50% 62%",k:"Stage production · 3 May 2025",t:"Fruitopia The Musical",m:"Light &amp; Sound team · SUT Acting Club · Wittayapat Hall (Room 1500), SUT",
   body:`<p>A full stage musical by the SUT Acting Club, produced for the university's 35th year and backed by about ten sponsors including Major Group. I was on the <b>Light &amp; Sound team</b>, working on the sound effects that ran live with the lighting and the actors.</p>
   ${stats([["1","live show, no second take"],["10","sponsors"],["4","people on Light &amp; Sound"]])}

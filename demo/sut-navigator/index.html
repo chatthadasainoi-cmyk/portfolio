@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="th">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUT Navigation</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100%;
+      background: linear-gradient(135deg, #FFC300 0%, #F26522 100%);
+    }
+
+    html {
+      height: 100%;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-in {
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .bounce-in {
+      animation: bounceIn 0.8s ease-out;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .category-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(145deg, #ffffff, #f8f8f8);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Gradient หลัก: สีทอง (FFC300) -> สีแสด (F26522) */
+    .gradient-bg {
+      background: linear-gradient(135deg, #FFC300 0%, #F26522 100%);
+    }
+
+    /* Map Gradient: สีแสด -> สีทอง */
+    .map-container {
+      background: linear-gradient(135deg, #F26522 0%, #FFC300 100%);
+      border-radius: 20px;
+      padding: 30px;
+      min-height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .building-marker {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
+
+    .building-marker:hover {
+      transform: scale(1.2) rotate(5deg);
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translateY(0px);
+      }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px);
+      }
+    }
+
+    /* ปรับสี glow ให้เป็นโทนแสด */
+    .glow {
+      box-shadow: 0 0 20px rgba(242, 101, 34, 0.4); 
+    }
+
+    /* ปรับปุ่มหลัก: ใช้สีทอง-แสด */
+    .btn-primary {
+      background: linear-gradient(135deg, #FFC300 0%, #F26522 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      color: black; /* กำหนดสีข้อความเป็นสีดำเพื่อให้ตัดกับปุ่มแสด/ทอง */
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); /* ทำให้ดูแวววาว */
+      transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      /* ปรับสี box-shadow ให้เข้ากับธีมแสด */
+      box-shadow: 0 10px 25px rgba(242, 101, 34, 0.3); 
+    }
+
+    .search-input {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      /* ปรับสี border ให้เข้ากับธีมแสด */
+      border: 2px solid rgba(242, 101, 34, 0.3); 
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      background: rgba(255, 255, 255, 1);
+      /* ปรับสี border-color ให้เข้ากับธีมแสด */
+      border-color: #F26522; 
+      box-shadow: 0 0 0 4px rgba(242, 101, 34, 0.1);
+    }
+
+    .stat-card {
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      /* ปรับสี border-left ให้เข้ากับธีมแสด */
+      border-left: 4px solid #F26522; 
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    @view-transition { navigation: auto; }
+  </style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full"></div>
+  
+  <script>
+    const defaultConfig = {
+      app_title: "SUT Navigator",
+      welcome_message: "ยินดีต้อนรับสู่ระบบนำทาง SUT",
+      background_color: "#f8f9fa",
+      surface_color: "#ffffff",
+      text_color: "#1a202c",
+      primary_action_color: "#F26522", // สีแสด (SUT Orange)
+      secondary_action_color: "#FFC300", // สีทอง (SUT Gold/Amber)
+      logo_url: "SUT_emblem_standard.png" // กำหนด path ไปยังไฟล์โลโก้ PNG ที่อัพโหลดมา
+    };
+    let currentUser = null;
+    let currentView = 'login';
+    let selectedCategory = null;
+    let selectedSubcategory = null;
+    let searchQuery = '';
+    const categories = {
+      'อาคารเรียน': {
+        icon: '🏫',
+        subcategories: ['อาคารเรียนรวม 1', 'อาคารเรียนรวม 2'],
+        rooms: {
+          'อาคารเรียนรวม 1': ['ห้อง 101', 'ห้อง 102', 'ห้อง 103', 'ห้อง 104'],
+          'อาคารเรียนรวม 2': ['ห้อง 201', 'ห้อง 202', 'ห้อง 203', 'ห้อง 204']
+        }
+      },
+      'ร้านค้า/อาหาร': {
+        icon: '🍽️',
+        subcategories: ['กาสะลอง', 'ร้านค้าหอ', 'เซเว่น'],
+        rooms: {
+          'กาสะลอง': ['ร้านอาหารตามสั่ง', 'โซนอาหารจานด่วน', 'โซนเครื่องดื่ม'],
+          'ร้านค้าหอ': ['ร้านเครื่องเขียน', 'ร้านถ่ายเอกสาร', 'ร้านกาแฟ'],
+          'เซเว่น': ['เซเว่น อาคาร 1', 'เซเว่น อาคาร 2']
+        }
+      },
+      'อาคารเครื่องมือ': {
+        icon: '🔧',
+        subcategories: ['อาคารเครื่องมือ 1', 'อาคารเครื่องมือ 2'],
+        rooms: {
+          'อาคารเครื่องมือ 1': ['ห้องปฏิบัติการ 1', 'ห้องปฏิบัติการ 2', 'ห้องเก็บอุปกรณ์'],
+          'อาคารเครื่องมือ 2': ['ห้องปฏิบัติการ 3', 'ห้องปฏิบัติการ 4', 'ห้องเก็บอุปกรณ์']
+        }
+      }
+    };
+    const dataHandler = {
+      onDataChanged(data) {
+        // Data changes are handled through user actions
+      }
+    };
+    async function initializeApp() {
+      // ตรวจสอบว่า SDKs โหลดมาหรือไม่
+      if (window.dataSdk && window.dataSdk.init) {
+        const initResult = await window.dataSdk.init(dataHandler);
+        if (!initResult.isOk) {
+          console.error("Failed to initialize data SDK");
+        }
+      } else {
+        console.warn("dataSdk not available. Running in standalone mode.");
+      }
+
+      // ตรวจสอบว่า Element SDK โหลดมาหรือไม่
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
+            render();
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  window.elementSdk.config.background_color = value;
+                  window.elementSdk.setConfig({ background_color: value });
+                }
+              },
+              {
+                get: () => config.surface_color || defaultConfig.surface_color,
+                set: (value) => {
+                  window.elementSdk.config.surface_color = value;
+                  window.elementSdk.setConfig({ surface_color: value });
+                }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  window.elementSdk.config.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                }
+              },
+              {
+                get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                set: (value) => {
+                  window.elementSdk.config.primary_action_color = value;
+                  window.elementSdk.setConfig({ primary_action_color: value });
+                }
+              },
+              {
+                get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                set: (value) => {
+                  window.elementSdk.config.secondary_action_color = value;
+                  window.elementSdk.setConfig({ secondary_action_color: value });
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["app_title", config.app_title || defaultConfig.app_title],
+            ["welcome_message", config.welcome_message || defaultConfig.welcome_message]
+          ])
+        });
+      }
+      
+      render(); // นี่คือฟังก์ชันที่สร้างหน้าจอแรก
+    }
+
+    function getConfig() {
+      return window.elementSdk?.config || defaultConfig;
+    }
+
+    function render() {
+      const app = document.getElementById('app');
+      const config = getConfig();
+      if (currentView === 'login') {
+        app.innerHTML = renderLogin(config);
+      } else if (currentView === 'register') {
+        app.innerHTML = renderRegister(config);
+      } else if (currentView === 'main') {
+        app.innerHTML = renderMainMenu(config);
+      } else if (currentView === 'search') {
+        app.innerHTML = renderSearch(config);
+      } else if (currentView === 'report') {
+        app.innerHTML = renderReport(config);
+      } else if (currentView === 'list') {
+        app.innerHTML = renderList(config);
+      }
+      
+      attachEventListeners();
+    }
+
+    function renderLogin(config) {
+      return `
+        <div class="h-full flex items-center justify-center gradient-bg">
+          <div class="w-full max-w-md p-8 rounded-3xl glass-card bounce-in">
+            <div class="text-center mb-8">
+              <img src="${config.logo_url || 'SUT_emblem_standard.png'}" 
+                   alt="SUT Logo" 
+                   class="w-24 h-34 mx-auto mb-4 floating"
+              >
+              <h1 class="text-4xl font-bold mb-3 bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent">${config.app_title}</h1>
+              <p class="text-lg text-gray-600">${config.welcome_message}</p>
+              <div class="mt-4 flex justify-center space-x-2">
+                <div class="w-2 h-2 bg-amber-400 rounded-full pulse"></div>
+                <div class="w-2 h-2 bg-orange-400 rounded-full pulse" style="animation-delay: 0.2s;"></div>
+                <div class="w-2 h-2 bg-red-400 rounded-full pulse" style="animation-delay: 0.4s;"></div>
+            </div>
+            </div>
+            
+            <form id="loginForm" class="space-y-6">
+              <div class="slide-in" style="animation-delay: 0.2s;">
+                <label for="loginEmail" class="block text-sm font-semibold mb-3 text-gray-700">📧 อีเมล</label>
+                <input type="email" id="loginEmail" value="demo@g.sut.ac.th" required 
+                  class="w-full px-5 py-4 rounded-xl search-input text-gray-800 placeholder-gray-500"
+                  placeholder="your@sut.ac.th">
+              </div>
+              
+              <div class="slide-in" style="animation-delay: 0.4s;">
+                <label for="loginPassword" class="block text-sm font-semibold mb-3 text-gray-700">🔒 รหัสผ่าน</label>
+                <input type="password" id="loginPassword" value="demo1234" required 
+                  class="w-full px-5 py-4 rounded-xl search-input text-gray-800 placeholder-gray-500"
+                  placeholder="••••••••">
+              </div>
+              
+              <button type="submit" 
+                class="w-full py-4 rounded-xl font-bold btn-primary text-white slide-in glow"
+                style="animation-delay: 0.6s;">
+                 เข้าสู่ระบบ
+              </button>
+            </form>
+            
+            <div class="mt-8 text-center slide-in" style="animation-delay: 0.8s;">
+              <button id="goToRegister" class="font-semibold text-orange-600 hover:text-orange-800 transition-colors text-lg">
+                ✨ ยังไม่มีบัญชี? สมัครสมาชิก
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRegister(config) {
+      return `
+        <div class="h-full flex items-center justify-center gradient-bg">
+          <div class="w-full max-w-md p-8 rounded-3xl glass-card bounce-in">
+            <div class="text-center mb-8">
+              <div class="text-8xl mb-4 floating">✨</div>
+              <h1 class="text-4xl font-bold mb-3 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">สมัครสมาชิก</h1>
+              <p class="text-lg text-gray-600">เข้าร่วมกับเรา SUT Navigator</p>
+              <div class="mt-4 flex justify-center space-x-2">
+                <div class="w-2 h-2 bg-pink-400 rounded-full pulse"></div>
+                <div class="w-2 h-2 bg-purple-400 rounded-full pulse" style="animation-delay: 0.2s;"></div>
+                <div class="w-2 h-2 bg-blue-400 rounded-full pulse" style="animation-delay: 0.4s;"></div>
+              </div>
+            </div>
+            
+            <form id="registerForm" class="space-y-6">
+              <div class="slide-in" style="animation-delay: 0.2s;">
+                <label for="registerUsername" class="block text-sm font-semibold mb-3 text-gray-700">👤 ชื่อผู้ใช้</label>
+                <input type="text" id="registerUsername" required 
+                  class="w-full px-5 py-4 rounded-xl search-input text-gray-800 placeholder-gray-500"
+                  placeholder="ชื่อผู้ใช้ของคุณ">
+              </div>
+              
+              <div class="slide-in" style="animation-delay: 0.4s;">
+                <label for="registerEmail" class="block text-sm font-semibold mb-3 text-gray-700">📧 อีเมล</label>
+                <input type="email" id="registerEmail" required 
+                  class="w-full px-5 py-4 rounded-xl search-input text-gray-800 placeholder-gray-500"
+                  placeholder="your@sut.ac.th">
+              </div>
+              
+              <div class="slide-in" style="animation-delay: 0.6s;">
+                <label for="registerPassword" class="block text-sm font-semibold mb-3 text-gray-700">🔒 รหัสผ่าน</label>
+                <input type="password" id="registerPassword" required 
+                  class="w-full px-5 py-4 rounded-xl search-input text-gray-800 placeholder-gray-500"
+                  placeholder="••••••••">
+              </div>
+              
+              <button type="submit" 
+                class="w-full py-4 rounded-xl font-bold btn-primary text-lg slide-in glow"
+                style="animation-delay: 0.8s;">
+                🎉 สมัครสมาชิก
+              </button>
+            </form>
+            
+            <div class="mt-8 text-center slide-in" style="animation-delay: 1s;">
+              <button id="goToLogin" class="font-semibold text-orange-600 hover:text-orange-800 transition-colors text-lg">
+                🔙 มีบัญชีแล้ว? เข้าสู่ระบบ
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMainMenu(config) {
+      return `
+        <div class="h-full flex flex-col fade-in gradient-bg">
+          <header class="glass-card shadow-xl p-6 m-4 rounded-2xl">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+              <div class="flex items-center gap-4">
+                <img src="${config.logo_url || 'SUT_emblem_standard.png'}" 
+                     alt="SUT Logo" 
+                     class="w-12 h-12 floating" 
+                />
+                <div>
+                  <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent">${config.app_title}</h1>
+                  <p class="text-sm text-gray-600">สำรวจมหาวิทยาลัยเทคโนโลยีสุรนารี</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-orange-100 to-amber-100 rounded-full">
+                  <span class="text-2xl">👤</span>
+                  <span class="font-semibold text-gray-700">${currentUser?.username || 'User'}</span>
+                </div>
+                <button id="logoutBtn" class="px-6 py-3 rounded-full font-semibold btn-primary transition-all">
+                  🚪 ออกจากระบบ
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 overflow-auto p-6">
+            <div class="max-w-7xl mx-auto">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <button id="searchBtn" class="category-card p-8 rounded-2xl text-left slide-in" style="animation-delay: 0.1s;">
+                  <div class="text-6xl mb-4 floating">🔍</div>
+                  <h3 class="text-2xl font-bold mb-3 text-gray-800">ค้นหา</h3>
+                  <p class="text-gray-600 text-lg">ค้นหาอาคารและห้องเรียน</p>
+                  <div class="mt-4 w-full h-1 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full"></div>
+                </button>
+                
+                <button id="reportBtn" class="category-card p-8 rounded-2xl text-left slide-in" style="animation-delay: 0.2s;">
+                  <div class="text-6xl mb-4 floating" style="animation-delay: 0.5s;">📊</div>
+                  <h3 class="text-2xl font-bold mb-3 text-gray-800">รายงาน</h3>
+                  <p class="text-gray-600 text-lg">ดูสถิติและรายงาน</p>
+                  <div class="mt-4 w-full h-1 bg-gradient-to-r from-green-400 to-orange-400 rounded-full"></div>
+                </button>
+                
+                <button id="listBtn" class="category-card p-8 rounded-2xl text-left slide-in" style="animation-delay: 0.3s;">
+                  <div class="text-6xl mb-4 floating" style="animation-delay: 1s;">📋</div>
+                  <h3 class="text-2xl font-bold mb-3 text-gray-800">รายการ</h3>
+                  <p class="text-gray-600 text-lg">รายการอาคารและห้องเรียน</p>
+                  <div class="mt-4 w-full h-1 bg-gradient-to-r from-red-400 to-orange-400 rounded-full"></div>
+                </button>
+              </div>
+
+              <div class="glass-card rounded-3xl shadow-2xl p-8 mb-10 slide-in" style="animation-delay: 0.4s;">
+                <div class="flex items-center gap-4 mb-6">
+                  <img src="${config.logo_url || 'SUT_emblem_standard.png'}" 
+                       alt="SUT Logo" 
+                       class="w-10 h-10" 
+                  />
+                  <h2 class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent">แผนที่ SUT</h2>
+                </div>
+                <div class="map-container relative">
+                  <div class="text-center text-white relative z-10">
+                    <div class="text-8xl mb-6 floating">🗺️</div>
+                    <p class="text-2xl font-bold mb-2">ใส่แผนที่ตรงนี้จ้า</p>
+                    <p class="text-lg opacity-90 mb-4">สำรวจมหาวิทยาลัยเทคโนโลยีสุรนารี</p>
+                    <div class="flex justify-center space-x-3">
+                      <div class="w-3 h-3 bg-white rounded-full pulse"></div>
+                      <div class="w-3 h-3 bg-white rounded-full pulse" style="animation-delay: 0.2s;"></div>
+                      <div class="w-3 h-3 bg-white rounded-full pulse" style="animation-delay: 0.4s;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </main>
+        </div>
+      `;
+    }
+
+    function renderSearch(config) {
+      const allItems = [];
+      Object.entries(categories).forEach(([catName, catData]) => {
+        catData.subcategories.forEach(subcat => {
+          if (catData.rooms[subcat]) {
+            catData.rooms[subcat].forEach(room => {
+              allItems.push({
+                category: catName,
+                subcategory: subcat,
+                room: room,
+                icon: catData.icon
+              });
+            });
+          }
+        });
+      });
+      const filteredItems = searchQuery 
+        ? allItems.filter(item => 
+            item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.subcategory.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.room.toLowerCase().includes(searchQuery.toLowerCase())
+          ) 
+        : [];
+      return `
+        <div class="h-full flex flex-col fade-in gradient-bg">
+          <header class="glass-card shadow-xl p-6 m-4 rounded-2xl">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+              <button id="backBtn" class="px-6 py-3 rounded-full font-semibold btn-primary transition-all">
+                ← กลับ
+              </button>
+              <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent">ค้นหา</h1>
+              <div style="width: 120px;"></div>
+            </div>
+          </header>
+          <main class="flex-1 overflow-auto p-6">
+            <div class="max-w-4xl mx-auto">
+              <div class="glass-card rounded-3xl shadow-2xl p-8 mb-8 slide-in">
+                <div class="text-center mb-6">
+                  <div class="text-6xl mb-4 floating">🔍</div>
+                  <h2 class="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent mb-2">ค้นหาสถานที่ใน SUT</h2>
+                  <p class="text-gray-600">พิมพ์ชื่ออาคาร ห้องเรียน หรือสถานที่ที่ต้องการค้นหา</p>
+                </div>
+                <div class="flex gap-4">
+                  <div class="relative">
+                    <button id="categoriesMenuBtn" class="p-6 rounded-2xl glass-card hover:shadow-lg transition-all floating flex items-center gap-3">
+                      <span class="text-3xl">📂</span>
+                      <span class="text-lg font-semibold text-gray-700">หมวดหมู่</span>
+                      <span class="text-lg text-orange-600">...</span>
+                    </button>
+                    <div id="categoriesDropdown" class="absolute left-0 mt-2 w-64 rounded-xl shadow-xl glass-card p-3 z-20 opacity-0 pointer-events-none transition-opacity duration-300 transform translate-y-2">
+                      <h4 class="text-md font-bold mb-2 text-gray-800 border-b pb-2 border-gray-200">เลือกหมวดหมู่หลัก</h4>
+                      <div class="space-y-2">
+                        ${Object.entries(categories).map(([catName, catData]) => `
+                          <button data-category="${catName}" class="category-btn w-full text-left p-3 rounded-lg hover:bg-orange-100 transition-colors flex items-center gap-3 text-gray-700 font-medium">
+                            <span class="text-xl">${catData.icon}</span> ${catName}
+                          </button>
+                        `).join('')}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="relative flex-1">
+                    <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                      <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                      </svg>
+                    </div>
+                    <input type="text" id="searchInput" class="w-full pl-16 pr-6 py-6 rounded-2xl search-input text-xl font-medium text-gray-800 placeholder-gray-500" placeholder="ค้นหาอาคาร, ห้องเรียน, หรือสถานที่ใน SUT..." value="${searchQuery}">
+                    <div class="absolute inset-y-0 right-0 pr-6 flex items-center">
+                      <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-amber-400 rounded-full pulse"></div>
+                        <div class="w-2 h-2 bg-orange-400 rounded-full pulse" style="animation-delay: 0.2s;"></div>
+                        <div class="w-2 h-2 bg-red-400 rounded-full pulse" style="animation-delay: 0.4s;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              ${searchQuery ?
+                `
+                <div class="glass-card rounded-2xl shadow-xl p-6">
+                  <h3 class="text-xl font-bold mb-4 text-gray-800">ผลการค้นหา (${filteredItems.length} รายการ)</h3>
+                  <div class="space-y-4">
+                    ${filteredItems.length > 0 ?
+                      filteredItems.map(item => `
+                        <div class="p-4 rounded-xl bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 transition-all duration-300 border border-orange-200">
+                          <div class="flex items-center gap-4">
+                            <span class="text-4xl">${item.icon}</span>
+                            <div class="flex-1">
+                              <h4 class="text-lg font-bold text-gray-800">${item.room}</h4>
+                              <p class="text-sm text-gray-600"> ${item.category} › ${item.subcategory} </p>
+                            </div>
+                            <button class="px-6 py-3 rounded-full font-semibold btn-primary transition-all">
+                              ดูแผนที่
+                            </button>
+                          </div>
+                        </div>
+                      `).join('') : `
+                        <div class="text-center py-12">
+                          <div class="text-6xl mb-4">😔</div>
+                          <p class="text-xl text-gray-600 mb-2">ไม่พบผลการค้นหา</p>
+                          <p class="text-gray-500">ลองใช้คำค้นหาอื่น หรือตรวจสอบการสะกดคำ</p>
+                        </div>
+                      `
+                    }
+                  </div>
+                </div>
+                ` : `
+                <div class="text-center py-12">
+                  <div class="text-8xl mb-6 floating">🏫</div>
+                  <h3 class="text-2xl font-bold text-white mb-4">เริ่มค้นหาสถานที่ใน SUT</h3>
+                  <p class="text-lg text-white opacity-90">พิมพ์ในช่องค้นหาด้านบนเพื่อเริ่มต้น</p>
+                  <div class="mt-6 flex justify-center space-x-3">
+                    <div class="w-3 h-3 bg-white rounded-full pulse"></div>
+                    <div class="w-3 h-3 bg-white rounded-full pulse" style="animation-delay: 0.2s;"></div>
+                    <div class="w-3 h-3 bg-white rounded-full pulse" style="animation-delay: 0.4s;"></div>
+                  </div>
+                </div>
+                `
+              }
+            </div>
+          </main>
+        </div>
+      `;
+    }
+
+    function renderReport(config) {
+      const totalCategories = Object.keys(categories).length;
+      const totalSubcategories = Object.values(categories).reduce((sum, cat) => sum + cat.subcategories.length, 0);
+      let totalRooms = 0;
+      Object.values(categories).forEach(cat => {
+        Object.values(cat.rooms).forEach(rooms => {
+          totalRooms += rooms.length;
+        });
+      });
+      return `
+        <div class="h-full flex flex-col fade-in" style="background-color: ${config.background_color};">
+          <header class="shadow-md p-4" style="background-color: ${config.surface_color};">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+              <button id="backBtn" class="px-4 py-2 rounded-lg font-medium transition-all" style="background-color: ${config.secondary_action_color}; color: black;">
+                ← กลับ
+              </button>
+              <h1 class="text-2xl font-bold" style="color: ${config.text_color};">รายงานและสถิติ</h1>
+              <div style="width: 80px;"></div>
+            </div>
+          </header>
+          <main class="flex-1 overflow-auto p-6">
+            <div class="max-w-6xl mx-auto">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <div class="stat-card p-8 rounded-2xl shadow-xl slide-in" style="animation-delay: 0.1s;">
+                  <div class="text-6xl mb-4 floating">📂</div>
+                  <div class="text-4xl font-bold mb-3 bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent">${totalCategories}</div>
+                  <p class="text-gray-700 text-lg font-semibold">หมวดหมู่หลัก</p>
+                  <div class="mt-4 w-full h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full"></div>
+                </div>
+                <div class="stat-card p-8 rounded-2xl shadow-xl slide-in" style="animation-delay: 0.2s;">
+                  <div class="text-6xl mb-4 floating" style="animation-delay: 0.5s;">🏷️</div>
+                  <div class="text-4xl font-bold mb-3 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">${totalSubcategories}</div>
+                  <p class="text-gray-700 text-lg font-semibold">หมวดหมู่ย่อย</p>
+                  <div class="mt-4 w-full h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full"></div>
+                </div>
+                <div class="stat-card p-8 rounded-2xl shadow-xl slide-in" style="animation-delay: 0.3s;">
+                  <div class="text-6xl mb-4 floating" style="animation-delay: 1s;">🏢</div>
+                  <div class="text-4xl font-bold mb-3 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">${totalRooms}</div>
+                  <p class="text-gray-700 text-lg font-semibold">ห้อง/สถานที่ทั้งหมด</p>
+                  <div class="mt-4 w-full h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full"></div>
+                </div>
+              </div>
+              <div class="rounded-xl shadow-lg p-6" style="background-color: ${config.surface_color};">
+                <h2 class="text-2xl font-bold mb-6" style="color: ${config.text_color};">รายละเอียดตามหมวดหมู่</h2>
+                <div class="space-y-6">
+                  ${Object.entries(categories).map(([catName, catData]) => {
+                    const roomCount = Object.values(catData.rooms).reduce((sum, rooms) => sum + rooms.length, 0);
+                    return `
+                      <div class="border-l-4 pl-4" style="border-color: ${config.primary_action_color};">
+                        <div class="flex items-center gap-3 mb-3">
+                          <span class="text-3xl">${catData.icon}</span>
+                          <h3 class="text-xl font-bold" style="color: ${config.text_color};">${catName}</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 ml-12">
+                          <div>
+                            <p class="text-sm" style="color: ${config.text_color}; opacity: 0.7;">หมวดหมู่ย่อย</p>
+                            <p class="text-2xl font-bold" style="color: ${config.primary_action_color};">${catData.subcategories.length}</p>
+                          </div>
+                          <div>
+                            <p class="text-sm" style="color: ${config.text_color}; opacity: 0.7;">ห้อง/สถานที่</p>
+                            <p class="text-2xl font-bold" style="color: ${config.primary_action_color};">${roomCount}</p>
+                          </div>
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      `;
+    }
+
+    function renderList(config) {
+      const displayCategories = selectedCategory
+        ? { [selectedCategory]: categories[selectedCategory] }
+        : categories;
+
+      return `
+        <div class="h-full flex flex-col fade-in" style="background-color: ${config.background_color};">
+          <header class="shadow-md p-4" style="background-color: ${config.surface_color};">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+              <button id="backBtn" class="px-4 py-2 rounded-lg font-medium transition-all" style="background-color: ${config.secondary_action_color}; color: black;">
+                ← กลับ
+              </button>
+              <h1 class="text-2xl font-bold" style="color: ${config.text_color};">
+                รายการอาคารและห้องเรียน
+                ${selectedCategory ? ` (${selectedCategory})` : ''}
+              </h1>
+              <button id="clearCategoryBtn" class="px-4 py-2 rounded-lg font-medium transition-all ${selectedCategory ? '' : 'hidden'}" style="background-color: ${config.primary_action_color}; color: white;">
+                ล้างหมวดหมู่
+              </button>
+              <div style="width: 80px;" class="${selectedCategory ? 'hidden' : ''}"></div>
+            </div>
+          </header>
+          <main class="flex-1 overflow-auto p-6">
+            <div class="max-w-6xl mx-auto">
+              ${Object.entries(displayCategories).map(([catName, catData]) => `
+                <div class="mb-8 rounded-xl shadow-lg p-6" style="background-color: ${config.surface_color};">
+                  <div class="flex items-center gap-3 mb-6">
+                    <span class="text-4xl">${catData.icon}</span>
+                    <h2 class="text-2xl font-bold" style="color: ${config.text_color};">${catName}</h2>
+                  </div>
+                  <div class="space-y-4 ml-10">
+                    ${catData.subcategories.map(subcat => `
+                      <div class="border-l-4 pl-4" style="border-color: ${config.secondary_action_color};">
+                        <h3 class="text-xl font-bold mb-2" style="color: ${config.text_color};">${subcat}</h3>
+                        <ul class="list-disc ml-6 space-y-1 text-gray-700">
+                          <li class="hover:text-orange-600 transition-colors cursor-pointer">${(catData.rooms[subcat] || []).join('</li><li class="hover:text-orange-600 transition-colors cursor-pointer">')}</li>
+                        </ul>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+
+              ${Object.keys(displayCategories).length === 0 ? `
+                <div class="text-center py-12">
+                  <div class="text-6xl mb-4" style="color: ${config.secondary_action_color};">😔</div>
+                  <p class="text-xl" style="color: ${config.text_color};">ไม่พบข้อมูลในหมวดหมู่นี้</p>
+                </div>
+              ` : ''}
+            </div>
+          </main>
+        </div>
+      `;
+    }
+
+    function attachEventListeners() {
+      // Login form
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('loginEmail').value;
+          const password = document.getElementById('loginPassword').value;
+          // Dummy login logic
+          if (email && password) {
+            currentUser = { username: email.split('@')[0] };
+            currentView = 'main';
+            render();
+          } else {
+            alert('โปรดกรอกอีเมลและรหัสผ่าน');
+          }
+        });
+      }
+
+      // Register form
+      const registerForm = document.getElementById('registerForm');
+      if (registerForm) {
+        registerForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const username = document.getElementById('registerUsername').value;
+          const email = document.getElementById('registerEmail').value;
+          const password = document.getElementById('registerPassword').value;
+          // Dummy registration logic
+          if (username && email && password) {
+            alert(`ลงทะเบียนสำเร็จ! ยินดีต้อนรับ ${username}`);
+            currentView = 'login';
+            render();
+          } else {
+            alert('โปรดกรอกข้อมูลให้ครบถ้วน');
+          }
+        });
+      }
+
+      // Navigation buttons
+      const goToRegister = document.getElementById('goToRegister');
+      if (goToRegister) {
+        goToRegister.addEventListener('click', () => {
+          currentView = 'register';
+          render();
+        });
+      }
+
+      const goToLogin = document.getElementById('goToLogin');
+      if (goToLogin) {
+        goToLogin.addEventListener('click', () => {
+          currentView = 'login';
+          render();
+        });
+      }
+
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          currentUser = null;
+          currentView = 'login';
+          render();
+        });
+      }
+
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          currentView = 'main';
+          searchQuery = '';
+          selectedCategory = null; // Clear selected category when going back to main
+          render();
+        });
+      }
+      
+      const clearCategoryBtn = document.getElementById('clearCategoryBtn');
+      if (clearCategoryBtn) {
+        clearCategoryBtn.addEventListener('click', () => {
+          selectedCategory = null;
+          render();
+        });
+      }
+
+      // Quick action buttons
+      const searchBtn = document.getElementById('searchBtn');
+      if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+          currentView = 'search';
+          render();
+        });
+      }
+
+      const reportBtn = document.getElementById('reportBtn');
+      if (reportBtn) {
+        reportBtn.addEventListener('click', () => {
+          currentView = 'report';
+          render();
+        });
+      }
+
+      const listBtn = document.getElementById('listBtn');
+      if (listBtn) {
+        listBtn.addEventListener('click', () => {
+          currentView = 'list';
+          render();
+        });
+      }
+
+      // Categories menu/dropdown
+      const categoriesMenuBtn = document.getElementById('categoriesMenuBtn');
+      const categoriesDropdown = document.getElementById('categoriesDropdown');
+      if (categoriesMenuBtn && categoriesDropdown) {
+        categoriesMenuBtn.addEventListener('click', () => {
+          const isOpen = categoriesDropdown.classList.contains('opacity-100');
+          const arrowSpan = categoriesMenuBtn.querySelector('span:last-child');
+          if (isOpen) {
+            // Close menu
+            categoriesDropdown.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            categoriesDropdown.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+            if (arrowSpan) arrowSpan.textContent = '...';
+          } else {
+            // Open menu
+            categoriesDropdown.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+            categoriesDropdown.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            if (arrowSpan) arrowSpan.textContent = 'x';
+          }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+          if (!categoriesMenuBtn.contains(event.target) && !categoriesDropdown.contains(event.target)) {
+            categoriesDropdown.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            categoriesDropdown.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+            const arrowSpan = categoriesMenuBtn.querySelector('span:last-child');
+            if (arrowSpan) arrowSpan.textContent = '...';
+          }
+        });
+      }
+      
+      // Category buttons in dropdown
+      const categoryBtns = document.querySelectorAll('.category-btn');
+      categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedCategory = btn.dataset.category;
+          currentView = 'list';
+          render();
+        });
+      });
+
+      // Search input
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value;
+          render();
+        });
+      }
+    }
+
+    // Initialize app
+    // **เรียกฟังก์ชันเริ่มต้นเพื่อสร้างหน้าจอแรกสุด**
+    initializeApp();
+  </script> 
+ <div id="demoBar" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:9999;background:#1e1e1e;color:#fff;font:500 13px/1.3 system-ui,sans-serif;padding:8px 14px;border-radius:999px;box-shadow:0 4px 18px rgba(0,0,0,.25);white-space:nowrap">UI prototype · mock data · login is pre-filled, just press เข้าสู่ระบบ</div>
+</body>
+</html>
