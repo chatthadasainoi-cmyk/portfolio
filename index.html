@@ -464,7 +464,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
       <li>RideCare: Top 10, DGT Digital Hackathon at SUT (React Native / Expo app, APK on GitHub).</li>
       <li>SUT Navigator: campus navigation app, OOP course team of 6; UX/UI of sign-in, sign-up and home, UML class diagram, user manual.</li>
       <li>StockMB: desktop stock and sales app (Electron, SQLite); co-wrote the SRS and refined the frontend.</li>
-      <li>DeckVance: CTO of a 5-person team; passed the depa Digital Startup Fund regional round; Honorable Mention at SUT Startup.</li>
+      <li>Road Accident Analytics: Power BI dashboard and infographic on 47,667 Thai road-accident records (BI course, grade A).</li><li>DeckVance: CTO of a 5-person team; passed the depa Digital Startup Fund regional round; Honorable Mention at SUT Startup.</li>
       <li>Experience: Developer Trainee, Accepted Engineering &amp; Consultant Co., Ltd., 2023 (4 months). Student council president, Institute of Digital Arts and Science.</li>
     </ul>
     <p>Skills: Node.js/Express, Socket.IO, REST APIs, OAuth/OTP, JavaScript, HTML/CSS, SCSS, Tailwind CSS, responsive web design, React Native (Expo), Three.js, SQL, Supabase, Firebase, MongoDB, Git/GitHub, Figma, AI coding tools. Also Java (OOP), TypeScript and Bootstrap.</p>
@@ -586,6 +586,15 @@ const D={
   ${stats([["1","live show, no second take"],["10","sponsors"],["4","people on Light &amp; Sound"]])}
   <h3>Why it's here</h3><p>A live show is a real-time system with people in it: every cue has to land on time, the crew talks over headsets, and nothing can be fixed after the fact. Same discipline as shipping the real-time sync in AECverse.</p>
   <h3>Photos</h3>${shots([["fr-poster","Official poster"],["fr-stage","Live show: lighting, haze and set"],["fr-desk","Light &amp; Sound crew at the desk"],["fr-booth","Control booth during the show"],["fr-crew","Cast and crew after the show"]])}`},
+ bi:{hero:"bi-hero",hp:"50% 30%",k:"Team project · BI &amp; Information Visualization Project (1101283) · Grade A",t:"Road Accident Analytics",m:"Power BI dashboard &amp; infographic · team of 6",
+  body:`${stats([["47,667","accident records"],["38","attributes per record"],["2","years compared (2024–2025)"]])}<p>An analysis of Thailand's road accidents from the Ministry of Transport's reporting system, to show where, when and why accidents happen so agencies can act before the next one.</p>
+  <h3>What I did</h3><ul><li>Built the <b>Power BI dashboard</b>: KPIs, monthly trend against the previous year, top provinces, time-of-day and vehicle-type breakdowns.</li><li>Designed the <b>infographic</b> that turns the dashboard into a one-page summary for the public.</li></ul>
+  <h3>Questions it answers</h3><ul><li>Which provinces have the most accidents?</li><li>Is the trend rising or falling against last year?</li><li>Which behaviours cause the most accidents?</li><li>What time of day is most dangerous?</li><li>Which vehicle types and causes go together?</li></ul>
+  <h3>Findings</h3><ul><li>Bangkok has the most accidents (5,782), followed by Chonburi and Nakhon Ratchasima.</li><li>Speeding is the main cause; 13:00–18:00 is the riskiest time.</li><li>Accidents fell 0.99% from 2024 to 2025, with spikes in the April and New Year holidays.</li></ul>
+  <h3>Infographic</h3>${shots([["bi-info","One-page infographic built from the dashboard",1]],"dg")}
+  <h3>Slides</h3>${shots([["bi-questions","Business questions and the metric behind each"],["bi-kpi","Headline KPIs"]],"sl")}
+  <h3>Techniques</h3><p>Data union of two yearly datasets, descriptive statistics, time-series comparison, geospatial density mapping, cross-tabulation heatmaps and category ranking, planned on an Analytics Canvas.</p>
+  <h3>Stack</h3>${chips(["Power BI","Data analysis","Data visualization"])}`},
  work:{hero:"aec-ceo-hero",hp:"50% 12%",k:"Work experience · 2023 · 4 months",t:"AE&C",m:"Developer trainee · Accepted Engineering & Consultant Co., Ltd. · Chumphon",
   body:`<p>A four-month trial stint at an engineering consultancy, working on the company's own systems.</p>
   ${shots([["aec-ceo","With Mr. Khwanchat Sainoi, CEO of AE&amp;C",1]])}
@@ -599,7 +608,7 @@ const D={
   <h3>Backend</h3>${chips(["Node.js","Express","REST APIs","Socket.IO real-time","Google OAuth","Email OTP"])}<p class="used">AECverse · Mission Life</p>
   <h3>Frontend & mobile</h3>${chips(["React Native","Expo","Three.js","Tailwind CSS","Bootstrap","SCSS","Responsive web design","PWA / Service Worker","Electron"])}<p class="used">RideCare · Mission Life · AECverse · SUT Navigator · Pharmacy Stock Ledger · StockMB · OAT SPORT (UI course project: SCSS, responsive layout, hamburger menu)</p>
   <h3>Databases</h3>${chips(["Supabase","Firebase Auth & Firestore","MongoDB","SQLite","Excel import / export"])}<p class="used">AECverse · Pharmacy Stock Ledger · RideCare · Mission Life · StockMB</p>
-  <h3>Deploy & tools</h3>${chips(["Git / GitHub","Vercel","Railway","GitHub Pages","EAS Build (APK)","AI coding tools"])}<p class="used">AECverse · Pharmacy Stock Ledger · RideCare</p>
+  <h3>Deploy & tools</h3>${chips(["Git / GitHub","Vercel","Railway","GitHub Pages","EAS Build (APK)","Power BI","AI coding tools"])}<p class="used">AECverse · Pharmacy Stock Ledger · RideCare</p>
   <h3>Design</h3>${chips(["UX/UI design","Figma","Map & pin design"])}<p class="used">Mission Life · SUT Navigator · AE&amp;C · Pharmacy Stock Ledger</p>
   <div class="skgroup">Soft skills</div>
   <ul><li><b>Leadership</b>: led the faculty student council as president; Scrum Master on AECverse; CTO of the DeckVance startup team.</li><li><b>Teamwork</b>: shipped team projects with clear role splits (backend on AECverse, UI and frontend on Mission Life and SUT Navigator, SRS and frontend on StockMB).</li><li><b>Communication</b>: pitched to judges at depa, SUT Startup and the DGT Hackathon.</li><li><b>Working with real users</b>: built the pharmacy app around how my sibling's shop actually works, and it is used daily.</li><li><b>Working under pressure</b>: research to working prototype in four days at the hackathon (Top 10).</li><li><b>Fast learner</b>: picked up React Native, Three.js and Supabase on the job to ship each project.</li></ul>
@@ -626,7 +635,7 @@ const TABS=[
   ["rx",3,1,2,1,"wide dim","rx-expiry","0% 10%","Live","Solo developer","Pharmacy Stock Ledger","PWA · barcode scanning · Firebase"],
   ["ml",3,2,1,1,"","ml-battle","50% 66%","","UI & frontend","Mission Life","React Native · Figma"],
   ["stock",4,2,1,1,"","sm-dash","40% 30%","","SE & frontend","StockMB","Electron · SQLite"],
-  ["deck",1,3,1,1,"","depa-team","50% 35%","","Startup project","DeckVance","depa & SUT Startup"],
+  ["bi",1,3,1,1,"","bi-hero","50% 20%","","Power BI · data","Road Accident Analytics","47,667 records"],
   ["nav",2,3,1,1,"","nav-map","55% 100%","","UX/UI & class diagram","SUT Navigator","OOP team project"],
   ["hack",3,3,1,1,"","hack-team","50% 35%","Top 10","Hackathon · mobile","RideCare","React Native · Firebase"],
   ["work",4,3,1,1,"","","","","Work experience","AE&C","Developer trainee · 4 months"]]},
